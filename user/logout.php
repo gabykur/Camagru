@@ -1,5 +1,5 @@
 <?php
 session_start();
-$_SESSION['logged'] = "";
-header("Location: login.php");
+$_SESSION['loggedin'] = "";
+header("Location: ../index.php");
 ?>

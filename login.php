@@ -1,5 +1,4 @@
 <?php
-// Initialize the session
 session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -8,9 +7,8 @@ session_start();
 //    exit;
 //}
  
-require_once "../config/database.php";
+require_once("config/database.php");
  
-// Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = "";
 
@@ -21,75 +19,51 @@ function test_input($data) {
     return $data;
 }
  
-// Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Check if username is empty
     if(empty(test_input($_POST["username"]))){
         $username_err = "Please enter username.";
     } else{
         $username = test_input($_POST["username"]);
     }
     
-    // Check if password is empty
     if(empty(test_input($_POST["password"]))){
         $password_err = "Please enter your password.";
     } else{
         $password = test_input($_POST["password"]);
     }
     
-    // Validate credentials
     if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
         $sql = "SELECT * FROM users WHERE username = :username";
         
         if($stmt = $pdo->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
-            
-            // Set parameters
             $param_username = $username;
-            
-            // Attempt to execute the prepared statement
             if($stmt->execute()){
-                // Check if username exists, if yes then verify password
                 if($stmt->rowCount() == 1){
                     if($row = $stmt->fetchAll()){
                         $id = $row[0]["id"];
                         $username = $row[0]["username"];
-                        //var_dump($username);
                         $hashed_password = $row[0]["password"];
-                       //var_dump($hashed_password);
                         if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
                             session_start();
-                            
-                            // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;                            
-                            
-                            // Redirect user to welcome page
-                            header("location: ../index.php");
+                            header("location: index.php");
                         } else{
-                            // Display an error message if password is not valid
                             $password_err = "The password you entered was not valid.";
                         }
                     }
                 } else{
-                    // Display an error message if username doesn't exist
                     $username_err = "No account found with that username.";
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
         }
-        
-        // Close statement
         unset($stmt);
     }
-    
-    // Close connection
     unset($pdo);
 }
 ?>
@@ -106,7 +80,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </style>
 </head>
 <body>
-    <div class="wrapper">
+    <div class="wrapper" style="align">
         <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -124,6 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            <p>Go back home ? <a href="index.php">Return</a>.</p>
         </form>
     </div>
 </body>
