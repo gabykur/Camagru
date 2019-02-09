@@ -11,6 +11,7 @@ require_once("config/database.php");
  
 $username = $password = "";
 $username_err = $password_err = "";
+$activation_mess = "";
 
 function test_input($data) {
     $data = trim($data);
@@ -45,14 +46,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $id = $row[0]["id"];
                         $username = $row[0]["username"];
                         $hashed_password = $row[0]["password"];
-                        if(password_verify($password, $hashed_password)){
-                            session_start();
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
-                            header("location: index.php");
-                        } else{
-                            $password_err = "The password you entered was not valid.";
+                        if ($row[0]["user_status"] == 'verified'){
+                            if(password_verify($password, $hashed_password)){
+                                session_start();
+                                $_SESSION["loggedin"] = true;
+                                $_SESSION["id"] = $id;
+                                $_SESSION["username"] = $username;                            
+                                header("location: index.php");
+                            } else{
+                                $password_err = "The password you entered was not valid.";
+                            }
+                        }else{
+                            $activation_mess = "The account is not yet verified. Please go check your email.";
                         }
                     }
                 } else{
@@ -83,6 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="wrapper" style="align">
         <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
+        <p style="color:red;"><?php echo $activation_mess; ?></p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>

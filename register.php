@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_email = test_input($_POST["email"]);
             if($stmt->execute()){
                 //if($stmt->rowCount() == 1){
-                  //  $username_err = "This username is already taken.";
+                  //  $username_err = "This email is already taken.";
                 //} else{
                     $email = test_input($_POST["email"]);
                // }
@@ -76,18 +76,43 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Check input errors before inserting in database
     if(empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
-        $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
+        $sql = "INSERT INTO users (username, email, password, activation_code, user_status)
+                VALUES (:username, :email, :password, :activation_code, :user_status)";
 
         if($stmt = $pdo->prepare($sql)){
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
             $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
             $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
+            $stmt->bindParam(":activation_code", $param_activationCode, PDO::PARAM_STR);
+            $stmt->bindParam(":user_status", $param_userStatus, PDO::PARAM_STR);
 
             $param_username = $username;
             $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
+            $param_activationCode = md5(rand(0,1000));
+            $param_userStatus = 'not verified';
             if($stmt->execute()){
-                header("location: login.php");
+
+                $to      = $email; // Send email to our user
+                $subject = 'Signup | Verification'; // Give the email a subject 
+                $message = '
+
+                Thanks for signing up!
+                Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+
+                ------------------------
+                Username: '.$username.'
+                Password: '.$password.'
+                ------------------------
+
+                Please click this link to activate your account:
+                http://localhost:8082/activation.php?username='.$username.'&activationCode='.$param_activationCode.'
+
+                '; // Our message above including the link
+
+                $headers = 'From:noreply@gabriele.com' . "\r\n"; // Set from headers
+                mail($to, $subject, $message, $headers); // Send our email
+                //header("location: login.php");
             } else{
                 echo "Something went wrong. Please try again later.";
             }
