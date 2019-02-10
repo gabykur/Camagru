@@ -1,6 +1,6 @@
 <?php
-
 require("config/database.php");
+
 $message = '';
 
 if(isset($_GET['activationCode']))
