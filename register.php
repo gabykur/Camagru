@@ -113,6 +113,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $headers = 'From:noreply@gabriele.com' . "\r\n"; // Set from headers
                 mail($to, $subject, $message, $headers); // Send our email
                 //header("location: login.php");
+                echo "go check your email to confirm your account.";
             } else{
                 echo "Something went wrong. Please try again later.";
             }
@@ -161,10 +162,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-default" value="Reset">
             </div>
             <p>Already have an account?<a href="login.php">Login here</a>.</p>
-            <p>Forgot your password ?<a href="login.php">Click here!</a>.</p>
             <p>Go back home ?<a href="index.php">Return</a>.</p>
         </form>
     </div>    
