@@ -1,0 +1,39 @@
+body{
+    background-color: bisque;
+}
+
+#edProfile{
+    display: grid;
+    background: #f0f0f0;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 8px;
+    margin-bottom: 2%;
+    transition: opacity 1s;
+    -webkit-transition: opacity 1s;
+}
+
+#edProfile h1{
+    background: #3399cc;
+    padding: 20px 0;
+    margin: initial;
+    font-size: 140%;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+}
+
+#edProfile a{  
+    background: pink;
+    padding: 20px 10px;
+    font-size: 140%;
+    margin: 1;
+    text-decoration: none;
+    font-weight: 300;
+    text-align: center;
+    color: #3399cc;
+}
+
+#edProfile a:hover{
+    background: lightblue;
+}

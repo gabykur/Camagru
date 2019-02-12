@@ -2,12 +2,13 @@
 session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
-//if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-//    header("location: welcome.php");
-//    exit;
-//}
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: ../index.php");
+    exit;
+}
  
-require_once("config/database.php");
+require_once("../config/database.php");
+require("../index.php");
  
 $username = $password = "";
 $username_err = $password_err = "";
@@ -52,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["id"] = $id;
                                 $_SESSION["username"] = $username;                            
-                                header("location: index.php");
+                                header("location: ../index.php");
                             } else{
                                 $password_err = "The password you entered was not valid.";
                             }
@@ -104,8 +105,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-            <p>Forgot your password ?<a href="user/forgotPassword.php">Click here!</a>.</p>
-            <p>Go back home ? <a href="index.php">Return</a>.</p>
+            <p>Forgot your password ?<a href="forgotPassword.php">Click here!</a>.</p>
+            <p>Go back home ? <a href="../index.php">Return</a>.</p>
         </form>
     </div>
 </body>

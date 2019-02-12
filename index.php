@@ -1,9 +1,5 @@
 <?php
-// Initialize the session
 session_start();
- 
-// Check if the user is logged in, if not then redirect him to login page
-
 ?>
  
 <!DOCTYPE html>
@@ -24,13 +20,13 @@ session_start();
     var_dump($_SESSION['loggedin']);
     if ($_SESSION['loggedin'] != ""){
         echo'<p>
-                <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-                <a href="user/logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+                <a href="user/account.php" class="btn btn-warning">Account</a>
+                <a href="user/logout.php" class="btn btn-danger">Log Out</a>
             </p>';
     }else{
         echo'<p>
-                <a href="login.php" class="btn btn-warning">Login</a>
-                <a href="register.php" class="btn btn-danger">Register</a>
+                <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php" class="btn btn-warning">Login</a>
+                <a href="http://'.$_SERVER['HTTP_HOST'].'/user/register.php" class="btn btn-danger">Register</a>
             </p>';
     }
 ?>

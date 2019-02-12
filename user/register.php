@@ -1,5 +1,6 @@
 <?php
-require_once("config/database.php");
+require_once("../config/database.php");
+require("../index.php");
  
 $username = $email = $password = $confirm_password = "";
 $username_err = $email_err = $password_err = $confirm_password_err = "";
@@ -76,8 +77,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Check input errors before inserting in database
     if(empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
-        $sql = "INSERT INTO users (username, email, password, activation_code, user_status)
-                VALUES (:username, :email, :password, :activation_code, :user_status)";
+        $sql = "INSERT INTO users (username, email, password, activation_code, user_status, token)
+                VALUES (:username, :email, :password, :activation_code, :user_status, :token)";
 
         if($stmt = $pdo->prepare($sql)){
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
@@ -85,12 +86,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
             $stmt->bindParam(":activation_code", $param_activationCode, PDO::PARAM_STR);
             $stmt->bindParam(":user_status", $param_userStatus, PDO::PARAM_STR);
+            $stmt->bindParam(":token", $param_token, PDO::PARAM_STR);
 
             $param_username = $username;
             $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
             $param_activationCode = md5(rand(0,1000));
             $param_userStatus = 'not verified';
+            $param_token = '';
             if($stmt->execute()){
 
                 $to      = $email; // Send email to our user
@@ -106,7 +109,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 ------------------------
 
                 Please click this link to activate your account:
-                http://localhost:8082/activation.php?username='.$username.'&activationCode='.$param_activationCode.'
+                http://'.$_SERVER['HTTP_HOST'].'/user/activation.php?username='.$username.'&activationCode='.$param_activationCode.'
 
                 '; // Our message above including the link
 
@@ -164,7 +167,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="submit" class="btn btn-primary" value="Submit">
             </div>
             <p>Already have an account?<a href="login.php">Login here</a>.</p>
-            <p>Go back home ?<a href="index.php">Return</a>.</p>
+            <p>Go back home ?<a href="../index.php">Return</a>.</p>
         </form>
     </div>    
 </body>
