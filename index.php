@@ -19,10 +19,7 @@ session_start();
 <?php
     var_dump($_SESSION['loggedin']);
     if ($_SESSION['loggedin'] != ""){
-        echo'<p>
-                <a href="user/account.php" class="btn btn-warning">Account</a>
-                <a href="user/logout.php" class="btn btn-danger">Log Out</a>
-            </p>';
+       header('location: home.php');
     }else{
         echo'<p>
                 <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php" class="btn btn-warning">Login</a>

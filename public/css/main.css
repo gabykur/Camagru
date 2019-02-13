@@ -1,0 +1,85 @@
+body{
+    background-image: linear-gradient(to top,#e3e3e3, #e3d0e2, #f2b9cd);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+header{
+    background-image: linear-gradient(to top, lightgreen, lightblue);
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.header
+{
+	max-width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	width:100%;
+}
+h1
+{
+   text-align: center;
+   font-family: 'Montserrat', sans-serif;
+   color:olivedrab;
+   text-shadow: 2px 3px 0px greenyellow;
+   font-size: 350%;
+   margin: 0;
+}
+
+/*_____Account display_____*/
+#edProfile{
+    display: grid;
+    background: #f0f0f0;
+    width: 400px;
+    margin: 0 auto;
+}
+
+#edProfile h1{
+    background: #3399cc;
+    padding: 20px 0;
+    margin: initial;
+    font-size: 140%;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+}
+
+#edProfile a{  
+    background: pink;
+    padding: 20px 10px;
+    font-size: 140%;
+    margin: 1;
+    text-decoration: none;
+    font-weight: 300;
+    text-align: center;
+    color: #3399cc;
+}
+
+#edProfile a:hover{
+    background: lightblue;
+}
+
+/*_____CAMERA_____*/
+
+#video{
+    border: 24px solid lightgreen;
+    display: block;
+    margin: auto;
+}
+
+#snap{
+    font-size: -webkit-xxx-large;
+    -webkit-appearance: textarea;
+    margin: 30px;
+}
+
+canvas{
+    border: 24px solid lightgreen;
+    display: block;
+    margin: auto;
+}

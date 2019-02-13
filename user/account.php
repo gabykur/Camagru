@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Menu des roulants</title>
-    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <title>Account</title>
+    <link rel="stylesheet" type="text/css" href="../public/css/main.css"/>
 </head>
 <body>
     <div id="edprofile">
