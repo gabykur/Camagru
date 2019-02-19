@@ -1,29 +1,12 @@
 <?php
 session_start();
-?>
- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome</title>
-    <link rel="stylesheet" href="public/css/main.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <style type="text/css">
-        body{ font: 14px sans-serif; text-align: center; }
-    </style>
-<body>
-    <div class="page-header">
-        <h1>Hi <b><?php if($_SESSION['loggedin'] == true){echo htmlspecialchars($_SESSION["username"]);} ?></b> Welcome to our site.</h1>
-    </div>
-    <p>
-               <a href="user/account.php" class="btn btn-warning">Account</a>
-                <a href="user/logout.php" class="btn btn-danger">Log Out</a>
-            </p>
-<?php
-?>
+require("index.php");
+
+if(empty($_SESSION['loggedin']))
+    header('Location: index.php');
+?> 
 <video id="video" width="640" height="480" autoplay></video>
-<button id="snap" class="far fa-circle" style="font-size:48px;"></button>
+<button id="snap"></button>
 <canvas id="canvas" width="640" height="480"></canvas>
 
 <script>
@@ -52,8 +35,3 @@ session_start();
 			});
 		}, false);
 </script>
-	
-
-</body>
-
-</html>

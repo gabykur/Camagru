@@ -1,37 +1,105 @@
+@font-face {
+	font-family: 'Instagram';
+	src: local('☺'), url('../fonts/Instagram.ttf') format('truetype');
+}
+
 body{
-    background-image: linear-gradient(to top,#e3e3e3, #e3d0e2, #f2b9cd);
-    height: 100%;
+    background: #e3d0e2;
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+}
+header {
+	display: flex;
+	justify-content: space-around;
+    flex-wrap: wrap;
+    background-image: radial-gradient(circle, #ebc4f6, #bbccff, #95d1f1, #8cd0d5, #9ccab7);
 }
 
-header{
-    background-image: linear-gradient(to top, lightgreen, lightblue);
-    height: 80px;
-    display: flex;
-    justify-content: space-around;
-	flex-wrap: wrap;
+h1{
+    font-family: Instagram;
+    font-size: 67px;
+    /* position: relative; */
+    color: honeydew;
+    text-align: center;
+}
+td:last-child{
+    text-align:right;
 }
 
-.header
+
+/*_____NAVIGATION_____*/
+
+.container
 {
-	max-width:1000px;
-	margin-left:auto;
-	margin-right:auto;
-	width:100%;
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    
 }
-h1
+.container a
 {
-   text-align: center;
-   font-family: 'Montserrat', sans-serif;
-   color:olivedrab;
-   text-shadow: 2px 3px 0px greenyellow;
-   font-size: 350%;
-   margin: 0;
+    color: #FFF;
+    text-decoration: none;
+    font: 20px Raleway;
+    margin: 0px 10px;
+    padding: 10px 10px;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+}
+.borderXwidth a:before, .borderXwidth a:after
+{
+    position: absolute;
+    opacity: 0;
+    width: 0%;
+    height: 2px;
+    content: '';
+    background: #FFF;
+    transition: all 0.3s;
 }
 
-/*_____Account display_____*/
+.borderXwidth a:before
+{
+    left: 0px;
+    top: 0px;
+}
+
+.borderXwidth a:after
+{
+    right: 0px;
+    bottom: 0px;
+}
+
+.borderXwidth a:hover:before, .borderXwidth a:hover:after
+{
+    opacity: 1;
+    width: 100%;
+}
+
+/*_____LOGIN_____*/
+
+
+
+.loginForm{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: lavender;
+    border-radius: 16%;
+    padding: 64px;
+    margin-top: 14%;
+    min-height: 300px;
+    max-width: 283px;
+}
+
+/*_____ACCOUNT_____*/
+
 #edProfile{
     display: grid;
     background: #f0f0f0;
@@ -73,10 +141,14 @@ h1
 }
 
 #snap{
-    font-size: -webkit-xxx-large;
-    -webkit-appearance: textarea;
-    margin: 30px;
+    border: 2px solid pink;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+    position: relative;
 }
+
 
 canvas{
     border: 24px solid lightgreen;

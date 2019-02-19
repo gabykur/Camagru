@@ -8,7 +8,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 require_once("../config/database.php");
-require("../index.php");
  
 $username = $password = "";
 $username_err = $password_err = "";
@@ -53,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["id"] = $id;
                                 $_SESSION["username"] = $username;                            
-                                header("location: ../index.php");
+                                header("location: ../home.php");
                             } else{
                                 $password_err = "The password you entered was not valid.";
                             }
@@ -73,41 +72,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     unset($pdo);
 }
 ?>
- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
-    </style>
-</head>
-<body>
-    <div class="wrapper" style="align">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
-        <p style="color:red;"><?php echo $activation_mess; ?></p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control">
-                <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-            <p>Forgot your password ?<a href="forgotPassword.php">Click here!</a>.</p>
-            <p>Go back home ? <a href="../index.php">Return</a>.</p>
-        </form>
-    </div>
-</body>
-</html>
+<?php require("../index.php"); ?>
+
+<div class="loginForm">
+    <h2>Login</h2>
+    <p>Please fill in your credentials to login.</p>
+    <p style="color:red;"><?php echo $activation_mess; ?></p>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+            <span class="help-block"><?php echo $username_err; ?></span>
+        </div>    
+        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control">
+            <span class="help-block"><?php echo $password_err; ?></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Login">
+        </div>
+        <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+        <p>Forgot your password ?<a href="forgotPassword.php">Click here!</a>.</p>
+        <p>Go back home ? <a href="../index.php">Return</a>.</p>
+    </form>
+</div>

@@ -6,26 +6,31 @@ session_start();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; text-align: center; }
-    </style>
+    <title>Camagru</title>
+    <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body>
-    <div class="page-header">
-        <h1>Hi <b><?php if($_SESSION['loggedin'] == true){echo htmlspecialchars($_SESSION["username"]);} ?></b> Welcome to our site.</h1>
-    </div>
-<?php
-    var_dump($_SESSION['loggedin']);
-    if ($_SESSION['loggedin'] != ""){
-       header('location: home.php');
-    }else{
-        echo'<p>
-                <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php" class="btn btn-warning">Login</a>
-                <a href="http://'.$_SERVER['HTTP_HOST'].'/user/register.php" class="btn btn-danger">Register</a>
-            </p>';
-    }
-?>
+<header>
+    <table class="container borderXwidth"><tr>
+        <td><a href="/home.php">PHOTO</a></td>
+        <td><h1>Camagru</h1></td>
+       
+        <?php
+        if ($_SESSION['loggedin'] != ""){
+            echo'
+                <td style="width:50px"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/account.php">ACCOUNT</a></td>
+                <td style="width:50px"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/logout.php">LOGOUT</a></td>
+                ';
+        }else{
+            echo'
+            <td><a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php">LOGIN</a></td>';
+        }?>
+    </tr></table>
+</header>
+<div style="
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+"></div>
 </body>
 </html>
