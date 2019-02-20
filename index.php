@@ -7,30 +7,29 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Camagru</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body>
 <header>
-    <table class="container borderXwidth"><tr>
+    <table class="container borderXwidth "><tr>
         <td><a href="/home.php">PHOTO</a></td>
         <td><h1>Camagru</h1></td>
-       
+        <td style="width:50%"></td>
         <?php
         if ($_SESSION['loggedin'] != ""){
             echo'
-                <td style="width:50px"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/account.php">ACCOUNT</a></td>
-                <td style="width:50px"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/logout.php">LOGOUT</a></td>
+                
+                <td><a href="http://'.$_SERVER['HTTP_HOST'].'/user/account.php">Account</a></td>
+                <td><a href="http://'.$_SERVER['HTTP_HOST'].'/user/logout.php">Log Out</a></td>
+            
                 ';
         }else{
             echo'
-            <td><a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php">LOGIN</a></td>';
+            <td><a class="logButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php">Log In</a></td>
+            <td><a class="signButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/register.php">Sign In</a></td>';
         }?>
     </tr></table>
 </header>
-<div style="
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-"></div>
 </body>
 </html>
