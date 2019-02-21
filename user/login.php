@@ -72,11 +72,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     unset($pdo);
 }
 ?>
-<?php require("../index.php"); ?>
-<div class="main">
+<?php ob_start(); ?>
     <div class="loginForm">
         <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
         <p style="color:red;"><?php echo $activation_mess; ?></p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
@@ -92,9 +90,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            
             <p>Forgot your password ?<a href="forgotPassword.php">Click here!</a>.</p>
-            <p>Go back home ? <a href="../index.php">Return</a>.</p>
         </form>
     </div>
-</div>
+    <div>
+        <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+    </div>
+<?php $view = ob_get_clean(); ?>
+<?php require("../index.php"); ?>

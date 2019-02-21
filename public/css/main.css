@@ -46,9 +46,13 @@ p{
 }
 
 .main{
-    margin: 0 auto;
-    max-width: 935px;
-    width: 100%;
+    max-width: 1000px;
+	background-image: linear-gradient(to right, #e0e0e0, #e3e6ea, #e1edf2, #dff5f4, #e5fcf0);
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 20px;
+	margin-top: 35px;
+	min-width: 320px;;
 }
 /*_____NAVIGATION_____*/
 
@@ -70,6 +74,18 @@ p{
     cursor: pointer;    
 }
 
+.logButt{
+    background-color: #e3d0e2;
+}
+
+.logButt, .signButt{
+    border: 1px solid #e3d0e2;
+    border-radius: 4px;
+    color: #fff;
+    position: relative;
+    inline-size: 83px;
+}
+
 /*_____LOGIN_____*/
 
 
@@ -87,17 +103,7 @@ p{
     max-width: 283px;
 }
 
-.logButt{
-    background-color: #e3d0e2;
-}
 
-.logButt, .signButt{
-    border: 1px solid #e3d0e2;
-    border-radius: 4px;
-    color: #fff;
-    position: relative;
-    inline-size: 83px;
-}
 
 /*_____ACCOUNT_____*/
 
@@ -146,8 +152,9 @@ p{
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    margin-bottom: 20px;
     position: relative;
+    margin-right: 50%;
+    margin-left: 50%;
 }
 
 

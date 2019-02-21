@@ -1,13 +1,13 @@
 <?php
 session_start();
-require("index.php");
 
 if(empty($_SESSION['loggedin']))
     header('Location: index.php');
 ?> 
-<video id="video" width="640" height="480" autoplay></video>
-<button id="snap"></button>
-<canvas id="canvas" width="640" height="480"></canvas>
+<?php ob_start(); ?>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="snap"></button>
+    <canvas id="canvas" width="640" height="480"></canvas>
 
 <script>
 		// Put event listeners into place
@@ -35,3 +35,5 @@ if(empty($_SESSION['loggedin']))
 			});
 		}, false);
 </script>
+<?php $view = ob_get_clean(); ?>
+<?php require("index.php"); ?>

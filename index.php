@@ -31,5 +31,8 @@ session_start();
         }?>
     </tr></table>
 </header>
+<div class="main">
+    <?= $view ?>
+</div>
 </body>
 </html>
