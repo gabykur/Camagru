@@ -75,27 +75,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php ob_start(); ?>
     <div class="loginForm">
         <h2>Login</h2>
+        <hr></hr>
         <p style="color:red;"><?php echo $activation_mess; ?></p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+        <form action="" method="post">
+            <div class=" <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+            <div class=" <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            
+            <hr></hr>
             <p>Forgot your password ?<a href="forgotPassword.php">Click here!</a>.</p>
         </form>
     </div>
-    <div>
-        <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+    <div >
+        <p style="text-align:center">Don't have an account? <a href="register.php">Sign up now</a>.</p>
     </div>
 <?php $view = ob_get_clean(); ?>
 <?php require("../index.php"); ?>

@@ -12,27 +12,29 @@ session_start();
 </head>
 <body>
 <header>
-    <table class="container borderXwidth "><tr>
+    <table class="container"><tr>
         <td><a href="/home.php">PHOTO</a></td>
-        <td><h1>Camagru</h1></td>
+        <td id="Cam_logo"><h1>Camagru</h1></td>
         <td style="width:50%"></td>
         <?php
         if ($_SESSION['loggedin'] != ""){
             echo'
                 
                 <td><a href="http://'.$_SERVER['HTTP_HOST'].'/user/account.php">Account</a></td>
-                <td><a href="http://'.$_SERVER['HTTP_HOST'].'/user/logout.php">Log Out</a></td>
+                <td><a href="http://'.$_SERVER['HTTP_HOST'].'/user/logout.php">LogOut</a></td>
             
                 ';
         }else{
             echo'
-            <td><a class="logButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php">Log In</a></td>
-            <td><a class="signButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/register.php">Sign In</a></td>';
+            <td><a class="logButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php">LogIn</a></td>
+            <td><a class="signButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/register.php">SignIn</a></td>';
         }?>
     </tr></table>
 </header>
 <div class="main">
     <?= $view ?>
 </div>
+<footer>
+    </footer>
 </body>
 </html>

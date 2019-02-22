@@ -16,13 +16,9 @@ body{
 
 header{
     background-image: linear-gradient(to right, #95d1f1, #8cd0d9, #95d1f1);
-}
-
-header{
 	display: flex;
 	justify-content: space-around;
     flex-wrap: wrap;
-    width:100%;
 }
 
 h1{
@@ -42,36 +38,62 @@ h2{
 }
 
 p{
-    font-family: cursive;
+    font-size:23px;
+	color: black;
+}
+
+a{
+	text-decoration: none;
+}
+
+input[type="submit"]{
+	cursor: pointer;
+}
+
+input[type="button"]{
+	cursor : pointer;
 }
 
 .main{
     max-width: 1000px;
-	background-image: linear-gradient(to right, #e0e0e0, #e3e6ea, #e1edf2, #dff5f4, #e5fcf0);
+	background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: 20px;
 	margin-top: 35px;
 	min-width: 320px;;
 }
+
+@media screen and (max-width: 1000px) {
+	#main {width:100%}
+}
+
 /*_____NAVIGATION_____*/
+
 
 .container
 {  
-    max-width: 1200px;
-    width: 100%;
+    max-width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	width:100%;
     
 }
+@media screen and (max-width: 400px)
+{
+    .container #Cam_logo {display: none}
+    .container a {width:100%}	
+}
+
 .container a
 {
     color: #FFF;
-    text-decoration: none;
     font: 20px Raleway;
-    margin: 0px 10px;
+    text-justify: inter-word;
+    margin: 10px 10px;
     padding: 10px 10px;
     position: relative;
-    z-index: 0;
-    cursor: pointer;    
+    z-index: 0;   
 }
 
 .logButt{
@@ -81,8 +103,6 @@ p{
 .logButt, .signButt{
     border: 1px solid #e3d0e2;
     border-radius: 4px;
-    color: #fff;
-    position: relative;
     inline-size: 83px;
 }
 
@@ -95,7 +115,7 @@ p{
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    background-color: #8cd0d9;
+    background-color: #c4f2da;
     border-radius: 16%;
     padding: 64px;
     margin-top: 14%;
@@ -141,14 +161,70 @@ p{
 
 /*_____CAMERA_____*/
 
-#video{
-    border: 24px solid lightgreen;
-    display: block;
-    margin: auto;
+#camera {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-bottom: 25px;
+	text-align:middle;
+}
+
+
+#camera #video_div {
+	margin-top: 30px;
+	background-color:#c4f2da;
+	padding: 10px;
+	width: 70%;
+	float:left;
+	position : relative;
+	height: 42vw;
+	max-height: 420px;
+	min-width: 285px;
+	min-height:236px;
+}
+
+#camera #overlay {
+	position:absolute;
+	width:96%;
+	height: 95%;
+}
+
+#camera #overlay img {
+    height: 50%;
+    width: 40%;
+}
+
+#camera #video_div #video {
+	width: 100%;
+	z-index:0;
+}
+#camera #video_div #camera_img {
+	width:100%;
+	z-index:0;
+	object-fit: cover;
+	display:none;
+	height:inherit;
+	max-height: 420px;
+	min-width: 315px;
+    min-height: 236px;
+}
+#camera #sticker_div{
+	background-color: #c4f2da;
+	width: 25%;
+	max-height: 444px;
+	margin-top: 30px;
+	float: right;
+	overflow-y: auto;
+}
+#camera #sticker_div img{
+   width: 50%;
+	margin-left: 10px;
+	margin-top: 5px;
+	cursor: pointer;
 }
 
 #snap{
-    border: 2px solid pink;
+    border: 2px solid #c4f2da;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -157,9 +233,23 @@ p{
     margin-left: 50%;
 }
 
+#camera #camera_gallery {
+	margin-top: 20px;
+	padding: 10px 0px 0px 10px;
+	border: 3px solid#c4f2da;
+	overflow-y:hidden;
+	overflow-x:auto;
+	width: 97%;
+	white-space: nowrap;
+	min-height: 120px;
+}
 
-canvas{
-    border: 24px solid lightgreen;
-    display: block;
-    margin: auto;
+#camera #camera_gallery #photo {
+	width: 20%;
+	padding: 2px;	
+	min-width: 150px
+}
+
+#camera #photo {
+    object-fit: contain;
 }
