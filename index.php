@@ -12,8 +12,8 @@ session_start();
 </head>
 <body>
 <header>
-    <table class="container"><tr>
-        <td><a href="/home.php">PHOTO</a></td>
+    <table class="container sticky"><tr>
+        <td><a href="/home.php">Photo</a></td>
         <td id="Cam_logo"><h1>Camagru</h1></td>
         <td style="width:50%"></td>
         <?php
@@ -34,7 +34,6 @@ session_start();
 <div class="main">
     <?= $view ?>
 </div>
-<footer>
-    </footer>
+<footer><p>YASSSSS QUEENM</p></footer>
 </body>
 </html>

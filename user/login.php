@@ -73,30 +73,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 <?php ob_start(); ?>
-    <div class="loginForm">
-        <h2>Login</h2>
-        <hr></hr>
-        <p style="color:red;"><?php echo $activation_mess; ?></p>
+<h2 style="text-align:center">Login</h2>
+    <div class="loginForm">      
+        <p style="color:red;"><?php echo $activation_mess; ?></p><br>
         <form action="" method="post">
-            <div class=" <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+            <div class=" <?php echo (!empty($username_err)) ? 'logError' : ''; ?>">
+                <input type="text" name="username" placeholder="Username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
-            <div class=" <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control">
+            <div class=" <?php echo (!empty($password_err)) ? 'logError' : ''; ?>">
+                <input type="password" name="password" placeholder="Password" class="form-control">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <hr></hr>
             <p>Forgot your password ?<a href="forgotPassword.php">Click here!</a>.</p>
         </form>
-    </div>
-    <div >
+    </div><br>
+    <div class="loginForm" style="min-width:200px">
         <p style="text-align:center">Don't have an account? <a href="register.php">Sign up now</a>.</p>
-    </div>
+    </div><br>
 <?php $view = ob_get_clean(); ?>
 <?php require("../index.php"); ?>
