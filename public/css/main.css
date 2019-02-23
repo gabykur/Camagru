@@ -24,22 +24,24 @@ header{
 h1{
     font-family: Instagram;
     font-size: 60px;
-    color: honeydew;
+    color: white;
     text-align: center;
     margin:0;
     display: block;
 }
 
 h2{
-    font-size: 50px;
-    color: honeydew;
-    margin:0;
+    font-size: 80px;
+    text-shadow: 4px 2px 1px #e3d0e2;
+    color: #94d0ef;
+    margin: 0;
     display: block;
+    border-radius: 10px;
 }
 
 p{
     font-size:15px;
-	color: black;
+	color: white;
 }
 
 a{
@@ -56,12 +58,12 @@ input[type="button"]{
 
 .main{
     max-width: 1000px;
-	background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
-	margin-right: auto;
-	margin-left: auto;
-	margin-bottom: 20px;
-	margin-top: 35px;
-	min-width: 320px;;
+    min-width: 320px;
+    background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 208px;
+    border-radius: 47px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -69,13 +71,12 @@ input[type="button"]{
 }
 
 footer{
-    max-width: 1000px;
-    margin-right: auto;
-    margin-left: auto;
-    background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
+    background-image: linear-gradient(to right, #95d1f1, #8cd0d9, #95d1f1);
     text-align: center;
-    padding: 1px;
-    margin-bottom: 20px;
+    position: absolute;
+    margin-top: 54px;
+    width: 100%;
+    bottom: 0;
 }
 
 /*_____NAVIGATION_____*/
@@ -89,7 +90,6 @@ footer{
 	width:100%;
     
 }
-
 
 @media screen and (max-width: 400px)
 {
@@ -122,29 +122,68 @@ footer{
 
 
 .loginForm{
-    width: 50%;
+    width: 65%;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     background-color: #c4f2da;
+    border: 2px solid #e3d0e2;
+    border-radius: 15px;
     padding: 1px;
     min-width: 300px;
 }
 
 .loginForm input {
-    width: 80%;
-    height: 35px;
-    font-family: Cambria;
+    width: 75%;
+    height: 45px;
     font-size: 25px;
-    margin: 12px;
-    border: none;
+    font-family: Cambria;
+    padding: 3px;
+    border-radius: 12px;
+    border: 2px solid #e3d0e2;
+    margin: 17px;
 }
 .loginForm input[type="submit"] {
-    background-color: #FAF4F5;
-    width: 60%;
-    border-radius: 5px;
-    border-color: rgba(75,68,83,0.8);
+    background-color: #94d1ef;
+    width: 31%;
+    height: 54px;
+    color: white;
+    border: 2px solid #e3d0e2;
 }
+
+.loginForm input[type="submit"]:hover{
+    opacity: 0.6;
+    background-color: #6ef5af;
+    border:3px solid #94d1ef; 
+} 
+
+.loginForm form p{
+    color: pink;
+    font-size: 20px;
+    margin-top: 45px;
+    text-shadow: 1px 1px 0px white;
+}
+
+.loginForm form p a{
+    color:#94d1ef;
+}
+
+.loginForm p{
+    color: #94d1ef;
+    font-size: 20px;
+    text-shadow: 1px 1px 0px white;
+}
+.loginForm p a{
+    color:pink;
+}
+ #actMsg{
+    color:red;
+    margin-bottom: -20px;
+    margin-top: 20px;
+ }
+ .logError{
+
+ }
 
 
 
@@ -194,7 +233,8 @@ footer{
 
 
 #camera #video_div {
-	margin-top: 30px;
+    margin-top: 30px;
+    margin-bottom: 20px;
 	background-color:#c4f2da;
 	padding: 10px;
 	width: 70%;
@@ -252,8 +292,8 @@ footer{
     width: 40px;
     height: 40px;
     position: relative;
-    margin-right: 50%;
-    margin-left: 50%;
+    margin-right: 34%;
+    margin-left: 33%;
 }
 
 #camera #camera_gallery {

@@ -34,6 +34,6 @@ session_start();
 <div class="main">
     <?= $view ?>
 </div>
-<footer><p>YASSSSS QUEENM</p></footer>
+<footer><p>Camagru ©gkuraite | 2019</p></footer>
 </body>
 </html>

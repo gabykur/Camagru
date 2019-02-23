@@ -73,26 +73,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 <?php ob_start(); ?>
-<h2 style="text-align:center">Login</h2>
-    <div class="loginForm">      
-        <p style="color:red;"><?php echo $activation_mess; ?></p><br>
-        <form action="" method="post">
-            <div class=" <?php echo (!empty($username_err)) ? 'logError' : ''; ?>">
-                <input type="text" name="username" placeholder="Username" class="form-control" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
+<div style="max-height: 705px;">
+    <h2 style="text-align:center;padding-top:19px;">Login</h2>
+    <div class="loginForm" style="min-height:411px;margin-top:39px;">      
+        <p id="actMsg"><?php echo $activation_mess; ?></p><br>
+        <form action="" method="post" style="margin-top:2%">
+            <div class="<?php echo (!empty($username_err)) ? 'logError' : ''; ?>">
+                <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
+                <span><?php echo $username_err; ?></span>
             </div>    
-            <div class=" <?php echo (!empty($password_err)) ? 'logError' : ''; ?>">
-                <input type="password" name="password" placeholder="Password" class="form-control">
-                <span class="help-block"><?php echo $password_err; ?></span>
+            <div class="<?php echo (!empty($password_err)) ? 'logError' : ''; ?>">
+                <input type="password" name="password" placeholder="Password">
+                <span><?php echo $password_err; ?></span>
             </div>
-            <div class="">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
-            <p>Forgot your password ?<a href="forgotPassword.php">Click here!</a>.</p>
+            <input type="submit"value="Login">
+            <p>Forgot your password ?<a href="forgotPassword.php"> Click here!</a></p>
         </form>
     </div><br>
-    <div class="loginForm" style="min-width:200px">
-        <p style="text-align:center">Don't have an account? <a href="register.php">Sign up now</a>.</p>
+    <div class="loginForm" style="min-width:200px;margin-bottom:105px;">
+        <p style="text-align:center">Don't have an account? <a href="register.php"> Sign up now</a></p>
     </div><br>
+</div>
 <?php $view = ob_get_clean(); ?>
 <?php require("../index.php"); ?>
