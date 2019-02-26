@@ -31,7 +31,7 @@ h1{
 }
 
 h2{
-    font-size: 80px;
+    font-size: 50px;
     text-shadow: 4px 2px 1px #e3d0e2;
     color: #94d0ef;
     margin: 0;
@@ -62,7 +62,7 @@ input[type="button"]{
     background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
     margin-right: auto;
     margin-left: auto;
-    margin-top: 208px;
+    margin-top: 50px;
     border-radius: 47px;
 }
 
@@ -76,7 +76,7 @@ footer{
     position: absolute;
     margin-top: 54px;
     width: 100%;
-    bottom: 0;
+
 }
 
 /*_____NAVIGATION_____*/
@@ -134,8 +134,8 @@ footer{
 }
 
 .loginForm input {
-    width: 75%;
-    height: 45px;
+    width: 65%;
+    height: 40px;
     font-size: 25px;
     font-family: Cambria;
     padding: 3px;
@@ -160,7 +160,7 @@ footer{
 .loginForm form p{
     color: pink;
     font-size: 20px;
-    margin-top: 45px;
+    margin-top: 15px;
     text-shadow: 1px 1px 0px white;
 }
 

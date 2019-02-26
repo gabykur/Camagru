@@ -74,10 +74,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 <?php ob_start(); ?>
 <div style="max-height: 705px;">
-    <h2 style="text-align:center;padding-top:19px;">Login</h2>
-    <div class="loginForm" style="min-height:411px;margin-top:39px;">      
+    <h2 style="text-align:center;">Login</h2>
+    <div class="loginForm" style="min-height:364px;margin-top:35px;">      
         <p id="actMsg"><?php echo $activation_mess; ?></p><br>
-        <form action="" method="post" style="margin-top:2%">
+        <form action="" method="post" style="margin-top:4%">
             <div class="<?php echo (!empty($username_err)) ? 'logError' : ''; ?>">
                 <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
                 <span><?php echo $username_err; ?></span>
@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <p>Forgot your password ?<a href="forgotPassword.php"> Click here!</a></p>
         </form>
     </div><br>
-    <div class="loginForm" style="min-width:200px;margin-bottom:105px;">
+    <div class="loginForm">
         <p style="text-align:center">Don't have an account? <a href="register.php"> Sign up now</a></p>
     </div><br>
 </div>
