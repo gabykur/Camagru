@@ -53,42 +53,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
 }
-
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>reset Password</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
-    </style>
-</head>
-<body>
-    <div class="wrapper">
-        <h2>Reset password</h2>
-        <p>Please enter your new password.</p>
-        <p style="color:green;"><?php echo $message; ?></p>
-        <p style="color:red;"><?php echo $message_err; ?></p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>New Password</label>
-                <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-                <span class="help-block"><?php echo $password_err; ?></span>
+<?php ob_start();?>
+<h2 style="text-align:center;margin-bottom: 35px;">Reset password</h2>
+<div class="loginForm">
+    <p style="color:green;"><?php echo $message; ?></p>
+    <p style="color:red;"><?php echo $message_err; ?></p>
+        <form action="" method="post">
+            <div  class="<?php echo (!empty($password_err)) ? 'logError' : ''; ?>">
+                <input type="password" name="password" placeholder="New Password" value="<?php echo $password; ?>">
+                <span><?php echo $password_err; ?></span>
             </div>
-            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm New Password</label>
-                <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-                <span class="help-block"><?php echo $confirm_password_err; ?></span>
+            <div  class="<?php echo (!empty($confirm_password_err)) ? 'logError' : ''; ?>">
+                <input type="password" name="confirm_password" placeholder="Confirm New Password" value="<?php echo $confirm_password; ?>">
+                <span><?php echo $confirm_password_err; ?></span>
             </div>
             <input type="hidden" name="reset" value="<?php if(isset($_GET['reset'])){echo($_GET['reset']);}?>">
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit" name="resetPasswordForm">
-            </div>
+            <input type="submit" value="Reset Password" name="resetPasswordForm">
         </form>
-    </div>    
-</body>
-</html>
+</div><br/>    
+<?php $view=ob_get_clean();?>
+<?php require("../index.php");?>

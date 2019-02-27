@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $headers = 'From:noreply@gabriele.com' . "\r\n"; // Set from headers
             mail($to, $subject, $message, $headers); // Send our email
             //header("location: login.php");
-            $reset_mess = "Email has been set to reset your pasword";
+            $reset_mess = "Email has been sent to $email";
             unset($stmt);
             //var_dump($stmt);
         }else{
@@ -69,25 +69,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
 
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>forgot password</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
-    </style>
-</head>
-  <body>
-    <div class="wrapper" style="align">
-    <p style="color:green;"><?php echo $reset_mess; ?></p>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-          <p>Enter Email Address To Send Password Link</p>
-          <input type="email" class="form-control" name="email">
-          <span class="help-block"><?php echo (!empty($email_err)); ?></span><br />
-          <input type="submit" class="btn btn-primary" name="forgotPassword">
+<?php ob_start();?>
+    <h2 style="text-align:center;margin-bottom: 35px;">Forgotten Password</h2>
+    <div class="loginForm">
+        <p id="actMsg" style="color:green;"><?php echo $reset_mess; ?></p>
+        <form method="post" action="" style="margin-top:7%;">
+          <input type="email" placeholder="Enter your email" name="email">
+          <span><?php echo (!empty($email_err)); ?></span><br />
+          <input type="submit" value="Send Link" name="forgotPassword">
         </form>
-    </div>
-  </body>
-</html>
+    </div><br/>
+    <div class="loginForm">
+            <p style="text-align:center">Know your password ? <a href="login.php"> Login</a></p>
+    </div><br>
+<?php $view = ob_get_clean();?>
+<?php require("../index.php");?>

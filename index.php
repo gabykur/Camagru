@@ -12,7 +12,7 @@ session_start();
 </head>
 <body>
 <header>
-    <table class="container sticky"><tr>
+    <table class="container"><tr>
         <td><a href="/home.php">Photo</a></td>
         <td id="Cam_logo"><h1>Camagru</h1></td>
         <td style="width:50%"></td>
@@ -20,14 +20,14 @@ session_start();
         if ($_SESSION['loggedin'] != ""){
             echo'
                 
-                <td><a href="http://'.$_SERVER['HTTP_HOST'].'/user/account.php">Account</a></td>
-                <td><a href="http://'.$_SERVER['HTTP_HOST'].'/user/logout.php">LogOut</a></td>
+                <td style="width:10%"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/account.php">Account</a></td>
+                <td style="width:10%"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/logout.php">LogOut</a></td>
             
                 ';
         }else{
             echo'
-            <td><a class="logButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php">LogIn</a></td>
-            <td><a class="signButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/register.php">SignIn</a></td>';
+            <td style="width:10%"><a class="logButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php">LogIn</a></td>
+            <td style="width:10%"><a class="signButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/register.php">SignIn</a></td>';
         }?>
     </tr></table>
 </header>

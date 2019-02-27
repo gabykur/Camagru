@@ -2,7 +2,7 @@
 require_once("../config/database.php");
  
 $username = $email = $password = $confirm_password = "";
-$username_err = $email_err = $password_err = $confirm_password_err = "";
+$username_err = $email_err = $password_err = $confirm_password_err = $activation_mess = "";
 
 function test_input($data) {
     $data = trim($data);
@@ -100,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $message = '
 
                 Thanks for signing up!
-                Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+                Your account logEeen created, you can login with the following credentials after you have activated your account by pressing the url below.
 
                 ------------------------
                 Username: '.$username.'
@@ -115,9 +115,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $headers = 'From:noreply@gabriele.com' . "\r\n"; // Set from headers
                 mail($to, $subject, $message, $headers); // Send our email
                 //header("location: login.php");
-                echo "go check your email to confirm your account.";
+                $activation_mess = "Go check your email to activate your account";
             } else{
-                echo "Something went wrong. Please try again later.";
+                $activation_mess = "Something went wrong. Please try again later";
             }
         }
         unset($stmt);
@@ -126,32 +126,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 <?php ob_start(); ?>
-<h2 style="text-align:center">Sign Up</h2>
-<div class="loginForm">
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+
+    <h2 style="text-align:center;margin-bottom: 35px;">Sign Up</h2>
+    <div class="loginForm" style="min-height:364px;">
+        <p id="actMsg"><?php echo $activation_mess; ?></p><br>
+        <form action="" method="post" style="margin-top:4%;">
+            <span><?php echo $username_err; ?></span>
             <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
-            <span class="help-block"><?php echo $username_err; ?></span>
-        </div>
-        <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+            <span><?php echo $email_err; ?></span>
             <input type="email" name="email" placeholder="Email" value="<?php echo $email; ?>">
-            <span class="help-block"><?php echo $email_err; ?></span>
-        </div>
-        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+            <span><?php echo $password_err; ?></span>
             <input type="password" name="password" placeholder="Enter Password" value="<?php echo $password; ?>">
-            <span class="help-block"><?php echo $password_err; ?></span>
-        </div>
-        <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+            <span><?php echo $confirm_password_err; ?></span>
             <input type="password" name="confirm_password" placeholder="Confirm Password" value="<?php echo $confirm_password; ?>">
-            <span class="help-block"><?php echo $confirm_password_err; ?></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Submit">
-        </div>
-    </form>
-</div><br>
-<div class="loginForm">
-        <p>Already have an account?<a href="login.php">Login here</a>.</p>
-</div><br>    
+            <input type="submit" value="Register">
+        </form>
+    </div><br>
+    <div class="loginForm">
+            <p>Already have an account?<a href="login.php"> Login here</a></p>
+    </div><br>
+
 <?php $view = ob_get_clean(); ?>
 <?php require("../index.php");?>

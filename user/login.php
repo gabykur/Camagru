@@ -74,18 +74,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 <?php ob_start(); ?>
 <div style="max-height: 705px;">
-    <h2 style="text-align:center;">Login</h2>
-    <div class="loginForm" style="min-height:364px;margin-top:35px;">      
-        <p id="actMsg"><?php echo $activation_mess; ?></p><br>
-        <form action="" method="post" style="margin-top:4%">
-            <div class="<?php echo (!empty($username_err)) ? 'logError' : ''; ?>">
-                <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
-                <span><?php echo $username_err; ?></span>
-            </div>    
-            <div class="<?php echo (!empty($password_err)) ? 'logError' : ''; ?>">
-                <input type="password" name="password" placeholder="Password">
-                <span><?php echo $password_err; ?></span>
-            </div>
+    <h2 style="text-align:center;margin-bottom: 35px;">Login</h2>
+    <div class="loginForm" style="min-height:364px;">      
+        <form action="" method="post" style="margin-top:%;">
+            <p id="actMsg"><?php echo $activation_mess; ?></p><br>
+            <span><?php echo $username_err; ?></span>
+            <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
+            <span><?php echo $password_err; ?></span>
+            <input type="password" name="password" placeholder="Password">
             <input type="submit"value="Login">
             <p>Forgot your password ?<a href="forgotPassword.php"> Click here!</a></p>
         </form>

@@ -23,36 +23,26 @@ if(isset($_GET['activationCode'])){
                 var_dump($statement->execute(array(':username' => $_GET['username'])));
                 var_dump($sub_result);
                 if(isset($sub_result)){
-                    $message = '<label class="text-success">Your Email Address Successfully Verified <br />You can login here - <a href="login.php">Login</a></label>';
+                    $message = '<span style="color:green">Your Email Address Successfully Verified</span>';
                 }
             }else{
-                $message = '<label class="text-info">Your Email Address Already Verified</label>';
-                header("Refresh: 2; url=login.php");
+                $message = '<span style="color:blue">Your Email Address Already Verified</span>';
             }
         }
     }else{
-        $message = '<label class="text-danger">Invalid Link</label>';
+        $message = '<span style="color:darkred">Invalid Link</span>';
     }
 }
-
 ?>
-<!DOCTYPE html>
-<html>
- <head>
-  <title>PHP Register Login Script with Email Verification</title>  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- </head>
- <body>
-  
-  <div class="container">
-   <h1 align="center">PHP Register Login Script with Email Verification</h1>
-  
-   <h3><?php echo $message; ?></h3>
-   
-  </div>
- 
- </body>
- 
-</html>
+
+<?php ob_start();?>
+<div style="min-height:250px;">
+<h2 style="text-align:center;margin-bottom: 35px;">Activate your account</h2>
+   <h3 style="text-align:center"><?php echo $message; ?>!</h3>
+   <div class="loginForm" style="border:none;background-color:transparent">
+       <input type="submit" value="Login" 
+       onclick="window.location='login.php'" />
+    </div>
+</div>
+<?php $view=ob_get_clean();?>
+ <?php require("../index.php");?>
