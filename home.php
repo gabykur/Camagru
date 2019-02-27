@@ -8,19 +8,22 @@ if(empty($_SESSION['loggedin']))
 
 <div id="camera">
     <div id="video_div">
-        <div id="overlay">
-            <img src="public/stickers/poop.png">
+        <div id="live_video">
+            <img src="public/stickers/poop.png" id="overlay">
         </div>
         <video id="video"></video>
-        <img id='camera_img'/>
     </div>
     <div id="sticker_div">
-        <img src="public/stickers/poop.png" >
+        <img src="public/stickers/poop.png" class="stickerImg active">
+        <img src="public/stickers/peach.png" class="stickerImg">
+        <img src="public/stickers/watermelon.png" class="stickerImg">
+        <img src="public/stickers/pig.png" class="stickerImg">
+        <img src="public/stickers/callme.png" class="stickerImg">
     </div>
-    <button id="snap"></button>
+    <button id="snap" ></button>
+    <canvas id="canvas" ></canvas>
     <div id='camera_gallery'>
-        <canvas id="canvas"></canvas>
-        
+        <img >
     </div>
 </div>
 <script src="/public/js/camera.js"></script>
