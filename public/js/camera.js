@@ -40,9 +40,15 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 
     snap.addEventListener('click', function() {
-        context.drawImage(video, 0, 0, 240, 180);
+        context.drawImage(video, 0, 0, 560, 420);
         var currentSticker = stickerSelector();
         document.getElementById('sticker_div').value = currentSticker.src;
-        context.drawImage(currentSticker, 0, 0, 90, 80); 
+        context.drawImage(currentSticker, 0, 0, 225, 220); 
     });
+    /*document.getElementById('form').addEventListener("submit",function(){
+        var canvas = document.getElementById("myCanvasImage");
+        var image = canvas.toDataURL(); // data:image/png....
+        document.getElementById('base64').value = image;
+     },false);*/
 }, false);
+
