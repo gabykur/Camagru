@@ -24,6 +24,12 @@ function stickerSelector() {
     return selectedSticker[0];
 }
 
+function takePhoto(){
+    var canvas = document.getElementById("canvas");
+    var photo =  document.getElementById("snap");
+    photo.value = canvas.toDataURL();
+}
+
 // Put event listeners into place
 window.addEventListener("DOMContentLoaded", function() {
     var mediaConfig =  { video: true, audio: false };
@@ -45,10 +51,5 @@ window.addEventListener("DOMContentLoaded", function() {
         document.getElementById('sticker_div').value = currentSticker.src;
         context.drawImage(currentSticker, 0, 0, 225, 220); 
     });
-    /*document.getElementById('form').addEventListener("submit",function(){
-        var canvas = document.getElementById("myCanvasImage");
-        var image = canvas.toDataURL(); // data:image/png....
-        document.getElementById('base64').value = image;
-     },false);*/
 }, false);
 

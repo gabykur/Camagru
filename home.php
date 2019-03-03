@@ -1,17 +1,21 @@
 <?php
+require("config/database.php");
+date_default_timezone_set('Europe/Paris');
+
+if (isset($_POST['tookAphoto']))
+{
+    $photo = $_POST['tookAphoto'];
+    $photo = explode(',', $photo);
+    $data = base64_decode($photo[1]);
+    $filePath = 'public/upload/'.date("YmdHis").'.png';
+    file_put_contents($filePath, $data);
+
+}
+
 session_start();
 
 if(empty($_SESSION['loggedin']))
     header('Location: index.php');
-
-
-    $baseFromJavascript = "data:image/png;base64,BBBFBfj42Pj4";
-    $base_to_php = explode(',', $baseFromJavascript);
-    var_dump($base_to_php);
-    $file = 'public/upload/'.date("YmdHis").'.png';
-    $data = base64_decode($base_to_php[1]);
-    var_dump($data);
-    file_put_contents($file, $data);
 
 ?> 
 <?php ob_start(); ?>
@@ -31,10 +35,11 @@ if(empty($_SESSION['loggedin']))
         <img src="public/stickers/callme.png" class="stickerImg">
     </div>
     
+    <form method="POST" action="" onsubmit=takePhoto();>
+        <button id="snap" type="submit"  name="tookAphoto" value=""></button>
+    </form>
     
-        <button id="snap" type="submit"></button>
-    
-    <canvas id="canvas" width=560 height=420></canvas>
+    <canvas style="display:none" id="canvas" width=560 height=420></canvas>
     <div id='camera_gallery'>
         <img >
     </div>
