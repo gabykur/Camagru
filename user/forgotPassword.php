@@ -8,12 +8,12 @@ function test_input($data){
     return $data;
 }
 
-$email_err = "";
+$error = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(isset($_POST['forgotPassword'])){
         if(empty(test_input($_POST['email']))){
-            $email_err = "Please enter an email";
+            $error = "Please enter an email";
         }else{
             $email = test_input($_POST["email"]);
         }  
@@ -61,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             unset($stmt);
             //var_dump($stmt);
         }else{
-            $email_err = "No user with that e-mail address exists.";
+            $error = "No user with that e-mail address exists.";
         }   
     }unset($pdo);
 }
@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <p id="actMsg" style="color:green;"><?php echo $reset_mess; ?></p>
         <form method="post" action="" style="margin-top:7%;">
           <input type="email" placeholder="Enter your email" name="email">
-          <span><?php echo (!empty($email_err)); ?></span><br />
+          <span><?php echo (!empty($error)); ?></span><br />
           <input type="submit" value="Send Link" name="forgotPassword">
         </form>
     </div><br/>
@@ -83,4 +83,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <p style="text-align:center">Know your password ? <a href="login.php"> Login</a></p>
     </div><br>
 <?php $view = ob_get_clean();?>
-<?php require("../index.php");?>
+<?php require("../template.php");?>

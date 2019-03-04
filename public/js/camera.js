@@ -46,7 +46,7 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 
     snap.addEventListener('click', function() {
-        context.drawImage(video, 0, 0, 560, 420);
+        context.drawImage(video, 0, 0, 640, 480);
         var currentSticker = stickerSelector();
         document.getElementById('sticker_div').value = currentSticker.src;
         context.drawImage(currentSticker, 0, 0, 225, 220); 

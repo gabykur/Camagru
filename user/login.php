@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["id"] = $id;
                                 $_SESSION["username"] = $username;                            
-                                header("location: ../home.php");
+                                header("location: ../camera.php");
                             } else{
                                 $password_err = "The password you entered was not valid.";
                             }
@@ -91,4 +91,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div><br>
 </div>
 <?php $view = ob_get_clean(); ?>
-<?php require("../index.php"); ?>
+<?php require("../template.php"); ?>

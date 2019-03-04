@@ -147,4 +147,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div><br>
 
 <?php $view = ob_get_clean(); ?>
-<?php require("../index.php");?>
+<?php require("../template.php");?>

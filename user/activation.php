@@ -45,4 +45,4 @@ if(isset($_GET['activationCode'])){
     </div>
 </div>
 <?php $view=ob_get_clean();?>
- <?php require("../index.php");?>
+ <?php require("../template.php");?>
