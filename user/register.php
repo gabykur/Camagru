@@ -127,10 +127,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 <?php ob_start(); ?>
 
-    <h2 style="text-align:center;margin-bottom: 35px;">Sign Up</h2>
     <div class="loginForm" style="min-height:364px;">
+        <h2 style="margin-bottom: 35px;">Sign Up</h2>
         <p id="actMsg"><?php echo $activation_mess; ?></p><br>
-        <form action="" method="post" style="margin-top:4%;">
+        <form action="" method="post">
             <span><?php echo $username_err; ?></span>
             <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
             <span><?php echo $email_err; ?></span>

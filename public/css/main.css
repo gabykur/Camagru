@@ -40,6 +40,7 @@ h2{
     margin: 0;
     display: block;
     border-radius: 10px;
+    text-align: center;
 }
 
 h3{
@@ -67,15 +68,19 @@ input[type="button"]{
 .main{
     max-width: 1000px;
     min-width: 320px;
-    background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
     margin-right: auto;
     margin-left: auto;
     margin-top: 50px;
+    
+}
+#background{
+    background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
     border-radius: 47px;
 }
 
 @media screen and (max-width: 1000px) {
-	.main {width:100%}
+    .main {width:100%;}
+    #background{border-radius: 0}
 }
 
 footer{
@@ -163,9 +168,9 @@ input::placeholder{
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    background-color: #c4f2da;
-    border: 2px solid #e3d0e2;
+    background-image: linear-gradient(to top, #dff5f4, #e1edf2, #e5fcf0);
     border-radius: 15px;
+    box-shadow: 0px 0px 1.1em #e3d0e2, 0.2em 0 0.5em #8ed0e1;
     padding: 1px;
     min-width: 300px;
 }
@@ -232,7 +237,7 @@ input::placeholder{
 
 #edProfile{
     display: grid;
-    background: #f0f0f0;
+
     width: 400px;
     margin: 0 auto;
 }
@@ -289,15 +294,14 @@ input::placeholder{
 
 #camera #live_video {
     width: 100%;
-	max-width: 480px;
 	height: 100%;
     z-index: 1;
     position: absolute;
 }
 
 #overlay{
-    height: 220px;
-    width: 225px;
+    height: 50%;
+    width: 40%;
 }
 
 #camera #video_div #video {
@@ -381,7 +385,7 @@ input::placeholder{
 	#camera #sticker_div {width: 100%;height:auto;float: none; min-height: 70px;overflow-y: hidden;
 		overflow-x: auto;white-space: nowrap; float:none}
 	#camera #video_div {margin-bottom:20px; width: 94%; height: inherit; margin-right: auto; margin-left:auto; float:none}
-	#overlay {margin-bottom:20px; width: 94%; height: inherit; margin-right: auto; margin-left:auto; float:none}
+	
 	#camera #sticker_div img {width:20%;}
 	#camera {width: 100%}
 	#camera #camera_gallery {width: 95%; margin-right: auto; margin-left:auto}

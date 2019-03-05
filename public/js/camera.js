@@ -49,7 +49,7 @@ window.addEventListener("DOMContentLoaded", function() {
         context.drawImage(video, 0, 0, 640, 480);
         var currentSticker = stickerSelector();
         document.getElementById('sticker_div').value = currentSticker.src;
-        context.drawImage(currentSticker, 0, 0, 225, 220); 
+        context.drawImage(currentSticker, 0, 0, 265, 250); 
     });
 }, false);
 
