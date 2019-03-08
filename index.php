@@ -4,14 +4,13 @@ $PhotoPerPage = 4;
 $query = $pdo->query('SELECT id_img FROM picture');
 $AllPhotos = $query->rowCount();
 $AllPages = ceil($AllPhotos/$PhotoPerPage);
-echo $AllPages;
 if(isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $AllPages) {
    $_GET['page'] = intval($_GET['page']);
-   $currentPage = $_GET['page'];
+   $page = $_GET['page'];
 } else {
-   $currentPage = 1;
+   $page = 1;
 }
-$start = ($currentPage-1) * $PhotoPerPage;
+$start = ($page-1) * $PhotoPerPage;
 
 ?>
 
@@ -26,17 +25,20 @@ $start = ($currentPage-1) * $PhotoPerPage;
             }
          ?>
     </div>
-    <div id=photoDisplay>
+</div>
+
+ <div class="pagination">
     <?php
-         for($i=1;$i<=$AllPages;$i++) {
-            if($i == $currentPage) {
-                echo $i.' ';
-            } else {
-                echo '<a href="index.php?page='.$i.'">'.$i.'</a> ';
-             }
-        }
+    if ($page > 1){
+        echo '<a href="index.php?page='.($page-1).'">Previous</a> ';
+    }
+    for($i=1;$i<=$AllPages;$i++) {
+        echo '<a href="index.php?page='.$i.'" class="pagination_item">'.$i.'</a> ';
+    }
+    if ($page < $AllPages){
+        echo '<a href="index.php?page='.($page+1).'">Next</a> ';
+    }
     ?>
     </div>
-</div>
 <?php $view = ob_get_clean(); ?>
 <?php require("template.php"); ?>
