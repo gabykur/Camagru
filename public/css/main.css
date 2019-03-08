@@ -76,6 +76,7 @@ input[type="button"]{
 #background{
     background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
     border-radius: 47px;
+    box-shadow: -1px 2px 1.3em yellow, 0.3em 0.4em 0.9em #8ed0e1;
 }
 
 @media screen and (max-width: 1000px) {

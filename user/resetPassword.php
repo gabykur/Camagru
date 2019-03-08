@@ -18,7 +18,6 @@ if(isset($_GET['username'])){
     if ($token['token'] != $_GET['reset']){
         $err_invalid = 'Invalid link';
     }
-    $pdo = null;
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
