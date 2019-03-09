@@ -1,6 +1,6 @@
 <?php require("config/database.php");
 
-$PhotoPerPage = 4;
+$PhotoPerPage = 9;
 $query = $pdo->query('SELECT id_img FROM picture');
 $AllPhotos = $query->rowCount();
 $AllPages = ceil($AllPhotos/$PhotoPerPage);
@@ -15,13 +15,16 @@ $start = ($page-1) * $PhotoPerPage;
 ?>
 
 <?php ob_start();?>
-<div id="background">
+<div class="background galleryB">
     <h2 style="text-align:center;margin-bottom: 35px;">Gallery</h2>
     <div id="photoDisplay" >
         <?php
             $stmt = $pdo->query("SELECT * FROM picture ORDER BY date DESC LIMIT $start, $PhotoPerPage");
             foreach ($stmt as $photos){
-                echo "<img src='".$photos['img']."' id='img' id='".$photos['id_img']."'>";
+                echo "
+                <div id='img'>
+                    <img src='".$photos['img']."' id='".$photos['id_img']."'>
+                </div>";
             }
          ?>
     </div>
@@ -29,15 +32,15 @@ $start = ($page-1) * $PhotoPerPage;
 
  <div class="pagination">
     <?php
-    if ($page > 1){
-        echo '<a href="index.php?page='.($page-1).'">Previous</a> ';
-    }
-    for($i=1;$i<=$AllPages;$i++) {
-        echo '<a href="index.php?page='.$i.'" class="pagination_item">'.$i.'</a> ';
-    }
-    if ($page < $AllPages){
-        echo '<a href="index.php?page='.($page+1).'">Next</a> ';
-    }
+        if ($page > 1){
+            echo '<a href="index.php?page='.($page-1).'" id="number">&#8249;</a> ';
+        }
+        for($i=1;$i<=$AllPages;$i++) {
+            echo '<a href="index.php?page='.$i.'" id="number">'.$i.'</a> ';
+        }
+        if ($page < $AllPages){
+            echo '<a href="index.php?page='.($page+1).'" id="number">&#8250;</a> ';
+        }
     ?>
     </div>
 <?php $view = ob_get_clean(); ?>

@@ -29,7 +29,7 @@ if(empty($_SESSION['loggedin']))
 
 ?> 
 <?php ob_start(); ?>
-<div id="background">
+<div class="background">
     <div id="camera">
         <div id="video_div">
             <div id="live_video">

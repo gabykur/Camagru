@@ -73,10 +73,14 @@ input[type="button"]{
     margin-top: 50px;
     
 }
-#background{
+
+.background{
     background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
     border-radius: 47px;
-    box-shadow: -1px 2px 1.3em yellow, 0.3em 0.4em 0.9em #8ed0e1;
+}
+
+.galleryB{
+    background-image: linear-gradient(to bottom, rgba(223,245,244,0.4), rgba(229,252,240,0.7)), url(../icons/quadrillage.png);
 }
 
 @media screen and (max-width: 1000px) {
@@ -149,38 +153,47 @@ input::placeholder{
 }
 
 #photoDisplay #img{
-    cursor: pointer;
-    align-items: center;
-    text-align: center;
-    margin: 20px;
-    background-color: rgb(137, 208, 219);
-    height: 335px;
-    width: 420px;
-    padding: 7px;
-    border-radius: 25px;
+    cursor : pointer;
+	align-items: center;
+	text-align:center;
+	margin: 20px;
+	background-color: rgba(232,233,243, 0.7);
+	height: 260px;
+	width: 270px;
+	vertical-align: middle;
+	padding-top: 10px;
+	float: left;
+}
+
+#img img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
 }
 
 .pagination {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+    justify-content: center;
+    margin: 25px 0px 0px 0px;
 }
 
-
-.pagination_item {
-	width: 40px;
+#number{
+    width: 40px;
     line-height: 35px;
-    border-radius: 50%;
     text-align: center;
-    font-size: 18px;
-	border: 2px solid  #e3d0e2;
-	font-weight: bold;
-	text-decoration: none;
-	margin: 2px 5px 2px 5px;
-	color: #e3d0e2;
-	background-image: linear-gradient(to right, #95d1f1, #8cd0d9, #95d1f1);
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 2px 5px 2px 5px;
+    color: #95d0f2;
+    background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
 }
+.pagination #number:hover{
+    transform: scale(1.1);
+}
+
 
 /*_____LOGIN_____*/
 
