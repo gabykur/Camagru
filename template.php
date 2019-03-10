@@ -7,7 +7,6 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Camagru</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body>
@@ -34,6 +33,14 @@ session_start();
 <div class="main">
     <?= $view ?>
 </div>
-<footer><p>Camagru ©gkuraite | 2019</p></footer>
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+<footer>
+		  <p class="text-footer">
+		  Ce site fut rélisé par KURAITE Gabriele du 17 au 22 avril 2017<br/> 
+		  Pour plus d'information veuilez contactez l'adresse email suivante : <a href="gabriellekuraite@gmail.com">
+		  gabriellekuraite@gmail.com</a><br/>
+		  <a href="credits.html">@credits2017</a>
+		  </p>
+	</footer>
 </body>
 </html>

@@ -88,20 +88,27 @@ input[type="button"]{
     #background{border-radius: 0}
 }
 
-footer{
-    background-image: linear-gradient(to right, #95d1f1, #8cd0d9, #95d1f1);
-    text-align: center;
-    position: absolute;
-    margin-top: 54px;
-    width: 100%;
-    bottom:0;
-}
-
 
 input::placeholder{
     color: #94d0ef;
     font-size:20px;
     padding:10px;
+}
+
+footer p
+{
+	color:(66, 80, 80);
+	font-size: 1em; 
+	border:3px; 
+	border-style:solid; 
+	border-color:-moz-linear-gradient(top, #e9e493 0%, #bbb22b 92%); 
+	padding: 1em;
+	font-family: verdana;
+	text-align: justify;
+	background:-webkit-linear-gradient(45deg, #7d7e7d 1%,#383838 100%);
+	margin-left: 50px;
+	margin-right: 50px;
+	padding: 10px;	
 }
 
 /*_____NAVIGATION_____*/
