@@ -33,13 +33,10 @@ session_start();
 <div class="main">
     <?= $view ?>
 </div>
-<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
 <footer>
 		  <p class="text-footer">
-		  Ce site fut rélisé par KURAITE Gabriele du 17 au 22 avril 2017<br/> 
-		  Pour plus d'information veuilez contactez l'adresse email suivante : <a href="gabriellekuraite@gmail.com">
-		  gabriellekuraite@gmail.com</a><br/>
-		  <a href="credits.html">@credits2017</a>
+            ©gkuraite 2019
 		  </p>
 	</footer>
 </body>
