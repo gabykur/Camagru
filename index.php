@@ -16,7 +16,7 @@ $start = ($page-1) * $PhotoPerPage;
 
 <?php ob_start();?>
 <div class="background galleryB">
-    <h2 style="text-align:center;margin-bottom: 35px;">Gallery</h2>
+    <h2 id="title">Gallery</h2>
     <div id="photoDisplay" >
         <?php
             $stmt = $pdo->query("SELECT * FROM picture ORDER BY date DESC LIMIT $start, $PhotoPerPage");

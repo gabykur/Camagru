@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php ob_start();?>
 
 <div class="loginForm">
-    <h2 style="margin-bottom: 35px;">Reset password</h2>
+    <h2 id="title2">Reset password</h2>
     <p style="color:green;"><?php echo $message; ?></p>
     <p style="color:red;"><?php echo $err_invalid; ?></p>
         <form action="" method="post">

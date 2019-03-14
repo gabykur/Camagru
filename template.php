@@ -33,11 +33,8 @@ session_start();
 <div class="main">
     <?= $view ?>
 </div>
-<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-<footer>
-		  <p class="text-footer">
-            ©gkuraite 2019
-		  </p>
-	</footer>
+<div id="footer">
+	<p style="margin: 10px;">©gkuraite - 2019</p>
+</div>
 </body>
 </html>

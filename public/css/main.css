@@ -9,13 +9,11 @@
 
 body{
     background: #e3d0e2;
-    margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-
+    margin:0;
+    padding:0;
+    height:100%;
 }
 
 header{
@@ -49,7 +47,8 @@ h3{
 }
 
 p{
-    font-size:15px;
+    text-align: center;
+    font-size:18px;
 	color: white;
 }
 
@@ -88,38 +87,27 @@ input[type="button"]{
     #background{border-radius: 0}
 }
 
-
 input::placeholder{
     color: #94d0ef;
     font-size:20px;
     padding:10px;
 }
 
-footer
-{
-    max-width:1000px;
-	margin-left:auto;
-	margin-right:auto;
+#footer {
+    position:fixed;
+    bottom:0;
+    height: 40px;
+    background-image: linear-gradient(to right, #95d1f1, #8cd0d9, #95d1f1);
+    opacity: 0.7;
     width:100%;
-}
-
-.text-footer
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    padding:10px;
-    border-radius:10px;
-    color: #95d1f1;
-	background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
-	text-align:center;
+    
 }
 
 @media screen and (max-width: 400px){
-    footer{margin: 3px;width:100%}
+    
 }
 
-/*_____NAVIGATION_____*/
+/*--------------------------------------------------------HEADER---------------------------------------------------------------*/
 
 
 .container
@@ -128,7 +116,6 @@ footer
 	margin-left:auto;
 	margin-right:auto;
 	width:100%;
-    
 }
 
 @media screen and (max-width: 400px)
@@ -158,7 +145,14 @@ footer
     inline-size: 83px;
 }
 
-/*_____Index.php_____*/
+/*--------------------------------------------------------GALLERY--------------------------------------------------------------*/
+
+#title{
+    text-align: center;
+    margin-bottom: -6px;
+    padding-top: 16px;
+    font-size:78px;
+}
 
 #photoDisplay{
     display: flex;
@@ -191,7 +185,7 @@ footer
 	display: flex;
 	flex-direction: row;
     justify-content: center;
-    margin: 25px 0px 0px 0px;
+    margin: 25px 0px 60px 0px;
 }
 
 #number{
@@ -209,8 +203,11 @@ footer
     transform: scale(1.1);
 }
 
+@media screen and (max-width: 400px){
 
-/*_____LOGIN_____*/
+}
+
+/*--------------------------------------------------------LOGIN---------------------------------------------------------------*/
 
 
 
@@ -225,15 +222,20 @@ footer
     padding: 1px;
     min-width: 300px;
 }
+.loginForm #title2{
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
 
 .loginForm input {
     width: 65%;
     height: 40px;
-    font-size: 25px;
+    font-size: 20px;
     font-family: Cambria;
+    color: #4bb7ec;
     padding: 3px;
     border-radius: 12px;
-    border: 2px solid #e3d0e2;
+    border: 1.25px solid #e3d0e2;
     margin: 17px;
 }
 
@@ -241,6 +243,7 @@ footer
     background-color: #94d1ef;
     width: 31%;
     height: 50px;
+    font-size: 25px;
     color: white;
     border: 2px solid #e3d0e2;
 }
@@ -274,43 +277,95 @@ footer
     color:red;
     margin-bottom: -20px;
     margin-top: 20px;
- }
+}
 
  .loginForm form span{
     display: block;
     color: #4BB7EC; 
     font-weight: bold;
- }
-
-
-
-/*_____ACCOUNT_____*/
-
-#edProfile{
-    display: grid;
-    width: 400px;
-    margin: 0 auto;
 }
 
 
-#edProfile a{  
-    background: #e5fcf0;
-    border: 1px solid pink;
-    padding: 20px 10px;
-    font-size: 140%;
-    margin: 5px;
-    border-radius:10px;
-    text-decoration: none;
+/*--------------------------------------------------------ACCOUNT---------------------------------------------------------------*/
+
+#test{
+    display: flex;
+    flex-direction: column;    
+    padding: 1em;
+}
+
+#account{
+	flex: 1 1 auto;
+    display: flex;
+}
+
+#account nav a{
+    background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
+    box-shadow: 0px 0px 1.1em #e3d0e2, 0.2em 0 0.5em #8ed0e1;
+    padding: 20px;
+    font-size: 19px;
+    margin: 11px 35px -6px;
+    border-radius: 10px;
     font-weight: 300;
     text-align: center;
     color: #3399cc;
 }
 
-#edProfile a:hover{
-    background: lightblue;
+#account article {
+    /* occupe la largeur restante */
+    flex: 1;
 }
 
-/*_____CAMERA_____*/
+#account nav {
+    /* nav s'affiche en premier */
+    order: -1;
+}
+
+@media (max-width: 640px) {
+    #account {flex-direction: column;}
+}
+
+#account nav {
+  /* pour écraser la valeur 10em */
+  width: 250px;
+  margin-right:25px;
+}
+#account nav,
+#account article {
+  /* pour écraser la valeur 0, due au flex: 1 */
+  flex-basis: auto;
+}
+#account nav {
+  /* nav reprend sa place */
+  order: 0;
+}
+#account nav {
+    display: grid;
+    background: rgba(229,252,240,0.5);
+    height: 336px;
+    margin: 13px 6px 0px 9px;
+    border-radius: 15px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 65px 65px 65px 65px;
+    grid-row-gap: 18px;
+}
+
+#account article {
+    height: 549px;
+    background: rgba(229,252,240,0.4);
+    margin: 14px 1px -3px 6px;
+    border-radius: 26px;
+}
+
+
+#account nav a:hover{
+    background-image: radial-gradient(circle, #6ef5af, #6cf1ac, #69eca9, #67e8a6, #65e4a3);
+    color: white;
+}
+
+
+
+/*--------------------------------------------------------CAMERA---------------------------------------------------------------*/
 
 #camera {
 	width: 80%;
@@ -362,7 +417,7 @@ footer
     min-height: 236px;
 }
 
-/* Stickers*/
+/********************************Stickers*************************************/
 
 #camera #sticker_div{
 	background-color: #c4f2da;
@@ -423,12 +478,18 @@ footer
 	min-width: 150px
 }
 
+#text-camera{
+    text-align:center;
+    font-size:18px;
+    color: a;
+    margin-bottom: auto;
+}
+
 
 @media screen and (max-width: 660px) {
 	#camera #sticker_div {width: 100%;height:auto;float: none; min-height: 70px;overflow-y: hidden;
 		overflow-x: auto;white-space: nowrap; float:none}
 	#camera #video_div {margin-bottom:20px; width: 94%; height: inherit; margin-right: auto; margin-left:auto; float:none}
-	
 	#camera #sticker_div img {width:20%;}
 	#camera {width: 100%}
 	#camera #camera_gallery {width: 95%; margin-right: auto; margin-left:auto}

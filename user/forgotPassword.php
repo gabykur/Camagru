@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
 <?php ob_start();?>
 <div class="loginForm">
-    <h2 style="margin-bottom: 35px;">Forgotten Password</h2>
+    <h2 id="title2">Forgotten Password</h2>
     <p id="actMsg" style="color:green;"><?php echo $reset_mess; ?></p>
         <form method="post" action="" style="margin-top:7%;">
         <input type="text" placeholder="Enter your login" name="username">

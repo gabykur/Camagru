@@ -62,9 +62,10 @@ if(empty($_SESSION['loggedin']))
             }
         ?>
         </div>
+        <div><p id="text-camera">No camera ? No problem !<a style="color: #EFB4E4;" href=""> <b>Click here :)</b></a></p></div>
     </div>
 </div><br/><br/>
-<div><p style="text-align:center;font-size:18px;color: #94d0ef;">No camera ? No problem !<a href=""> Click here :)</a></p></div>
+
 <script src="/public/js/camera.js"></script>
 <?php $view = ob_get_clean(); ?>
 <?php require("template.php"); ?>
