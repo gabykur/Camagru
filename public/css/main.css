@@ -300,7 +300,7 @@ input::placeholder{
 }
 
 #account nav a{
-    background-image: linear-gradient(to bottom, #dff5f4, #e1edf2, #e5fcf0);
+    background-image: linear-gradient(to right top, #e1edf2, #dff5f4, #e5fcf0);
     box-shadow: 0px 0px 1.1em #e3d0e2, 0.2em 0 0.5em #8ed0e1;
     padding: 20px;
     font-size: 19px;
@@ -312,12 +312,10 @@ input::placeholder{
 }
 
 #account article {
-    /* occupe la largeur restante */
     flex: 1;
 }
 
 #account nav {
-    /* nav s'affiche en premier */
     order: -1;
 }
 
@@ -326,17 +324,14 @@ input::placeholder{
 }
 
 #account nav {
-  /* pour écraser la valeur 10em */
   width: 250px;
   margin-right:25px;
 }
 #account nav,
 #account article {
-  /* pour écraser la valeur 0, due au flex: 1 */
   flex-basis: auto;
 }
 #account nav {
-  /* nav reprend sa place */
   order: 0;
 }
 #account nav {
@@ -357,7 +352,6 @@ input::placeholder{
     border-radius: 26px;
 }
 
-
 #account nav a:hover{
     background-image: radial-gradient(circle, #6ef5af, #6cf1ac, #69eca9, #67e8a6, #65e4a3);
     color: white;
@@ -377,7 +371,7 @@ input::placeholder{
 
 
 #camera #video_div {
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 20px;
 	background-color:#c4f2da;
 	padding: 10px;
@@ -424,7 +418,7 @@ input::placeholder{
 	width: 25%;
     max-height: 440px;
     min-height: 236px;
-	margin-top: 30px;
+	margin-top: 50px;
 	float: right;
 	overflow-y: auto;
 }
@@ -459,6 +453,7 @@ input::placeholder{
     margin-left: 33%;
     margin-bottom: 20px;
 }
+/********************************Camera Gallery*************************************/
 
 #camera #camera_gallery {
 	margin-top: 1px;
@@ -481,7 +476,7 @@ input::placeholder{
 #text-camera{
     text-align:center;
     font-size:18px;
-    color: a;
+    color: #4bb7ec;
     margin-bottom: auto;
 }
 
