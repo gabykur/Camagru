@@ -1,20 +1,14 @@
 <?php ob_start(); ?>
-
-            <h2 style="margin-top: 20px;">Delete Your Account</h2>
-                <div style="max-height: 705px;" id="a">
-                    <div class="loginForm" style="min-height:364px; margin-top: 30px;">      
-                        <form action="" method="post">
-                            
-                            <p id="actMsg"><?php echo $activation_mess; ?></p><br>
-                            <span><?php echo $username_err; ?></span>
-                            <input type="text" name="username" placeholder="New Username" value="<?php echo $username; ?>">
-                            <input type="submit" name="change_username" value="Save">
-                            <span><?php echo $password_err; ?></span>
-                            <input type="password" name="password" placeholder="New Password">
-                            <input type="password" name="confirm_password" placeholder="Confirm New Password">
-                            <input type="submit" name="change_password" value="Save">
-                        </form>
-                    </div><br>
-                </div>
+    <div style="max-height: 705px;" id="a">
+        <div class="loginForm accountForm" style="min-height:220px;margin-top:77px;">      
+            <h2 id="subTitle">Delete Your Account</h2>
+            <form action="" method="post">
+                <p id="actMsg"><?php echo $activation_mess; ?></p><br>
+                <span><?php echo $password_err; ?></span>
+                <input type="passwrod" style="margin-top:41px;" name="password" placeholder="Enter password to delete account" value="<?php echo $passwrod; ?>">
+                <input type="submit" id="saveBtt" style="width: 37%;margin-top: 15px;font-size: 22px;" name="delete_account" value="Delete Account">
+            </form>
+        </div><br>
+    </div>
 <?php $content = ob_get_clean(); ?>
 <?php require("account.php"); ?>
