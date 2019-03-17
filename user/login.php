@@ -46,12 +46,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $id = $row[0]["id"];
                         $username = $row[0]["username"];
                         $hashed_password = $row[0]["password"];
+                        $email = $row[0]["email"];
                         if ($row[0]["user_status"] == 'verified'){
                             if(password_verify($password, $hashed_password)){
                                 session_start();
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["id"] = $id;
                                 $_SESSION["username"] = $username;                            
+                                $_SESSION["email"] = $email;                            
                                 header("location: ../camera.php");
                             } else{
                                 $password_err = "The password you entered was not valid.";

@@ -301,14 +301,14 @@ input::placeholder{
 
 #account nav a{
     background-image: linear-gradient(to right top, #e1edf2, #dff5f4, #e5fcf0);
-    box-shadow: 0px 0px 1.1em #e3d0e2, 0.2em 0 0.5em #8ed0e1;
+    box-shadow: 0px 0px 0.15em #6cf1ac, 0.15em 0 0.25em #67e8a600;
     padding: 20px;
     font-size: 19px;
     margin: 11px 35px -6px;
     border-radius: 10px;
-    font-weight: 300;
+    font-weight: bold;
     text-align: center;
-    color: #3399cc;
+    color: #95d0f2;
 }
 
 #account article {
@@ -357,6 +357,54 @@ input::placeholder{
     color: white;
 }
 
+#subTitle{
+    text-shadow: 4px 2px 1px #69eca9;
+    color: #c4f2da;
+    margin-top: 20px;
+}
+
+#saveBtt{
+    border: 3px solid #c4f2da;     
+    background-color:  #6ef5af;
+}
+.accountForm{
+    width:81%;
+    background-image: linear-gradient(to top, #94d1ef26, #95d1f199, #94d1ef);
+    border-radius: 15px;
+    box-shadow: 0px 0px 1.1em #95d1f1, 0.2em 0 0.5em #efb4e4;
+    padding: 1px;
+}
+
+/********************************Notifications*************************************/
+
+label {
+    border: 2px solid #67e8a6;
+    padding: 25px;
+    margin: 0 0 10px;
+    background: #c4f2da;
+    border-radius: 20px;
+}
+   
+label:hover {
+    background:#67e8a6;
+    border: 2px solid #c4f2da;
+    color: white;
+    cursor:pointer;
+}
+#pNot{
+    display: -webkit-inline-box;
+    text-shadow: none;
+    color: #4bb7ec;
+}
+#pNot:hover{
+    color:white;
+}
+
+#checkbox{
+    width: -webkit-fill-available;
+    height: 16px;
+    margin: 93px 20px 20px 20px;
+}
 
 
 /*--------------------------------------------------------CAMERA---------------------------------------------------------------*/
