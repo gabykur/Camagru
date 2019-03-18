@@ -337,12 +337,12 @@ input::placeholder{
 #account nav {
     display: grid;
     background: rgba(229,252,240,0.5);
-    height: 336px;
+    height: 376px;
     margin: 13px 6px 0px 9px;
     border-radius: 15px;
     grid-template-columns: 1fr;
-    grid-template-rows: 65px 65px 65px 65px;
-    grid-row-gap: 18px;
+    grid-template-rows: 65px 65px 65px 65px 65px;
+    grid-row-gap: 8px;
 }
 
 #account article {
@@ -406,6 +406,31 @@ label:hover {
     margin: 93px 20px 20px 20px;
 }
 
+/********************************Delete Photos*************************************/
+
+#deletePhotos{
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 3px 0px 26px 9px;
+    overflow-x: hidden;
+    height: 398px;
+    width: 616px;
+}
+
+#deletePhotos #img{
+    cursor: pointer;
+    height: 129px;
+    width: 199px;
+    vertical-align: middle;
+    border-radius: 74px;
+    float: left;
+}
+
+#deletePhotos #img img{
+    width: 197px;
+    height: 110px;
+    object-fit: scale-down;
+}
 
 /*--------------------------------------------------------CAMERA---------------------------------------------------------------*/
 
