@@ -57,10 +57,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         unset($stmt);
     }
 
+    $uppercase = preg_match('@[A-Z]@', test_input($_POST["password"]));
+    $lowercase = preg_match('@[a-z]@', test_input($_POST["password"]));
+    $number    = preg_match('@[0-9]@', test_input($_POST["password"]));
+
     if(empty(test_input($_POST["password"]))){
         $password_err = "Please enter a password.";     
-    } elseif(strlen(test_input($_POST["password"])) < 6){
-        $password_err = "Password must have atleast 6 characters.";
+    } elseif(strlen(test_input($_POST["password"])) < 8 || !$uppercase || !$lowercase || !$number){
+        $password_err = "Password : 8 characters, uppercase (A-Z), number (0-9).";
     } else{
         $password = test_input($_POST["password"]);
     }

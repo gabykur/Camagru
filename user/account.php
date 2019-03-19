@@ -1,6 +1,10 @@
 <?php
 require_once("../config/database.php");
 session_start();
+
+if(empty($_SESSION['loggedin']))
+    header('Location: ../index.php');
+
 $username = $email = $password = $confirm_password = "";
 $error = "";
 

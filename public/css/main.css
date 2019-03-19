@@ -411,15 +411,14 @@ label:hover {
 #deletePhotos{
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin: 3px 0px 26px 9px;
+    margin: 3px 0px 0px 9px;
     overflow-x: hidden;
-    height: 398px;
+    height: 369px;
     width: 616px;
 }
 
 #deletePhotos #img{
-    cursor: pointer;
-    height: 129px;
+    height: 151px;
     width: 199px;
     vertical-align: middle;
     border-radius: 74px;
@@ -430,6 +429,12 @@ label:hover {
     width: 197px;
     height: 110px;
     object-fit: scale-down;
+}
+
+#check_del{
+    cursor: pointer;
+    width: fit-content;
+    margin-top: -4px;
 }
 
 /*--------------------------------------------------------CAMERA---------------------------------------------------------------*/

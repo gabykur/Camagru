@@ -25,7 +25,7 @@ if (isset($_POST['tookAphoto']))
 
 
 if(empty($_SESSION['loggedin']))
-    header('Location: index.php');
+    header('Location: /user/login.php');
 
 ?> 
 <?php ob_start(); ?>
