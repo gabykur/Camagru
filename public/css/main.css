@@ -311,6 +311,22 @@ input::placeholder{
     color: #95d0f2;
 }
 
+#account nav #EdPro{
+    box-shadow: -3px 1px 0.15em #6cf1ac, 0.15em 0 0.25em #67e8a600;
+}
+#account nav #EdPwd{
+    box-shadow: -3px 1px 0.15em #4bb7ec, 0.15em 0 0.25em #67e8a600;
+}
+#account nav #DelPho{
+    box-shadow: -3px 1px 0.15em #bac, 0.15em 0 0.25em #67e8a600;
+}
+#account nav #DelAcc{
+    box-shadow: -3px 1px 0.15em #c992ff, 0.15em 0 0.25em #67e8a600;
+}
+#account nav #Notif{
+    box-shadow: -3px 1px 0.15em #efb4e4, 0.15em 0 0.25em #67e8a600;
+}
+
 #account article {
     flex: 1;
 }
@@ -368,7 +384,7 @@ input::placeholder{
     background-color:  #6ef5af;
 }
 .accountForm{
-    width:81%;
+    width:82%;
     background-image: linear-gradient(to top, #94d1ef26, #95d1f199, #94d1ef);
     border-radius: 15px;
     box-shadow: 0px 0px 1.1em #95d1f1, 0.2em 0 0.5em #efb4e4;

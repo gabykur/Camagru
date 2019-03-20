@@ -2,6 +2,9 @@
 session_start();
 require("../config/database.php");
 
+if(empty($_SESSION['loggedin']))
+    header('Location: ../index.php');
+
 $old_password = test_input($_POST['old_password']);
 $new_password = test_input($_POST['new_password']);
 $confirm_password = test_input($_POST['new_confirm_password']);
@@ -62,11 +65,11 @@ if (isset($_POST["change_pwd"])){
     <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">What's up bitch ? </h2>
         <div id="account">
             <nav id="account_nav">
-                <a href="account.php">Edit Profile</a>
-                <a href="modifyPassw.php">Edit Password</a>
-                <a href="deletePhotos.php" >Delete Photos</a>
-                <a href="deleteAccount.php" >Delete Account</a>
-                <a href="notifications.php" >Notifications</a>
+                <a id="EdPro" href="account.php">Edit Profile</a>
+                <a id="EdPwd" href="modifyPassw.php">Edit Password</a>
+                <a id="DelPho" href="deletePhotos.php" >Delete Photos</a>
+                <a id="DelAcc" href="deleteAccount.php" >Delete Account</a>
+                <a id="Notif" href="notifications.php" >Notifications</a>
             </nav>
             <article>
                 <div style="max-height: 705px;" id="a">

@@ -44,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $message = "Your account has been updated";
             session_start();
             $_SESSION['username'] = $username;
-            header("Refresh: 2; url=modifyProfile.php");
+            header("Refresh: 2; url=account.php");
         }else{
             $message = "Something went wrong :(";
         }
@@ -78,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $message = "Your account has been updated";
             session_start();
             $_SESSION['email'] = $email;
-            //header("Refresh: 2; url=modifyProfile.php");
+            header("Refresh: 2; url=account.php");
         }else{
             $message = "Something went wrong :(";
         }
@@ -93,11 +93,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">What's up bitch ? </h2>
         <div id="account">
             <nav id="account_nav">
-                <a href="account.php">Edit Profile</a>
-                <a href="modifyPassw.php">Edit Password</a>
-                <a href="deletePhotos.php" >Delete Photos</a>
-                <a href="deleteAccount.php" >Delete Account</a>
-                <a href="notifications.php" >Notifications</a>
+                <a id="EdPro" href="account.php">Edit Profile</a>
+                <a id="EdPwd" href="modifyPassw.php">Edit Password</a>
+                <a id="DelPho" href="deletePhotos.php" >Delete Photos</a>
+                <a id="DelAcc" href="deleteAccount.php" >Delete Account</a>
+                <a id="Notif" href="notifications.php" >Notifications</a>
             </nav>
             <article>
                 <div style="max-height: 705px;" id="a">
