@@ -5,6 +5,13 @@ require("../config/database.php");
 if(empty($_SESSION['loggedin']))
     header('Location: ../index.php');
 
+function test_input($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
 $old_password = test_input($_POST['old_password']);
 $new_password = test_input($_POST['new_password']);
 $confirm_password = test_input($_POST['new_confirm_password']);
@@ -15,13 +22,6 @@ $message = $message_err = "";
 $uppercase = preg_match('@[A-Z]@', $new_password);
 $lowercase = preg_match('@[a-z]@', $new_password);
 $number    = preg_match('@[0-9]@', $new_password);
-
-function test_input($data){
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
 
 if (isset($_POST["change_pwd"])){
     if (isset($old_password)){

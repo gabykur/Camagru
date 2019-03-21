@@ -1,7 +1,7 @@
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
-var video = document.getElementById('video');
-var snap = document.getElementById('snap');
+var picture = document.getElementById('upload_img');
+var upload = document.getElementById('uploadBtt');
 var overlay_image = document.getElementById("overlay");
 
 
@@ -24,32 +24,24 @@ function stickerSelector() {
     return selectedSticker[0];
 }
 
-function takePhoto(){
+document.getElementById('uploadPic').onchange = function(e) {
+    var output = document.getElementById('upload_img');
+    var saveBtt = document.getElementById('uploadBtt');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.style.display="block";
+    saveBtt.style.display="block";
+  };
+
+function uploadPhoto(){
     var canvas = document.getElementById("canvas");
-    var photo =  document.getElementById("snap");
+    var photo =  document.getElementById("uploadBtt");
     photo.value = canvas.toDataURL();
 }
 
-// Put event listeners into place
-window.addEventListener("DOMContentLoaded", function() {
-    var mediaConfig =  { video: true, audio: false };
-    var errBack = function(e) {
-        console.log('An error has occurred!', e)
-    };
 
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia(mediaConfig)
-        .then(function(stream) {
-            video.srcObject = stream;
-            video.play();
-        });
-    }
-
-    snap.addEventListener('click', function() {
-        context.drawImage(video, 0, 0, 640, 480);
+upload.addEventListener('click', function() {
+        context.drawImage(picture, 0, 0, 640, 480);
         var currentSticker = stickerSelector();
         document.getElementById('sticker_div').value = currentSticker.src;
         context.drawImage(currentSticker, 0, 0, 265, 250); 
-    });
-}, false);
-
+});

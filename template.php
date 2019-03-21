@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Camagru</title>
-    <link rel="icon" href="public/icons/noel.jpg">
+    <link rel="icon" href="/public/icons/noel.jpg">
     <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body>
