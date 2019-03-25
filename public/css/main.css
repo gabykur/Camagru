@@ -53,7 +53,8 @@ p{
 }
 
 a{
-	text-decoration: none;
+    text-decoration: none;
+    color:white;
 }
 
 input[type="submit"]{
@@ -158,28 +159,55 @@ input::placeholder{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin: 0px 0px 25px 0px;
+    margin: 16px 0px 25px 0px;
 }
 
 #photoDisplay #img{
-    cursor : pointer;
-	align-items: center;
-	text-align:center;
-	margin: 20px;
-	background-color: rgba(232,233,243, 0.7);
-	height: 260px;
-	width: 270px;
-	vertical-align: middle;
-	padding-top: 10px;
-	float: left;
+    cursor: pointer;
+    text-align: center;
+    margin: 20px;
+    background-image: linear-gradient(to left bottom, #eafff5, #defdff, #dff7ff, #ecefff, #ffe6fc);   
+    height: 248px;
+    width: 270px;
+    padding-top: 9px;
+    -moz-box-shadow: 1.5px 1.75px 5.75px 2px #989898;
+    -webkit-box-shadow: 1.5px 1.75px 5.75px 2px #989898;
+    box-shadow: 3px 3px 5px 2px #989898;
+}
+
+#photoDisplay #img:hover{
+    background-image: linear-gradient(to top, #fceaff, #e5f0ff, #c6f9ff, #b7fffc, #caffd9);
+}
+
+#photoDisplay #img:hover img{
+    filter:brightness(40%);
 }
 
 #img img{
     width: 250px;
     height: 250px;
-    object-fit: cover;
+    object-fit: contain;
+    margin-top: -28px;
 }
 
+
+#buttons{
+    margin-top: -138px;
+    margin-left: 30%;
+    margin-right: 30%;
+    color: white;
+    font-size: 20px;
+    opacity: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+#photoDisplay #img:hover #buttons{
+    opacity: 1;
+    filter: brightness(100%);
+}
+
+/********************************Pagination*************************************/
 .pagination {
 	width: 100%;
 	display: flex;
@@ -203,8 +231,77 @@ input::placeholder{
     transform: scale(1.1);
 }
 
+
 @media screen and (max-width: 400px){
 
+}
+
+/********************************Like / comment*************************************/
+
+#photoDisplay #imgLikeCom{
+    text-align: center;
+    margin: 59px 0px 65px 0px;
+    background-image: linear-gradient(to left bottom, #eafff5, #defdff, #dff7ff, #ecefff, #ffe6fc);
+    height: 448px;
+    width: 470px;
+    padding-top: 9px;
+    -moz-box-shadow: 1.5px 1.75px 5.75px 2px #989898;
+    -webkit-box-shadow: 1.5px 1.75px 5.75px 2px #989898;
+    box-shadow: 1.5px 1.75px 5.75px 2px #989898;
+}
+
+#imgLikeCom img{
+    width: 450px;
+    height: 450px;
+    object-fit: contain;
+    margin-top: -28px;
+}
+
+#box{
+    max-height: 460px;
+    max-width:400px;
+    width: 100%;
+    background: rgba(229, 252, 240, 0.5);
+    margin: 56px -14px 5px -50px;
+}
+
+#img_info{
+    text-align: left;
+    color: #4bb7ecab;
+    font-size: 17px;
+    font-weight: bold;
+    margin: -27px 0px 0px 15px;
+    font-family: monospace;
+}
+.comment_form{
+    order:5;
+}
+.comment_form {
+	display: flex;
+	
+	outline: none;
+}
+
+.textbox {
+    outline: none;
+    overflow: hidden;
+    resize: none;
+    font-size: 14px;
+    flex-grow: 100;
+    border: none;
+    background-color: #e3d0e2a3;
+    margin-top: 97%;
+}    
+    
+#sendBtt{
+    flex-grow: 15;
+    border: none;
+    background-color: #c4f2da;
+    margin-top: 97%;
+    font-size: 13px;
+    font-weight: bold;
+    color: #4bb7ec;
+    border-radius: 4px;
 }
 
 /*--------------------------------------------------------LOGIN---------------------------------------------------------------*/
@@ -283,6 +380,7 @@ input::placeholder{
     display: block;
     color: #4BB7EC; 
     font-weight: bold;
+    margin-top: 34px;
 }
 
 

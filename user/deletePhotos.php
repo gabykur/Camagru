@@ -46,9 +46,9 @@ if(isset($_POST['delete'])){
                     <div class="loginForm accountForm" style="min-height:364px; margin-top: 13px;width: 91%;">      
                         <h2 id="subTitle">Delete Photos</h2>
                             <div id="deletePhotos">
+                                <span style="color:green"><?php echo $message; ?></span>
+                                <span style="color:red"><?php echo $message_err; ?></span>
                                 <form method="POST" action="">
-                                    <span style="color:green"><?php echo $message; ?></span>
-                                    <span style="color:red"><?php echo $message_err; ?></span>
                                     <?php 
                                         $stmt = $pdo->prepare("SELECT img, id_img FROM picture WHERE id_user = :id_user ORDER BY date DESC");
                                         $stmt->bindParam(":id_user", $_SESSION['id']);
