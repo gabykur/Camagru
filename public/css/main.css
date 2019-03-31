@@ -255,6 +255,7 @@ input::placeholder{
     height: 450px;
     object-fit: contain;
     margin-top: -28px;
+    position: relative;
 }
 
 #box{
@@ -273,13 +274,17 @@ input::placeholder{
     margin: -27px 0px 0px 15px;
     font-family: monospace;
 }
-.comment_form{
-    order:5;
-}
+
 .comment_form {
 	display: flex;
-	
 	outline: none;
+}
+.likeIcon{
+    font-size: 44px;
+    color: #86c6f2;
+    margin-top: -52px;
+    margin-left: 133px;
+    position: absolute;
 }
 
 .textbox {
@@ -290,18 +295,17 @@ input::placeholder{
     flex-grow: 100;
     border: none;
     background-color: #e3d0e2a3;
-    margin-top: 97%;
 }    
     
 #sendBtt{
     flex-grow: 15;
     border: none;
     background-color: #c4f2da;
-    margin-top: 97%;
     font-size: 13px;
     font-weight: bold;
     color: #4bb7ec;
     border-radius: 4px;
+    margin:0
 }
 
 /*--------------------------------------------------------LOGIN---------------------------------------------------------------*/
@@ -380,7 +384,6 @@ input::placeholder{
     display: block;
     color: #4BB7EC; 
     font-weight: bold;
-    margin-top: 34px;
 }
 
 

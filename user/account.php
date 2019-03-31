@@ -104,8 +104,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="loginForm accountForm" style="min-height:364px; margin-top: 90px;">      
                         <h2 id="subTitle">Edit your profile</h2>
                         <form action="" method="post">
-                            <span style="color:green"><?php echo $message; ?></span>
-                            <span style="color:red"><?php echo $error; ?></span>
+                            <span style="color:green;    margin-top: 34px;"><?php echo $message; ?></span>
+                            <span style="color:red;    margin-top: 34px;"><?php echo $error; ?></span>
                             <input type="text" style="border: 3px solid #efb4e4;margin:14px;" name="new_username" placeholder="New Username" value="<?php echo $_SESSION["username"]; ?>">
                             <input type="email" style="border: 3px solid #6cf1ac;margin:14px;" name="new_email" placeholder="New Email" value="<?php echo $_SESSION['email']; ?>">
                             <span></span>

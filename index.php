@@ -13,6 +13,18 @@ if(isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 && $_GET['
 }
 $start = ($page-1) * $PhotoPerPage;
 
+//counting number of likes and comments
+
+/*$countLikes = $pdo->prepare("SELECT count(likes.id_img) AS likes FROM likes WHERE id_img = :id_img");
+$countLikes->bindParam(':id_img', $id_photo);
+$countLikes->execute();
+$likes = $countLikes->fetch(PDO::FETCH_ASSOC);
+
+$countComments = $pdo->prepare("SELECT count(comments.id_img) AS comments FROM  WHERE id_img = :id_img");
+$countComments->bindParam(':id_img', $id_photo);
+$countComments->execute();
+$comments = $countComments->fetch(PDO::FETCH_ASSOC);*/
+
 ?>
 
 <?php ob_start();?>
@@ -20,24 +32,38 @@ $start = ($page-1) * $PhotoPerPage;
     <h2 id="title" style="letter-spacing:10px">Gallery</h2>
     <div id="photoDisplay" >
         <?php
-            $stmt = $pdo->query("SELECT picture.id_img, picture.img, picture.date, users.username 
-                                FROM picture INNER JOIN users ON picture.id_user = users.id 
-                                GROUP BY picture.id_img ORDER BY picture.date DESC LIMIT $start, $PhotoPerPage");
+            $stmt = $pdo->query("SELECT picture.id_img, picture.img, picture.date, users.username, count(comments.id_img) AS nb_comment, count(likes.id_img) AS nb_like
+                                FROM picture
+                                LEFT JOIN comments ON (picture.id_img = comments.id_img) 
+                                LEFT JOIN likes ON (picture.id_img = likes.id_img)
+                                INNER JOIN users ON picture.id_user = users.id 
+                                GROUP BY picture.id_img 
+                                ORDER BY picture.date DESC 
+                                LIMIT $start, $PhotoPerPage");
             foreach ($stmt as $photos){
         ?>
         <div id='img'>
-            <img src='<?= $photos['img'] ?>' id='<?= $photos['id_img'] ?>'>
+            <?php
+                session_start();
+                if (empty($_SESSION['loggedin'])){
+                    echo '
+                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php"><img src='.$photos['img'].' id='.$photos['id_img'].'></a>';
+                } else{
+                    echo '
+                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/addLikeCom.php?id='.$photos['id_img'].'"><img src='.$photos['img'].' id='.$photos['id_img'].'></i></a>';
+                }
+            ?>
             <div id='buttons'>
             <?php
                 session_start();
                 if (empty($_SESSION['loggedin'])){
                     echo '
-                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php"><i class="fas fa-heart"></i></a>
-                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php"><i class="fas fa-comment" ></i></a>';
+                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php"><i class="fas fa-heart"></i>  '.$photos['nb_like'].'</a>
+                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php"><i class="fas fa-comment" ></i>  '.$photos['nb_comment'].'</a>';
                 } else{
                     echo '
-                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/addLikeCom.php?id='.$photos['id_img'].'"><i class="fas fa-heart"></i></a>
-                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/addLikeCom.php?id='.$photos['id_img'].'"><i class="fas fa-comment" ></i></a>';
+                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/addLikeCom.php?id='.$photos['id_img'].'"><i class="fas fa-heart"></i>  '.$photos['nb_like'].'</a>
+                        <a href="http://'.$_SERVER['HTTP_HOST'].'/user/addLikeCom.php?id='.$photos['id_img'].'"><i class="fas fa-comment" ></i>  '.$photos['nb_comment'].'</a>';
                 }
             ?>
             </div>

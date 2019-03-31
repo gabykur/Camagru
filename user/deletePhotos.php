@@ -63,12 +63,11 @@ if(isset($_POST['delete'])){
                                             }
                                         }
                                     ?>
-                                     </div>
-                                     <div class="loginForm accountForm" style="background:none; box-shadow:none">
-                        
-                                             <input type="submit" id="saveBtt" style="width: 22%;margin-top: 11px;font-size: 24px;margin-bottom:7px" name="delete" value="Delete">          
-                                </form>
                             </div>
+                                <div class="loginForm accountForm" style="background:none; box-shadow:none">
+                                    <input type="submit" id="saveBtt" style="width: 22%;margin-top: 11px;font-size: 24px;margin-bottom:7px" name="delete" value="Delete">          
+                                </div>
+                            </form>
                     </div><br>
                 </div>
             </article>
