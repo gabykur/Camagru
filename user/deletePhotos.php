@@ -42,33 +42,32 @@ if(isset($_POST['delete'])){
                 <a id="Notif" href="notifications.php" >Notifications</a>
             </nav>
             <article>
-                <div style="max-height: 705px;" id="a">
-                    <div class="loginForm accountForm" style="min-height:364px; margin-top: 13px;width: 91%;">      
-                        <h2 id="subTitle">Delete Photos</h2>
-                            <div id="deletePhotos">
-                                <span style="color:green"><?php echo $message; ?></span>
-                                <span style="color:red"><?php echo $message_err; ?></span>
-                                <form method="POST" action="">
-                                    <?php 
-                                        $stmt = $pdo->prepare("SELECT img, id_img FROM picture WHERE id_user = :id_user ORDER BY date DESC");
-                                        $stmt->bindParam(":id_user", $_SESSION['id']);
-                                        $stmt->execute();
-                                        while ($res = $stmt->fetchAll(PDO::FETCH_ASSOC)){
-                                            foreach($res as $photos){
-                                                echo "
-                                                <div id='img'>
-                                                    <img src='../".$photos['img']."'>
-                                                    <input type='checkbox' id='check_del' name='check[]' value='".$photos['id_img']."'>
-                                                </div>";
-                                            }
+                <div class="loginForm accountForm" style="min-height:364px; margin-top: 13px;width: 91%;">      
+                    <h2 id="subTitle">Delete Photos</h2>
+                        <span style="color:green"><?php echo $message; ?></span>
+                        <span style="color:red"><?php echo $message_err; ?></span>
+                        <div id="deletePhotos">
+                           
+                            <form method="POST" action="">
+                                <?php 
+                                    $stmt = $pdo->prepare("SELECT img, id_img FROM picture WHERE id_user = :id_user ORDER BY date DESC");
+                                    $stmt->bindParam(":id_user", $_SESSION['id']);
+                                    $stmt->execute();
+                                    while ($res = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                                        foreach($res as $photos){
+                                            echo "
+                                            <div id='img'>
+                                                <img src='../".$photos['img']."'>
+                                                <input type='checkbox' id='check_del' name='check[]' value='".$photos['id_img']."'>
+                                            </div>";
                                         }
-                                    ?>
+                                    }
+                                ?>
+                        </div>
+                            <div class="loginForm accountForm" style="background:none; box-shadow:none">
+                                <input type="submit" id="saveBtt" style="width: 22%;margin-top: 11px;font-size: 24px;margin-bottom:7px" name="delete" value="Delete">          
                             </div>
-                                <div class="loginForm accountForm" style="background:none; box-shadow:none">
-                                    <input type="submit" id="saveBtt" style="width: 22%;margin-top: 11px;font-size: 24px;margin-bottom:7px" name="delete" value="Delete">          
-                                </div>
-                            </form>
-                    </div><br>
+                        </form>
                 </div>
             </article>
         

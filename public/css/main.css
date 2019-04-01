@@ -208,6 +208,7 @@ input::placeholder{
 }
 
 /********************************Pagination*************************************/
+
 .pagination {
 	width: 100%;
 	display: flex;
@@ -238,9 +239,16 @@ input::placeholder{
 
 /********************************Like / comment*************************************/
 
-#photoDisplay #imgLikeCom{
+#likeComPhoto{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 57px 0px;
+}
+
+
+#likeComPhoto #imgLikeCom{
     text-align: center;
-    margin: 59px 0px 65px 0px;
     background-image: linear-gradient(to left bottom, #eafff5, #defdff, #dff7ff, #ecefff, #ffe6fc);
     height: 448px;
     width: 470px;
@@ -248,6 +256,7 @@ input::placeholder{
     -moz-box-shadow: 1.5px 1.75px 5.75px 2px #989898;
     -webkit-box-shadow: 1.5px 1.75px 5.75px 2px #989898;
     box-shadow: 1.5px 1.75px 5.75px 2px #989898;
+    position: relative;
 }
 
 #imgLikeCom img{
@@ -255,15 +264,6 @@ input::placeholder{
     height: 450px;
     object-fit: contain;
     margin-top: -28px;
-    position: relative;
-}
-
-#box{
-    max-height: 460px;
-    max-width:400px;
-    width: 100%;
-    background: rgba(229, 252, 240, 0.5);
-    margin: 56px -14px 5px -50px;
 }
 
 #img_info{
@@ -275,16 +275,42 @@ input::placeholder{
     font-family: monospace;
 }
 
-.comment_form {
-	display: flex;
-	outline: none;
-}
 .likeIcon{
     font-size: 44px;
     color: #86c6f2;
     margin-top: -52px;
     margin-left: 133px;
     position: absolute;
+}
+
+#box{
+    max-width:400px;
+    width: 100%;
+}
+
+.commentForm{
+    width: 100%;
+    background: #94d1ef;
+}
+
+.comtxt{
+    text-align: left;
+    padding-left: 18px;
+    font-family: "Lucida Console", Courier, monospace;
+    color: #c3f2d9;
+    margin: 7px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#usertxt{
+    color: #ffe6fc;
+} 
+
+.comment_form {
+	display: flex;
+	outline: none;
 }
 
 .textbox {
@@ -294,9 +320,9 @@ input::placeholder{
     font-size: 14px;
     flex-grow: 100;
     border: none;
-    background-color: #e3d0e2a3;
-}    
-    
+    background-color: #e3d0e2f5;
+}
+  
 #sendBtt{
     flex-grow: 15;
     border: none;
@@ -304,8 +330,7 @@ input::placeholder{
     font-size: 13px;
     font-weight: bold;
     color: #4bb7ec;
-    border-radius: 4px;
-    margin:0
+    margin:0;
 }
 
 /*--------------------------------------------------------LOGIN---------------------------------------------------------------*/
@@ -528,10 +553,12 @@ input::placeholder{
 #deletePhotos{
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin: 3px 0px 0px 9px;
     overflow-x: hidden;
-    height: 369px;
-    width: 616px;
+    height: 321px;
+    margin-left: 33px;
+    width: 92%;
+    padding-top: 38px;
+    
 }
 
 #deletePhotos #img{

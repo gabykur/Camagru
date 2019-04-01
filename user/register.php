@@ -80,9 +80,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Check input errors before inserting in database
     if(empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
-        $sql = "INSERT INTO users (username, email, password, activation_code, user_status, token)
-                VALUES (:username, :email, :password, :activation_code, :user_status, :token)";
-
+        $sql = "INSERT INTO users (username, email, password, activation_code, user_status, token, notif)
+                VALUES (:username, :email, :password, :activation_code, :user_status, :token, :notif)";
         if($stmt = $pdo->prepare($sql)){
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
             $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
@@ -90,6 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt->bindParam(":activation_code", $param_activationCode, PDO::PARAM_STR);
             $stmt->bindParam(":user_status", $param_userStatus, PDO::PARAM_STR);
             $stmt->bindParam(":token", $param_token, PDO::PARAM_STR);
+            $stmt->bindParam(":notif", $param_notif, PDO::PARAM_STR);
 
             $param_username = $username;
             $param_email = $email;
@@ -97,6 +97,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_activationCode = md5(rand(0,1000));
             $param_userStatus = 'not verified';
             $param_token = '';
+            $param_notif = 1;
             if($stmt->execute()){
 
                 $to      = $email; // Send email to our user

@@ -24,7 +24,12 @@ if (isset($_GET['like'])){
     $query = $pdo->prepare("INSERT INTO likes(id_user, id_img) VALUES(:id_user, :id_img)");
     $query->bindParam(':id_user', $_SESSION['id']);
     $query->bindParam(':id_img', $_GET['like']);
-    $query->execute();
+    if ($query->execute())
+    {
+        $addLike = $pdo->prepare("UPDATE picture SET likes = likes + 1 WHERE id_img = :id_img");
+        $addLike->bindParam('id_img', $_GET['like']);
+        $addLike->execute();
+    }
     header("Location: /user/addLikeCom.php?id=".$id_photo);
 }
 
@@ -32,7 +37,12 @@ if (isset($_GET['dislike'])){
     $query = $pdo->prepare("DELETE FROM likes WHERE id_user = :id_user AND id_img = :id_img");
     $query->bindParam(':id_user', $_SESSION['id']);
     $query->bindParam(':id_img', $_GET['dislike']);
-    $query->execute();
+    if ($query->execute())
+    {
+        $delLike = $pdo->prepare("UPDATE picture SET likes = likes - 1 WHERE id_img = :id_img");
+        $delLike->bindParam('id_img', $_GET['dislike']);
+        $delLike->execute();
+    }
     header("Location: /user/addLikeCom.php?id=".$id_photo);
 }
 
@@ -45,24 +55,39 @@ $comment = test_input($_POST['comment']);
 
 if (!empty($comment)){
     $query = $pdo->prepare("INSERT INTO comments(id_img, id_user, comment) VALUES(:id_img, :id_user, :comment)");
-    $query->execute(array(
-        ':id_img' => $id_photo,
-        ':id_user' => $_SESSION['id'],
-        ':comment' => $comment
+    $query->bindParam(':id_img', $id_photo);
+    $query->bindParam(':id_user', $_SESSION['id']);
+    $query->bindParam(':comment', $comment);
+    $ok = $query->execute();
+    if ($ok){
+        //sending email to photo's user if notif are on
+        $query = $pdo->query("SELECT email, notif, username 
+                                FROM picture 
+                                JOIN users WHERE picture.id_user = users.id AND picture.id_img = '".$id_photo."'");
+        $photoUser = $query->fetch(PDO::FETCH_ASSOC);
+        var_dump($photoUser);
+        if ($photoUser['notif'] == 1){
+            $to      = $photoUser['email'];
+            $subject = 'New Comment'; 
+            $message = '
+                Hey '.$photoUser['username'].',<br><br>
+        
+                You have recieved a new comment on your photo from : 
 
-    ));
+                <p><b>'.$_SESSION['username'].'</b> : <i>"'.$comment.'"</i></p>
+            '; 
+            $headers = 'MIME-Version: 1.0'."\n".'Content-type: text/html'."\n"."From:noreply@gabriele.com"."\n";
+            mail($to, $subject, $message, $headers);
+        }
+    }
     header("Location: /user/addLikeCom.php?id=".$id_photo);
-
 }
-
-
-
 ?>
 
 
 <?php ob_start();?>
 <div class="background galleryB">
-    <div id="photoDisplay">
+    <div id="likeComPhoto">
         <div id="imgLikeCom">
             <img src="../<?= $photo[0]['img'] ?>">
             <p id="img_info"><?= $photo[0]['username'] ?> </br> <?= date('j M Y', strtotime($photo[0]['date']));?></p>
@@ -79,7 +104,7 @@ if (!empty($comment)){
             ?>
         </div>
         <div id="box">
-            <div class="loginForm accountForm">
+            <div class="commentForm">
             <?php
                 $allComments = $pdo->query("SELECT comments.id_user, comments.comment, users.username
                                                 FROM comments
@@ -87,7 +112,8 @@ if (!empty($comment)){
                                                 WHERE comments.id_img = $id_photo
                                                 ORDER BY comments.date ASC");
                 foreach($allComments as $data){
-                    echo "<p>".$data['comment']."</p>";
+                    echo "<p class='comtxt'> <b id='usertxt'>" .$data['username']. "</b>  ";
+                    echo $data['comment']."</p>";
                 }
             ?>
             <form action="" class="comment_form" method="post">

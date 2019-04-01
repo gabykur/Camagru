@@ -4,6 +4,29 @@ require("../config/database.php");
 
 if(empty($_SESSION['loggedin']))
     header('Location: ../index.php');
+
+$query = $pdo->prepare("SELECT notif FROM users WHERE id = :id");
+$query->bindParam(':id', $_SESSION['id']);
+$query->execute();
+$data = $query->fetch(PDO::FETCH_ASSOC);
+
+if (isset($_POST['update'])){
+    $checkbox = $_POST['notif'];
+    if ($checkbox == NULL){
+        $notif = 0;
+    }else{
+        $notif = 1;
+    }
+    $query = $pdo->prepare("UPDATE users SET notif = :notif WHERE id = :id");
+    $query->bindParam(':notif', $notif);
+    $query->bindParam(':id', $_SESSION['id']);
+    $query->execute();
+    $message = "Updated ;)";
+    header("Refresh: 1; url=notifications.php");
+}
+
+
+
 ?>
 
 <?php ob_start(); ?>
@@ -22,9 +45,13 @@ if(empty($_SESSION['loggedin']))
                 <div style="max-height: 705px;" id="a">
                     <div class="loginForm accountForm" style="min-height:364px; margin-top: 90px;">      
                          <h2 id="subTitle">Notifications</h2>
-                            <form action="" method="post">
-                                <label id="notiflabel"><input id="checkbox" type="checkbox" /><p id="pNot">Enable notifications on comments</p></label>
-                            </form>
+                         <span style="color:green"><?php echo $message; ?></span>
+                            <form action="" method="post">  
+                            <label id="notiflabel"><input id="checkbox" type="checkbox" name="notif[]" <?php if ($data['notif'] == 1) { echo 'checked="checked"'; }?>><p id="pNot">Set up notifications on comments</p></label>
+                            <div class="loginForm accountForm" style="background:none; box-shadow:none">
+                                <input type="submit" id="saveBtt" style="width: 22%;margin-top: 72px;font-size: 24px;" name="update" value="Update">          
+                            </div>   
+                        </form>
                     </div><br>
                 </div>
             </article>

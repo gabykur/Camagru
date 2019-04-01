@@ -56,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $_SESSION["email"] = $email;                            
                                 header("location: ../camera.php");
                             } else{
-                                $password_err = "The password you entered was not valid.";
+                                $password_err = "The password you entered is not valid.";
                             }
                         }else{
                             $activation_mess = "The account is not yet verified. Please go check your email.";
