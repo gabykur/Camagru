@@ -18,6 +18,11 @@ if(isset($_GET['id'])){
                             WHERE picture.id_img = ?");
     $query->execute(array($_GET['id']));
     $photo = $query->fetchAll(PDO::FETCH_ASSOC);
+    if (empty($photo)){
+        header("Location: ../index.php");
+    }
+}else{
+    header("Location: ../index.php");
 }
 
 if (isset($_GET['like'])){
@@ -66,7 +71,7 @@ if (!empty($comment)){
                                 JOIN users WHERE picture.id_user = users.id AND picture.id_img = '".$id_photo."'");
         $photoUser = $query->fetch(PDO::FETCH_ASSOC);
         var_dump($photoUser);
-        if ($photoUser['notif'] == 1){
+        if ($photoUser['notif'] == 1 && $_SESSION['username'] != $photoUser['username']){
             $to      = $photoUser['email'];
             $subject = 'New Comment'; 
             $message = '

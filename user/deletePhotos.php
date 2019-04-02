@@ -19,8 +19,9 @@ if(isset($_POST['delete'])){
                 }
             }
         }
-        $query = $pdo->prepare("DELETE FROM picture WHERE id_img IN ($del_id)");
-        $query->execute();
+        $pdo->query("DELETE FROM comments WHERE comments.id_img IN ($del_id)");
+        $pdo->query("DELETE FROM likes WHERE likes.id_img IN ($del_id)");
+        $pdo->query("DELETE FROM picture WHERE picture.id_img IN ($del_id)");
         $message = "Yaaaaass photos deleted successfully !";
         header("Refresh: 2; url=deletePhotos.php");
     }else{
@@ -32,7 +33,7 @@ if(isset($_POST['delete'])){
 <?php ob_start(); ?>
 <div class="background galleryB">
     <div id="test">
-    <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">What's up bitch ? </h2>
+    <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">Hey Kitty </h2>
         <div id="account">
             <nav id="account_nav">
                 <a id="EdPro" href="account.php">Edit Profile</a>

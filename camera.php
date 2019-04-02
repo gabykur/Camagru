@@ -6,18 +6,34 @@ session_start();
 if(empty($_SESSION['loggedin']))
     header('Location: /user/login.php');
 
-if (isset($_POST['tookAphoto']))
-{
-    $photo = $_POST['tookAphoto'];
+if ((isset($_POST['tookAphoto']))){
+    $photo = $_POST['photo'];
+    $sticker = $_POST['sticker'];
     $photo = explode(',', $photo);
     $data = base64_decode($photo[1]);
     $filePath = 'public/upload/'.date("YmdHis").'.png';
     file_put_contents($filePath, $data);
 
+
+    $photoCopy = imagecreatefrompng($filePath);
+    $stickerCopy = imagecreatefrompng($sticker);
+    $resized_mask = imagecreatetruecolor(265, 250);
+    $trans_color = imagecolorallocatealpha($resized_mask, 0, 0, 0, 127);
+    imagefill($resized_mask, 0, 0, $trans_color);
+    imagealphablending($stickerCopy, true);
+    imagesavealpha($stickerCopy, true);
+    $src_x = imagesx($stickerCopy);
+    $src_y = imagesy($stickerCopy);
+    imagecopyresampled($resized_mask, $stickerCopy, 0, 0, 0, 0, 265, 250, $src_x, $src_y);
+    imagecopy($photoCopy, $resized_mask, 0, 0, 0, 0, 265, 250);
+    imagepng($photoCopy, $filePath);
+    imagedestroy($photoCopy);
+  
+
     $username = ($_SESSION['username']);
     $sql = $pdo->prepare("SELECT * FROM users WHERE username = :username");
     $sql->bindParam(":username", $username);
-	$sql->execute();
+    $sql->execute();
     $profile = $sql->fetchAll();
     foreach ($profile as $user){
         $addPhoto = "INSERT INTO picture (id_user, img) VALUE ('".$user['id']."', '".$filePath."')";
@@ -45,7 +61,9 @@ if (isset($_POST['tookAphoto']))
         </div>
 
         <form method="POST" action="" onsubmit=takePhoto();>
-            <button id="snap" type="submit"  name="tookAphoto" value=""></button>
+            <input id="photo" name="photo" type="hidden" value="">
+            <input id="sticker" name="sticker" type="hidden" value="">
+            <input id="snap" style="display:none;" type="submit"  name="tookAphoto" value="" >
         </form>
 
         <canvas style="display:none" id="canvas" width=640 height=480></canvas>
@@ -61,6 +79,7 @@ if (isset($_POST['tookAphoto']))
         ?>
         </div>
         <div><p id="text-camera">No camera ? No problem !<a style="color: #EFB4E4;" href="upload.php"> <b>Click here :)</b></a></p></div>
+        <canvas style="display:none" id="canvasCopy" width="640" height="480"></canvas>
     </div>
 </div><br/><br/>
 

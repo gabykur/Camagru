@@ -1,5 +1,9 @@
 <?php
 require_once("../config/database.php");
+session_start();
+
+if (($_SESSION['loggedin'] == true))
+    header('Location: ../index.php');
  
 $username = $email = $password = $confirm_password = "";
 $username_err = $email_err = $password_err = $confirm_password_err = $activation_mess = "";
@@ -45,11 +49,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
             $param_email = test_input($_POST["email"]);
             if($stmt->execute()){
-                //if($stmt->rowCount() == 1){
-                  //  $username_err = "This email is already taken.";
-                //} else{
+                if($stmt->rowCount() == 1){
+                    $username_err = "This email is already taken.";
+                } else{
                     $email = test_input($_POST["email"]);
-               // }
+                }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -105,7 +109,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $message = '
 
                 Thanks for signing up!
-                Your account logEeen created, you can login with the following credentials after you have activated your account by pressing the url below.
+                Your account Camagru has been created ! 
+                You can login with the following credentials after you have activated your account by pressing the url below.
 
                 ------------------------
                 Username: '.$username.'

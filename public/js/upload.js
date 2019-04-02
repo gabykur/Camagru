@@ -1,11 +1,12 @@
 var canvas = document.getElementById('canvas');
+var canvasCopy = document.getElementById("canvasCopy");
 var context = canvas.getContext('2d');
 var picture = document.getElementById('upload_img');
 var upload = document.getElementById('uploadBtt');
 var overlay_image = document.getElementById("overlay");
 
 
-// Changes class of selected tree
+// Changes class of selected sticker
 var stickerDisplay = document.getElementById("sticker_div");
 var stickerImg = stickerDisplay.getElementsByClassName("stickerImg");
 for (var i = 0; i < stickerImg.length; i++) {
@@ -33,15 +34,17 @@ document.getElementById('uploadPic').onchange = function(e) {
   };
 
 function uploadPhoto(){
-    var canvas = document.getElementById("canvas");
-    var photo =  document.getElementById("uploadBtt");
+    var canvas = document.getElementById("canvasCopy");
+    var photo =  document.getElementById("photo");
     photo.value = canvas.toDataURL();
 }
 
 
 upload.addEventListener('click', function() {
-        context.drawImage(picture, 0, 0, 640, 480);
-        var currentSticker = stickerSelector();
-        document.getElementById('sticker_div').value = currentSticker.src;
-        context.drawImage(currentSticker, 0, 0, 265, 250); 
+    var currentSticker = stickerSelector();
+    document.getElementById('sticker').value = currentSticker.src;
+    console.log(currentSticker.src);
+    context.drawImage(picture, 0, 0, 640, 480);
+    context.drawImage(currentSticker, 0, 0, 265, 250); 
+    canvasCopy.getContext('2d').drawImage(picture, 0, 0, 640, 480);
 });

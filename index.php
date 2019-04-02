@@ -18,6 +18,9 @@ $start = ($page-1) * $PhotoPerPage;
 ?>
 
 <?php ob_start();?>
+<?php 
+    if (!empty($AllPhotos)){
+?>
 <div class="background galleryB">
     <h2 id="title" style="letter-spacing:10px">Gallery</h2>
     <div id="photoDisplay" >
@@ -70,12 +73,19 @@ $start = ($page-1) * $PhotoPerPage;
             echo '<a href="index.php?page='.($page-1).'" id="number">&#8249;</a> ';
         }
         for($i=1;$i<=$AllPages;$i++) {
-            echo '<a href="index.php?page='.$i.'" id="number">'.$i.'</a> ';
+            if ($AllPages == 1){
+                echo '<a href="index.php?page='.$i.'" id="number"></a> ';
+            }else{
+                echo '<a href="index.php?page='.$i.'" id="number">'.$i.'</a> ';
+            }
         }
         if ($page < $AllPages){
             echo '<a href="index.php?page='.($page+1).'" id="number">&#8250;</a> ';
         }
     ?>
     </div>
+<?php 
+    }
+?>
 <?php $view = ob_get_clean(); ?>
 <?php require("template.php"); ?>

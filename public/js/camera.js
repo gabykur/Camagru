@@ -1,11 +1,31 @@
 var canvas = document.getElementById('canvas');
+var canvasCopy = document.getElementById("canvasCopy");
 var context = canvas.getContext('2d');
 var video = document.getElementById('video');
 var snap = document.getElementById('snap');
 var overlay_image = document.getElementById("overlay");
 
+navigator.mediaDevices.getUserMedia({ audio: false, video: { width: 640, height: 480 } }).then(mediaStream => {
+    video.srcObject = mediaStream
+    video.onloadedmetadata = function(e) {
+        video.play();
+        snap.style.display = "block";
+    };
+},
+function(err) {
+    console.log("An error occured! " + err);
+});
 
-// Changes class of selected tree
+snap.addEventListener('click', function() {
+    var currentSticker = stickerSelector();
+    document.getElementById('sticker').value = currentSticker.src;
+    context.drawImage(video, 0, 0, 640, 480);
+    context.drawImage(currentSticker, 0, 0, 265, 250);
+    canvasCopy.getContext('2d').drawImage(video, 0, 0, 640, 480);
+});
+
+
+// Changes class of selected sticker
 var stickerDisplay = document.getElementById("sticker_div");
 var stickerImg = stickerDisplay.getElementsByClassName("stickerImg");
 for (var i = 0; i < stickerImg.length; i++) {
@@ -25,31 +45,7 @@ function stickerSelector() {
 }
 
 function takePhoto(){
-    var canvas = document.getElementById("canvas");
-    var photo =  document.getElementById("snap");
+    var canvas = document.getElementById("canvasCopy");
+    var photo =  document.getElementById("photo");
     photo.value = canvas.toDataURL();
 }
-
-// Put event listeners into place
-window.addEventListener("DOMContentLoaded", function() {
-    var mediaConfig =  { video: true, audio: false };
-    var errBack = function(e) {
-        console.log('An error has occurred!', e)
-    };
-
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia(mediaConfig)
-        .then(function(stream) {
-            video.srcObject = stream;
-            video.play();
-        });
-    }
-
-    snap.addEventListener('click', function() {
-        context.drawImage(video, 0, 0, 640, 480);
-        var currentSticker = stickerSelector();
-        document.getElementById('sticker_div').value = currentSticker.src;
-        context.drawImage(currentSticker, 0, 0, 265, 250); 
-    });
-}, false);
-

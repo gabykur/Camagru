@@ -5,6 +5,8 @@ require("../config/database.php");
 if(empty($_SESSION['loggedin']))
     header('Location: ../index.php');
 
+$username = $_SESSION['id'];
+
 function test_input($data){
     $data = trim($data);
     $data = stripslashes($data);
@@ -34,10 +36,11 @@ if (isset($_POST['delete_account'])){
                 }
             }
             //Deletes the user + all the rest
-            $query = $pdo->prepare("DELETE users, picture 
-                                    FROM users INNER JOIN picture 
-                                    ON users.id = picture.id_user 
-                                    WHERE users.id = :id"); 
+            $pdo->query("DELETE FROM comments WHERE comments.id_user IN ($username)");
+            $pdo->query("DELETE FROM likes WHERE likes.id_user IN ($username)");
+            $pdo->query("DELETE FROM picture WHERE picture.id_user IN ($username)");
+
+            $query = $pdo->prepare("DELETE users FROM users WHERE users.id = :id"); 
             $query->bindParam(':id', $_SESSION['id']);
             //if the query is correct, the account is deleted and the the session is loggued out
             if ($query->execute()){
@@ -72,7 +75,7 @@ if (isset($_POST['delete_account'])){
 <?php ob_start(); ?>
 <div class="background galleryB">
     <div id="test">
-    <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">What's up bitch ? </h2>
+    <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">Hey Kitty </h2>
         <div id="account">
             <nav id="account_nav">
                 <a id="EdPro" href="account.php">Edit Profile</a>

@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php ob_start(); ?>
 <div class="background galleryB">
     <div id="test">
-    <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">What's up bitch ? </h2>
+    <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">Hey Kitty </h2>
         <div id="account">
             <nav id="account_nav">
                 <a id="EdPro" href="account.php">Edit Profile</a>

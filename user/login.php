@@ -1,10 +1,9 @@
 <?php
 session_start();
- 
+
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: ../index.php");
-    exit;
 }
  
 require_once("../config/database.php");
@@ -73,6 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     unset($pdo);
 }
+
 ?>
 <?php ob_start(); ?>
 <div style="max-height: 705px;" id="a">
