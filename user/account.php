@@ -101,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </nav>
             <article>
                 <div style="max-height: 705px;" id="a">
-                    <div class="loginForm accountForm" style="min-height:364px; margin-top: 90px;">      
+                    <div class="loginForm accountForm EdProf">      
                         <h2 id="subTitle">Edit your profile</h2>
                         <form action="" method="post">
                             <span style="color:green;    margin-top: 34px;"><?php echo $message; ?></span>

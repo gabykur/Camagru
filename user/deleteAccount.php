@@ -86,12 +86,12 @@ if (isset($_POST['delete_account'])){
             </nav>
             <article>
                 <div style="max-height: 705px;" id="a">
-                    <div class="loginForm accountForm" style="min-height:220px;margin-top:128px;">      
+                    <div class="loginForm accountForm DelAcc">      
                         <h2 id="subTitle">Delete Your Account</h2>
                         <form action="" method="post">
                             <span><?php echo $error; ?></span>
                             <input type="password" style="margin-top:41px;" name="password" placeholder="Enter password to delete account" value="<?php echo $password; ?>" required>
-                            <input type="submit" id="saveBtt" style="width: 37%;margin-top: 15px;font-size: 22px;" name="delete_account" value="Delete Account">
+                            <input type="submit" id="saveBtt" style="margin-top: 15px;font-size: 22px;" name="delete_account" value="Delete Account">
                         </form>
                     </div><br>
                 </div>

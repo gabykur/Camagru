@@ -43,13 +43,13 @@ if (isset($_POST['update'])){
             </nav>
             <article>
                 <div style="max-height: 705px;" id="a">
-                    <div class="loginForm accountForm" style="min-height:364px; margin-top: 90px;">      
+                    <div class="loginForm accountForm Notif">      
                          <h2 id="subTitle">Notifications</h2>
                          <span style="color:green"><?php echo $message; ?></span>
                             <form action="" method="post">  
                             <label id="notiflabel"><input id="checkbox" type="checkbox" name="notif[]" <?php if ($data['notif'] == 1) { echo 'checked="checked"'; }?>><p id="pNot">Set up notifications on comments</p></label>
                             <div class="loginForm accountForm" style="background:none; box-shadow:none">
-                                <input type="submit" id="saveBtt" style="width: 22%;margin-top: 72px;font-size: 24px;" name="update" value="Update">          
+                                <input type="submit" id="saveBtt" style="width: 29%;font-size: 24px;" name="update" value="Update">          
                             </div>   
                         </form>
                     </div><br>

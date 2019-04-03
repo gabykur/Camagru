@@ -22,6 +22,8 @@ if(isset($_GET['username'])){
     if ($token['token'] != $_GET['reset']){
         $err_invalid = 'Invalid link';
     }
+}else{
+    header("Location: ../index.php");
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){

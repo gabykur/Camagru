@@ -6,6 +6,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta charset="UTF-8">
     <title>Camagru</title>
     <link rel="icon" href="/public/icons/noel.jpg">
@@ -16,7 +17,14 @@ session_start();
 <header>
     <table class="container"><tr>
         <td><a href="/camera.php">Photo</a></td>
-        <td><a href="/index.php" id="Cam_logo" style="padding:0"><h1>Camagru</h1></a></td>
+        <td><a href="/index.php" id="Cam_logo" style="padding:0">
+            <h1>Camagru</h1>
+            <h1 id="C">C</h1>
+        </a>
+        <td><a href="/index.php" id="C" style="padding:0">
+            <h1>C</h1>
+        </a>
+        </td>
         <td style="width:50%"></td>
         <?php
         if ($_SESSION['loggedin'] != ""){
@@ -36,8 +44,11 @@ session_start();
 <div class="main">
     <?= $view ?>
 </div>
+<div style="margin-bottom: 43px;"></div>
 <div id="footer">
 	<p style="margin: 10px;">©gkuraite - 2019</p>
 </div>
+<script> 
+</script>
 </body>
 </html>

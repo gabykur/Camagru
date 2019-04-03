@@ -28,6 +28,8 @@ if(isset($_GET['activationCode'])){
     }else{
         $message = '<span style="color:darkred">Invalid Link</span>';
     }
+}else{
+    header("Location: ../index.php");
 }
 ?>
 

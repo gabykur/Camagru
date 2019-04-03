@@ -43,7 +43,7 @@ if(isset($_POST['delete'])){
                 <a id="Notif" href="notifications.php" >Notifications</a>
             </nav>
             <article>
-                <div class="loginForm accountForm" style="min-height:364px; margin-top: 13px;width: 91%;">      
+                <div class="loginForm accountForm DelPho">      
                     <h2 id="subTitle">Delete Photos</h2>
                         <span style="color:green"><?php echo $message; ?></span>
                         <span style="color:red"><?php echo $message_err; ?></span>
@@ -66,7 +66,7 @@ if(isset($_POST['delete'])){
                                 ?>
                         </div>
                             <div class="loginForm accountForm" style="background:none; box-shadow:none">
-                                <input type="submit" id="saveBtt" style="width: 22%;margin-top: 11px;font-size: 24px;margin-bottom:7px" name="delete" value="Delete">          
+                                <input type="submit" id="saveBtt" style="margin-top: 11px;font-size: 24px;margin-bottom:7px" name="delete" value="Delete">          
                             </div>
                         </form>
                 </div>
