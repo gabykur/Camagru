@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3308
--- Generation Time: Apr 03, 2019 at 09:40 AM
+-- Generation Time: Apr 03, 2019 at 10:24 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.1.25
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test_camagru`
+-- Database: `db_camagru`
 --
 
 -- --------------------------------------------------------

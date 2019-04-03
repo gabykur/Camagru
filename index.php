@@ -28,7 +28,6 @@ $start = ($page-1) * $PhotoPerPage;
             $stmt = $pdo->query("SELECT picture.id_img, picture.img, picture.date, picture.likes, users.username, count(comments.id_img) AS nb_comment
                                 FROM picture
                                 LEFT JOIN comments ON (picture.id_img = comments.id_img) 
-                                LEFT JOIN likes ON (picture.id_img = likes.id_img)
                                 INNER JOIN users ON picture.id_user = users.id 
                                 GROUP BY picture.id_img 
                                 ORDER BY picture.date DESC 
@@ -48,7 +47,6 @@ $start = ($page-1) * $PhotoPerPage;
             ?>
             <div id='buttons'>
             <?php
-                session_start();
                 if (empty($_SESSION['loggedin'])){
                     echo '
                         <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php"><i class="fas fa-heart"></i>  '.$photos['likes'].'</a>

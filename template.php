@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
  
 <!DOCTYPE html>
@@ -48,7 +47,5 @@ session_start();
 <div id="footer">
 	<p style="margin: 10px;">©gkuraite - 2019</p>
 </div>
-<script> 
-</script>
 </body>
 </html>

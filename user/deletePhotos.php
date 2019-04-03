@@ -22,8 +22,7 @@ if(isset($_POST['delete'])){
         $pdo->query("DELETE FROM comments WHERE comments.id_img IN ($del_id)");
         $pdo->query("DELETE FROM likes WHERE likes.id_img IN ($del_id)");
         $pdo->query("DELETE FROM picture WHERE picture.id_img IN ($del_id)");
-        $message = "Yaaaaass photos deleted successfully !";
-        header("Refresh: 2; url=deletePhotos.php");
+        header("Location: deletePhotos.php");
     }else{
         $message_err = "Please choose photos to delete";
     }

@@ -763,15 +763,15 @@ input::placeholder{
 	background-color: #c4f2da;
 	width: 25%;
     max-height: 445px;
-    margin-top: 45px;
+    margin-top: 50px;
 	float: right;
 	
 }
 #camera #sticker_div img{
-    width: 50%;
-	margin-left: 44px;
-	margin-top: 15px;
-	cursor: pointer;
+    width: 35%;
+    margin-left: 63px;
+    margin-top: 11px;
+    cursor: pointer;
 }
 .stickerImg{
     background: rgb(148, 209, 237);
@@ -831,7 +831,7 @@ input::placeholder{
 	#camera #sticker_div {width: 100%;height:auto;float: none; min-height: 70px;overflow-y: hidden;overflow-x: auto;white-space: nowrap; float:none}
     #camera #video_div {margin-bottom:20px; width: 94%; height: inherit; margin-right: auto; margin-left:auto; float:none}
     #camera #live_video {    width: 96%;}
-	#camera #sticker_div img {width:20%;margin-left: 19px;}
+	#camera #sticker_div img {width:20%;}
 	#camera {width: 100%}
 	#camera #camera_gallery {width: 95%; margin-right: auto; margin-left:auto}
     #camera .stickerImg {height: 95%; width: auto}
@@ -840,7 +840,6 @@ input::placeholder{
     #snap{margin-left: 33%; margin-right: 0%;}
 }
 
-@media screen and (max-width: 935px){
-
+@media screen and (max-width: 950px){
+    #camera #sticker_div img {margin-left:45px}
 }
-
