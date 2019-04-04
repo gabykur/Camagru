@@ -1,6 +1,7 @@
 <?php 
 require("config/database.php");
 
+
 $PhotoPerPage = 9;
 $query = $pdo->query('SELECT id_img FROM picture');
 $AllPhotos = $query->rowCount();
@@ -82,8 +83,10 @@ $start = ($page-1) * $PhotoPerPage;
         }
     ?>
     </div>
-<?php 
+<?php
     }
 ?>
-<?php $view = ob_get_clean(); ?>
-<?php require("template.php"); ?>
+<?php 
+     $view = ob_get_clean();
+    require("template.php");
+?>

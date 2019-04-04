@@ -2,6 +2,11 @@
 session_start();
 require("../config/database.php");
 
+if(!isset($_SESSION["loggedin"]) && !$_SESSION["loggedin"] === true){
+    header("location: ../index.php");
+    exit;
+ }
+
 function test_input($data) {
     $data = trim($data);
     $data = stripslashes($data);

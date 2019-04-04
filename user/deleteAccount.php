@@ -13,7 +13,7 @@ function test_input($data){
     $data = htmlspecialchars($data);
     return $data;
 }
-
+ 
 $password = test_input($_POST['password']);
 
 if (isset($_POST['delete_account'])){
@@ -37,6 +37,16 @@ if (isset($_POST['delete_account'])){
             }
             //Deletes the user + all the rest
             $pdo->query("DELETE FROM comments WHERE comments.id_user IN ($username)");
+
+            //update the likes where user liked other users photos
+            $query = $pdo->prepare("SELECT id_img FROM likes WHERE id_user = ?");
+            $query->execute(array($username));
+            $res = $query->fetchAll();
+            if ($res){
+                foreach ($res as $likedPhoto){
+                $pdo->query("UPDATE picture SET likes = likes - 1 WHERE id_img = $likedPhoto[id_img]");
+                }
+            }
             $pdo->query("DELETE FROM likes WHERE likes.id_user IN ($username)");
             $pdo->query("DELETE FROM picture WHERE picture.id_user IN ($username)");
 
