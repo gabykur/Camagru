@@ -120,11 +120,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 Please click this link to activate your account:
                 http://'.$_SERVER['HTTP_HOST'].'/user/activation.php?username='.$username.'&activationCode='.$param_activationCode.'
 
-                '; // Our message above including the link
+                '; 
 
-                $headers = 'From:noreply@gabriele.com' . "\r\n"; // Set from headers
-                mail($to, $subject, $message, $headers); // Send our email
-                //header("location: login.php");
+                $headers = 'From:noreply@gabriele.com' . "\r\n"; 
+                mail($to, $subject, $message, $headers); 
                 $activation_mess = "Go check your email to activate your account";
             } else{
                 $activation_mess = "Something went wrong. Please try again later";

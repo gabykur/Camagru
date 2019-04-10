@@ -1,5 +1,4 @@
 <?php
-// require("database.php");
 $DB_USER = 'root';
 $DB_PASSWORD = "123456";
 
