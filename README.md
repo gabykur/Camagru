@@ -2,7 +2,7 @@
 
 Camagru is a web application allowing you to to take  photos via your webcam using some fun stickers. 
 It allows you to view all the users taken or uploaded photos via the gallery page.
-It's fun, simple amd enjoyable for all.
+It's fun, simple and enjoyable for all.
 Long life to the cats.  
 
 ### Used technologies
@@ -13,7 +13,7 @@ Long life to the cats.
 
 ### Modify the config file
 
-*config/database.php* contains all the information needed by MySQL to connect to the database. Modify it so it matches your MySQL config.
+*config/database.php* contains all the information needed by MySQL to connect to the database. Modify it so it matches your config file.
 
 ```
 $DB_DSN = 'mysql:host=localhost; dbname=db_camagru';
