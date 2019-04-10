@@ -7,12 +7,9 @@ Long life to the cats.
 
 ### Used technologies
 
-* PHP - Backend
-* MySQL - Database
-* Javascript - Frontend
-* HTML/CSS - Frontend
-
-## Get the requirement
+* PHP : Backend
+* MySQL : Database
+* Javascript | HTML/CSS : Frontend
 
 ### Modify the config file
 
@@ -20,21 +17,24 @@ Long life to the cats.
 
 ```
 $DB_DSN = 'mysql:host=localhost; dbname=db_camagru';
-$DB_USER = 'yourMysqlUsername';
-$DB_PASSWORD = "yourMysqlPassword";
+$DB_USER = 'yourUsername';
+$DB_PASSWORD = "yourPassword";
 ```
 
 ### Create the database
 If no database is found, create the database by going to *config//setup.php*.
 
-## User Part
+### User Part
 
-You can now create a new profile OR sign in with the following users:
+You can now create a new profile 
+OR 
+Sign in with the following users:
+
 * noel : *noel*
 * suri : *suri*
 * iz : *iz*
 
-## Desktop View
+### Desktop View
 
 ![alt text](screensnaps/cama1.png?raw=true "Title")
 
@@ -46,7 +46,7 @@ You can now create a new profile OR sign in with the following users:
 
 ![alt text](screensnaps/cama6.png?raw=true "Title")
 
-## Mobile View
+### Mobile View
 
 ![alt text](screensnaps/cama7.png?raw=true "Title")
 
