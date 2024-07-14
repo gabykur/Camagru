@@ -19,6 +19,7 @@ function(err) {
 snap.addEventListener('click', function() {
     var currentSticker = stickerSelector();
     document.getElementById('sticker').value = currentSticker.src;
+    console.log("Current sticker src: ", currentSticker.src);
     context.drawImage(video, 0, 0, 640, 480);
     context.drawImage(currentSticker, 0, 0, 265, 250);
     canvasCopy.getContext('2d').drawImage(video, 0, 0, 640, 480);
@@ -31,9 +32,12 @@ var stickerImg = stickerDisplay.getElementsByClassName("stickerImg");
 for (var i = 0; i < stickerImg.length; i++) {
     stickerImg[i].addEventListener("click", function() {
         active_photo = document.getElementsByClassName("active");
-        active_photo[0].className = active_photo[0].className.replace(" active", "");
+        if (active_photo[0]) {
+            active_photo[0].className = active_photo[0].className.replace(" active", "");
+        }
         this.className += " active";
         overlay_image.src = this.src;
+        console.log(`[DEBUG] Overlay image src set to: ${this.src}`);
     });
 }
 
@@ -48,4 +52,6 @@ function takePhoto(){
     var canvas = document.getElementById("canvasCopy");
     var photo =  document.getElementById("photo");
     photo.value = canvas.toDataURL();
+    console.log("[DEBUG] Photo data URL set."); 
+    return true;
 }

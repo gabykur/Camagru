@@ -1,7 +1,6 @@
 <?php 
 require("config/database.php");
 
-
 $PhotoPerPage = 9;
 $query = $pdo->query('SELECT id_img FROM picture');
 $AllPhotos = $query->rowCount();
@@ -37,7 +36,6 @@ $start = ($page-1) * $PhotoPerPage;
         ?>
         <div id='img'>
             <?php
-                session_start();
                 if (empty($_SESSION['loggedin'])){
                     echo '
                         <a href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php"><img src='.$photos['img'].' id='.$photos['id_img'].'></a>';

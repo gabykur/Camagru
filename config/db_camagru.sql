@@ -30,6 +30,8 @@ USE `db_camagru`;
 -- Table structure for table `comments`
 --
 
+DROP TABLE IF EXISTS `comments`;
+
 CREATE TABLE `comments` (
   `id_comment` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -47,14 +49,14 @@ INSERT INTO `comments` (`id_comment`, `id_user`, `id_img`, `comment`, `date`) VA
 (40, 14, 278, 'always handsome darling', '2019-04-02 17:01:30'),
 (41, 14, 277, 'Why so sad Noel ?', '2019-04-02 17:01:44'),
 (42, 13, 278, 'thank you Honey &lt;3', '2019-04-02 17:02:39'),
-(43, 13, 277, 'because you weren\'t next to me', '2019-04-02 17:02:58'),
+(43, 13, 277, 'because you werent next to me', '2019-04-02 17:02:58'),
 (44, 13, 274, 'YASSSSSSSSSS QUEEEN', '2019-04-02 17:03:12'),
 (45, 13, 285, 'My wife is the most beautiful cat in the world', '2019-04-02 17:03:33'),
 (46, 13, 285, 'I love you baby', '2019-04-02 17:03:39'),
 (47, 13, 281, 'hahhahahaha you are so lazy', '2019-04-02 17:03:57'),
-(48, 13, 284, 'Can\'t believe that this cat is the mother of my 3 children', '2019-04-02 17:04:41'),
+(48, 13, 284, 'Cant believe that this cat is the mother of my 3 children', '2019-04-02 17:04:41'),
 (49, 13, 284, 'You are stunning', '2019-04-02 17:04:46'),
-(50, 13, 283, 'Don\'t be mad Suri !', '2019-04-02 17:05:05'),
+(50, 13, 283, 'Dont be mad Suri !', '2019-04-02 17:05:05'),
 (51, 13, 276, 'hehehe i look cute', '2019-04-02 17:05:21'),
 (52, 13, 288, 'fetetert', '2019-04-03 17:25:55'),
 (53, 13, 288, 'etetetewte', '2019-04-03 17:25:59'),
@@ -68,6 +70,8 @@ INSERT INTO `comments` (`id_comment`, `id_user`, `id_img`, `comment`, `date`) VA
 --
 -- Table structure for table `likes`
 --
+
+DROP TABLE IF EXISTS `likes`;
 
 CREATE TABLE `likes` (
   `id_like` int(11) NOT NULL,
@@ -99,6 +103,8 @@ INSERT INTO `likes` (`id_like`, `id_user`, `id_img`, `date`) VALUES
 --
 -- Table structure for table `picture`
 --
+
+DROP TABLE IF EXISTS `picture`;
 
 CREATE TABLE `picture` (
   `id_img` int(11) NOT NULL,
@@ -137,6 +143,8 @@ INSERT INTO `picture` (`id_img`, `id_user`, `img`, `date`, `likes`) VALUES
 --
 -- Table structure for table `users`
 --
+
+DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,

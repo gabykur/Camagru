@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
  
 <!DOCTYPE html>
@@ -26,12 +28,11 @@ session_start();
         </td>
         <td style="width:50%"></td>
         <?php
-        if ($_SESSION['loggedin'] != ""){
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != ""){
             echo'
                 
                 <td style="width:10%"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/account.php">Account</a></td>
                 <td style="width:10%"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/logout.php">Logout</a></td>
-            
                 ';
         }else{
             echo'

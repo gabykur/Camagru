@@ -14,31 +14,47 @@ if ((isset($_POST['tookAphoto']))){
     $filePath = 'public/upload/'.date("YmdHis").'.png';
     file_put_contents($filePath, $data);
 
+    error_log("Sticker Path: " . $sticker);
 
-    $photoCopy = imagecreatefrompng($filePath);
-    $stickerCopy = imagecreatefrompng($sticker);
-    $resized_mask = imagecreatetruecolor(265, 250);
-    $trans_color = imagecolorallocatealpha($resized_mask, 0, 0, 0, 127);
-    imagefill($resized_mask, 0, 0, $trans_color);
-    imagealphablending($stickerCopy, true);
-    imagesavealpha($stickerCopy, true);
-    $src_x = imagesx($stickerCopy);
-    $src_y = imagesy($stickerCopy);
-    imagecopyresampled($resized_mask, $stickerCopy, 0, 0, 0, 0, 265, 250, $src_x, $src_y);
-    imagecopy($photoCopy, $resized_mask, 0, 0, 0, 0, 265, 250);
-    imagepng($photoCopy, $filePath);
-    imagedestroy($photoCopy);
-  
+    if (file_exists($sticker)) {
+        $photoCopy = imagecreatefrompng($filePath);
+        $stickerCopy = imagecreatefrompng($sticker);
+        $resized_mask = imagecreatetruecolor(265, 250);
+        $trans_color = imagecolorallocatealpha($resized_mask, 0, 0, 0, 127);
+        imagefill($resized_mask, 0, 0, $trans_color);
+        imagealphablending($stickerCopy, true);
+        imagesavealpha($stickerCopy, true);
+        $src_x = imagesx($stickerCopy);
+        $src_y = imagesy($stickerCopy);
+        imagecopyresampled($resized_mask, $stickerCopy, 0, 0, 0, 0, 265, 250, $src_x, $src_y);
+        imagecopy($photoCopy, $resized_mask, 0, 0, 0, 0, 265, 250);
+        imagepng($photoCopy, $filePath);
+        imagedestroy($photoCopy);
+    
 
-    $username = ($_SESSION['username']);
-    $sql = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-    $sql->bindParam(":username", $username);
-    $sql->execute();
-    $profile = $sql->fetchAll();
-    foreach ($profile as $user){
-        $addPhoto = "INSERT INTO picture (id_user, img) VALUE ('".$user['id']."', '".$filePath."')";
-        $pdo->query($addPhoto);
-        header('location: camera.php');
+        $username = ($_SESSION['username']);
+        $sql = $pdo->prepare("SELECT id FROM users WHERE username = :username");
+        $sql->bindParam(":username", $username);
+        $sql->execute();
+        $user = $sql->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $addPhoto = $pdo->prepare("INSERT INTO picture (id_user, img) VALUES (:id_user, :img)");
+            $addPhoto->bindParam(":id_user", $user['id']);
+            $addPhoto->bindParam(":img", $filePath);
+            if ($addPhoto->execute()) {
+                echo "[SUCCESS] Picture added to db";
+                header('Location: camera.php');
+                exit;
+            } else {
+                $errorInfo = $addPhoto->errorInfo();
+                echo "[ERROR] Failed to insert photo into database: " . $errorInfo[2];
+            }
+        } else {
+            echo "[ERROR] User not found.";
+        }
+    } else {
+        echo "[ERROR] Sticker file not found.";
     }
 }
 
@@ -53,11 +69,11 @@ if ((isset($_POST['tookAphoto']))){
             <video id="video"></video>
         </div>
         <div id="sticker_div">
-            <img src="public/stickers/poop.png" class="stickerImg active">
-            <img src="public/stickers/peach.png" class="stickerImg">
-            <img src="public/stickers/watermelon.png" class="stickerImg">
-            <img src="public/stickers/pig.png" class="stickerImg">
-            <img src="public/stickers/callme.png" class="stickerImg">
+            <img src="public/stickers/poop.png" class="stickerImg active" onclick="selectSticker(this)">
+            <img src="public/stickers/peach.png" class="stickerImg" onclick="selectSticker(this)">
+            <img src="public/stickers/watermelon.png" class="stickerImg" onclick="selectSticker(this)">
+            <img src="public/stickers/pig.png" class="stickerImg" onclick="selectSticker(this)">
+            <img src="public/stickers/callme.png" class="stickerImg" onclick="selectSticker(this)">
         </div>
 
         <form method="POST" action="" onsubmit=takePhoto();>
