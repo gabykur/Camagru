@@ -46,7 +46,7 @@ if (session_status() == PHP_SESSION_NONE) {
 </div>
 <div style="margin-bottom: 43px;"></div>
 <div id="footer">
-	<p style="margin: 10px;">©gkuraite - 2019</p>
+	<p style="margin: 10px;">©gabrielekuraite - 2024</p>
 </div>
 </body>
 </html>

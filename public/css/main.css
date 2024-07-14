@@ -1,3 +1,4 @@
+/*--------------------------------------------------------FONT-FACE---------------------------------------------------------------*/
 @font-face {
 	font-family: 'Instagram';
 	src: local('☺'), url('../fonts/Instagram.ttf') format('truetype');
@@ -7,6 +8,7 @@
 	src: local('☺'), url('../fonts/gaban.ttf') format('truetype');
 }
 
+/*--------------------------------------------------------GLOBAL STYLES---------------------------------------------------------------*/
 body{
     background: #e3d0e2;
     background-repeat: no-repeat;
@@ -70,8 +72,7 @@ input[type="button"]{
     min-width: 320px;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 50px;
-    
+    margin-top: 50px; 
 }
 
 .background{
@@ -563,24 +564,33 @@ input::placeholder{
 }
 
 #notiflabel {
+    display: flex;
+    align-items: center;
     border: 2px solid #67e8a6;
-    padding: 25px;
-    margin: 0 0 10px;
+    padding: 10px;
+    margin: 17px 22px 10px;
     background: #c4f2da;
     border-radius: 20px;
+    cursor: pointer;
 }
    
 #notiflabel:hover {
     background:#67e8a6;
     border: 2px solid #c4f2da;
     color: white;
-    cursor:pointer;
 }
+
+#checkbox {
+    width: auto;
+    height: 16px;
+    margin-right: 10px;
+}
+
 #pNot{
-    display: -webkit-inline-box;
-    text-shadow: none;
+    margin: 0;
     color: #4bb7ec;
 }
+
 #pNot:hover{
     color:white;
 }
@@ -591,18 +601,24 @@ input::placeholder{
     font-size: 24px;
 }
 
-#checkbox{
-    width: -webkit-fill-available;
-    height: 16px;
-    margin: 93px 20px 20px 20px;
-}
-
 @media (max-width: 770px) {
-    .Notif{margin-top:0px}
-    #notiflabel{padding: 7px;     margin: 76px 0 16px; display: -webkit-box;}
-    #checkbox{      height: 13px;  margin: -2px 20px 20px 15px}
-    #account article .loginForm form p {    font-size: 17px;}
-   
+    .Notif { 
+        margin-top:0px
+    }
+    #notiflabel {
+        padding: 7px;
+        margin: 70px 24px 22px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    #checkbox {      
+        height: 13px;
+        margin-right: 10px;
+    }
+    #account article .loginForm form p { 
+        font-size: 17px;
+    }
 }
 
 /********************************Modify Password*************************************/

@@ -2,31 +2,31 @@
 session_start();
 require("../config/database.php");
 
-if(empty($_SESSION['loggedin']))
+if(empty($_SESSION['loggedin'])){
     header('Location: ../index.php');
+    exit;
+}
+
+$message = "";
 
 $query = $pdo->prepare("SELECT notif FROM users WHERE id = :id");
 $query->bindParam(':id', $_SESSION['id']);
 $query->execute();
 $data = $query->fetch(PDO::FETCH_ASSOC);
 
-if (isset($_POST['update'])){
-    $checkbox = $_POST['notif'];
-    if ($checkbox == NULL){
-        $notif = 0;
-    }else{
-        $notif = 1;
-    }
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
+    // Check if the checkbox is set
+    $notif = isset($_POST['notif']) ? 1 : 0;
+
+    // Update notification setting in the database
     $query = $pdo->prepare("UPDATE users SET notif = :notif WHERE id = :id");
-    $query->bindParam(':notif', $notif);
-    $query->bindParam(':id', $_SESSION['id']);
+    $query->bindParam(':notif', $notif, PDO::PARAM_INT);
+    $query->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
     $query->execute();
+
     $message = "Updated ;)";
     header("Refresh: 1; url=notifications.php");
 }
-
-
-
 ?>
 
 <?php ob_start(); ?>
@@ -44,18 +44,20 @@ if (isset($_POST['update'])){
             <article>
                 <div style="max-height: 705px;" id="a">
                     <div class="loginForm accountForm Notif">      
-                         <h2 id="subTitle">Notifications</h2>
-                         <span style="color:green"><?php echo $message; ?></span>
-                            <form action="" method="post">  
-                            <label id="notiflabel"><input id="checkbox" type="checkbox" name="notif[]" <?php if ($data['notif'] == 1) { echo 'checked="checked"'; }?>><p id="pNot">Set up notifications on comments</p></label>
+                        <h2 id="subTitle">Notifications</h2>
+                        <span style="color:green"><?php echo htmlspecialchars($message); ?></span>
+                        <form action="" method="post">  
+                            <label id="notiflabel">
+                                <input id="checkbox" type="checkbox" name="notif" <?php if (isset($data['notif']) && $data['notif'] === 1): ?>checked="checked"<?php endif; ?>>
+                                <p id="pNot">Set up notifications on comments</p>
+                            </label>
                             <div class="loginForm accountForm" style="background:none; box-shadow:none">
                                 <input type="submit" id="saveBtt" style="width: 29%;font-size: 24px;" name="update" value="Update">          
                             </div>   
                         </form>
                     </div><br>
                 </div>
-            </article>
-        
+            </article>      
         </div>
     </div>
 </div>

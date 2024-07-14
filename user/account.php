@@ -7,6 +7,7 @@ if(empty($_SESSION['loggedin']))
 
 $username = $email = $password = $confirm_password = "";
 $error = "";
+$message = "";
 
 function test_input($data) {
     $data = trim($data);
