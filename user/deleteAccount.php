@@ -2,10 +2,14 @@
 session_start();
 require("../config/database.php");
 
-if(empty($_SESSION['loggedin']))
+if (empty($_SESSION['loggedin'])) {
     header('Location: ../index.php');
+    exit;
+}
 
 $username = $_SESSION['id'];
+$error = "";
+$password = "";
 
 function test_input($data){
     $data = trim($data);
@@ -14,43 +18,40 @@ function test_input($data){
     return $data;
 }
  
-$password = test_input($_POST['password']);
 
-if (isset($_POST['delete_account'])){
-    if (isset($password)){ //Checks ifthe password is written
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_account'])) {
+    if (isset($_POST['password']) && !empty($_POST['password'])) { //Checks if the password is written
+        $password = test_input($_POST['password']);
+
         $sql = "SELECT id, password FROM users WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id', $_SESSION['id']);
         $stmt->execute();
         $hashed_pwd = $stmt->fetch();
-        if(password_verify($password, $hashed_pwd['password'])){ //Checks if the password is correct
+
+        if($hashed_pwd && password_verify($password, $hashed_pwd['password'])){ //Checks if the password is correct
             $query = $pdo->prepare("SELECT * FROM picture WHERE id_user = :id_user");
             if ($query->execute(array(':id_user' => $_SESSION['id']))){ // Deletes the photos from the file 'upload'
-                $rowCount = $query->rowCount();
-                for($i=0;$i<$rowCount;$i++){
-                    while($row = $query->fetchAll()){
-                        foreach($row as $fileToDelete){
-                            unlink("../".$fileToDelete['img']);    
-                        }
-                    }
+                $filesToDelete = $query->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($filesToDelete as $fileToDelete) {
+                    unlink("../" . $fileToDelete['img']);    
                 }
             }
-            //Deletes the user + all the rest
-            $pdo->query("DELETE FROM comments WHERE comments.id_user IN ($username)");
 
-            //update the likes where user liked other users photos
+            //Deletes the user + all the rest
+            $pdo->query("DELETE FROM comments WHERE comments.id_user = $username");
             $query = $pdo->prepare("SELECT id_img FROM likes WHERE id_user = ?");
             $query->execute(array($username));
-            $res = $query->fetchAll();
+            $res = $query->fetchAll(PDO::FETCH_ASSOC);
             if ($res){
                 foreach ($res as $likedPhoto){
-                $pdo->query("UPDATE picture SET likes = likes - 1 WHERE id_img = $likedPhoto[id_img]");
+                    $pdo->query("UPDATE picture SET likes = likes - 1 WHERE id_img = " . intval($likedPhoto['id_img']));
                 }
             }
-            $pdo->query("DELETE FROM likes WHERE likes.id_user IN ($username)");
-            $pdo->query("DELETE FROM picture WHERE picture.id_user IN ($username)");
+            $pdo->query("DELETE FROM likes WHERE likes.id_user = $username");
+            $pdo->query("DELETE FROM picture WHERE picture.id_user = $username");
 
-            $query = $pdo->prepare("DELETE users FROM users WHERE users.id = :id"); 
+            $query = $pdo->prepare("DELETE FROM users WHERE id = :id"); 
             $query->bindParam(':id', $_SESSION['id']);
             //if the query is correct, the account is deleted and the the session is loggued out
             if ($query->execute()){
@@ -69,6 +70,7 @@ if (isset($_POST['delete_account'])){
                 $_SESSION["loggedin"] = "";
                 session_destroy();
                 header("Location:../index.php");
+                exit;
             }else{
                 $error = "Your account wasn't deleted";
             }
@@ -99,8 +101,8 @@ if (isset($_POST['delete_account'])){
                     <div class="loginForm accountForm DelAcc">      
                         <h2 id="subTitle">Delete Your Account</h2>
                         <form action="" method="post">
-                            <span><?php echo $error; ?></span>
-                            <input type="password" style="margin-top:41px;" name="password" placeholder="Enter password to delete account" value="<?php echo $password; ?>" required>
+                            <span><?php echo htmlspecialchars($error); ?></span>
+                            <input type="password" style="margin-top:41px;" name="password" placeholder="Enter password to delete account" value="<?php echo htmlspecialchars($password); ?>" required>
                             <input type="submit" id="saveBtt" style="margin-top: 15px;font-size: 22px;" name="delete_account" value="Delete Account">
                         </form>
                     </div><br>

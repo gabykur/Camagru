@@ -2,8 +2,10 @@
 session_start();
 require("../config/database.php");
 
-if(empty($_SESSION['loggedin']))
+if (empty($_SESSION['loggedin'])) {
     header('Location: ../index.php');
+    exit;
+}
 
 function test_input($data){
     $data = trim($data);
@@ -12,25 +14,27 @@ function test_input($data){
     return $data;
 }
 
-$old_password = test_input($_POST['old_password']);
-$new_password = test_input($_POST['new_password']);
-$confirm_password = test_input($_POST['new_confirm_password']);
-
+$old_password = $new_password = $confirm_password = "";
 $password_err = $confirm_password_err = $error = "";
 $message = $message_err = "";
 
-$uppercase = preg_match('@[A-Z]@', $new_password);
-$lowercase = preg_match('@[a-z]@', $new_password);
-$number    = preg_match('@[0-9]@', $new_password);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["change_pwd"])){
+    if (isset($_POST['old_password']) && isset($_POST['new_password']) && isset($_POST['new_confirm_password'])) {
+        $old_password = test_input($_POST['old_password']);
+        $new_password = test_input($_POST['new_password']);
+        $confirm_password = test_input($_POST['new_confirm_password']);
 
-if (isset($_POST["change_pwd"])){
-    if (isset($old_password)){
+        $uppercase = preg_match('@[A-Z]@', $new_password);
+        $lowercase = preg_match('@[a-z]@', $new_password);
+        $number    = preg_match('@[0-9]@', $new_password);
+
         $sql = "SELECT password FROM users WHERE username = :username";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':username', $_SESSION['username']);
         $stmt->execute();
         $hashed_pwd = $stmt->fetch();
-        if(password_verify($old_password, $hashed_pwd['password'])){
+
+        if($hashed_pwd && password_verify($old_password, $hashed_pwd['password'])){
             if(empty($new_password)){
                 $password_err =  "Please enter a new password";
             }elseif(strlen($new_password) < 8 || !$uppercase || !$lowercase || !$number){
@@ -41,7 +45,9 @@ if (isset($_POST["change_pwd"])){
                 if(empty($password_err) && ($new_password != $confirm_password)){
                     $confirm_password_err =  "Password did not match.";
                 }
-            } if(empty($password_err) && empty($confirm_password_err)){
+            } 
+            
+            if(empty($password_err) && empty($confirm_password_err)){
                 $new_password1 = password_hash($new_password, PASSWORD_DEFAULT);
                 $update_pass = "UPDATE users SET password = :password WHERE username = :username";
                 $stmt = $pdo->prepare($update_pass);
@@ -56,8 +62,11 @@ if (isset($_POST["change_pwd"])){
         }else {
             $error = "Your old password is incorrect";
         }
+        unset($stmt);
     }
 }
+unset($pdo); 
+
 ?>
 <?php ob_start(); ?>
 <div class="background galleryB">

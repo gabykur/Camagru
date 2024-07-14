@@ -2,8 +2,10 @@
 require_once("../config/database.php");
 session_start();
 
-if (($_SESSION['loggedin'] == true))
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     header('Location: ../index.php');
+    exit;
+}
  
 $username = $email = $password = $confirm_password = "";
 $username_err = $email_err = $password_err = $confirm_password_err = $activation_mess = "";
