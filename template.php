@@ -16,37 +16,32 @@ if (session_status() == PHP_SESSION_NONE) {
 </head>
 <body>
 <header>
-    <table class="container"><tr>
-        <td><a href="/camera.php">Photo</a></td>
-        <td><a href="/index.php" id="Cam_logo" style="padding:0">
+    <div class="navbar">
+        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != ""): ?>
+            <a href="/camera.php" class="nav-icon"><i class="fas fa-camera"></i></a>
+        <?php endif; ?>
+        <a href="/index.php" id="cam_logo" class="logo">
             <h1>Camagru</h1>
-            <h1 id="C">C</h1>
         </a>
-        <td><a href="/index.php" id="C" style="padding:0">
+        <a href="/index.php" id="c" class="logo">
             <h1>C</h1>
         </a>
-        </td>
-        <td style="width:50%"></td>
-        <?php
-        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != ""){
-            echo'
-                
-                <td style="width:10%"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/account.php">Account</a></td>
-                <td style="width:10%"><a href="http://'.$_SERVER['HTTP_HOST'].'/user/logout.php">Logout</a></td>
-                ';
-        }else{
-            echo'
-            <td style="width:10%"><a class="logButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/login.php">Log In</a></td>
-            <td style="width:10%"><a class="signButt" href="http://'.$_SERVER['HTTP_HOST'].'/user/register.php">Sign In</a></td>';
-        }?>
-    </tr></table>
+        <div class="header-spacer"></div>
+        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != ""): ?>
+            <a class="nav-icon" href="http://<?= $_SERVER['HTTP_HOST']; ?>/user/account.php"><i class="fas fa-user"></i></a>
+            <a class="nav-icon" href="http://<?= $_SERVER['HTTP_HOST']; ?>/user/logout.php"><i class="fas fa-sign-out-alt"></i></a>
+        <?php else: ?>
+            <a class="nav-button logButt" href="http://<?= $_SERVER['HTTP_HOST']; ?>/user/login.php">Log In</a>
+            <a class="nav-button signButt" href="http://<?= $_SERVER['HTTP_HOST']; ?>/user/register.php">Sign In</a>
+        <?php endif; ?>
+    </div>
 </header>
 <div class="main">
     <?= $view ?>
 </div>
-<div style="margin-bottom: 43px;"></div>
+<div class="footer-spacer"></div>
 <div id="footer">
-	<p style="margin: 10px;">©gabrielekuraite - 2024</p>
+	<p>©gabrielekuraite - 2024</p>
 </div>
 </body>
 </html>
