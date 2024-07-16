@@ -1,50 +1,58 @@
-var canvas = document.getElementById('canvas');
-var canvasCopy = document.getElementById("canvasCopy");
-var context = canvas.getContext('2d');
-var picture = document.getElementById('upload_img');
-var upload = document.getElementById('uploadBtt');
-var overlay_image = document.getElementById("overlay");
+const canvas = document.getElementById('canvas');
+const canvasCopy = document.getElementById('canvasCopy');
+const context = canvas.getContext('2d');
+const picture = document.getElementById('upload_img');
+const uploadButton = document.getElementById('uploadBtt');
+const overlayImage = document.getElementById('overlay');
 
+const stickerSelector = () => {
+  const selectedSticker = document.querySelector('#sticker_div .active');
+  if (!selectedSticker) {
+    console.warn('[WARNING] No active sticker found.');
+    return null;
+  }
+  console.log(`[DEBUG] Active sticker found: ${selectedSticker.getAttribute('data-id')}`);
+  return selectedSticker;
+};
 
-// Changes class of selected sticker
-var stickerDisplay = document.getElementById("sticker_div");
-var stickerImg = stickerDisplay.getElementsByClassName("stickerImg");
-for (var i = 0; i < stickerImg.length; i++) {
-    stickerImg[i].addEventListener("click", function() {
-        active_photo = document.getElementsByClassName("active");
-        active_photo[0].className = active_photo[0].className.replace(" active", "");
-        this.className += " active";
-        overlay_image.src = this.src;
-    });
-}
+const uploadPhoto = () => {
+  const canvasCopyElement = document.getElementById('canvasCopy');
+  const photo = document.getElementById('photo');
+  photo.value = canvasCopyElement.toDataURL();
+  console.log('[DEBUG] Photo data URL set.');
+  return true;
+};
 
-// Return currently selected sticker
-function stickerSelector() {
-    var header = document.getElementById("sticker_div");
-    var selectedSticker = header.getElementsByClassName("active");
-    return selectedSticker[0];
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const defaultSticker = document.querySelector('#sticker_div img[data-id="1"]');
+  if (defaultSticker) {
+    defaultSticker.classList.add('active');
+    document.getElementById('sticker').value = defaultSticker.getAttribute('data-id');
+    overlayImage.src = defaultSticker.src;
+    console.log(`[DEBUG] Default sticker set to: ${defaultSticker.src}, sticker ID: ${defaultSticker.getAttribute('data-id')}`);
+  }
+});
 
-document.getElementById('uploadPic').onchange = function(e) {
-    var output = document.getElementById('upload_img');
-    var saveBtt = document.getElementById('uploadBtt');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.style.display="block";
-    saveBtt.style.display="block";
-  };
+document.getElementById('uploadPic').onchange = (event) => {
+  const output = document.getElementById('upload_img');
+  const saveButton = document.getElementById('uploadBtt');
+  output.src = URL.createObjectURL(event.target.files[0]);
+  output.style.display = 'block';
+  saveButton.style.display = 'block';
+};
 
-function uploadPhoto(){
-    var canvas = document.getElementById("canvasCopy");
-    var photo =  document.getElementById("photo");
-    photo.value = canvas.toDataURL();
-}
+uploadButton.addEventListener('click', () => {
+  const currentSticker = stickerSelector();
+  document.getElementById('sticker').value = currentSticker ? currentSticker.getAttribute('data-id') : '1';
+  console.log('Current sticker ID: ', document.getElementById('sticker').value);
 
-
-upload.addEventListener('click', function() {
-    var currentSticker = stickerSelector();
-    document.getElementById('sticker').value = currentSticker.src;
-    console.log(currentSticker.src);
-    context.drawImage(picture, 0, 0, 640, 480);
-    context.drawImage(currentSticker, 0, 0, 265, 250); 
-    canvasCopy.getContext('2d').drawImage(picture, 0, 0, 640, 480);
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.drawImage(picture, 0, 0, 640, 480);
+  if (currentSticker) {
+    context.drawImage(currentSticker, 0, 0, 265, 250);
+  }
+  const canvasContext = canvasCopy.getContext('2d');
+  canvasContext.clearRect(0, 0, canvasCopy.width, canvasCopy.height);
+  canvasContext.drawImage(picture, 0, 0, 640, 480);
+  console.log('[DEBUG] Images drawn on canvas.');
 });

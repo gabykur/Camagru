@@ -12,38 +12,26 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `test_camagru`
---
+-- Database: `db_camagru`
 CREATE DATABASE IF NOT EXISTS `db_camagru` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `db_camagru`;
 
 -- --------------------------------------------------------
-
---
 -- Table structure for table `comments`
---
+-- --------------------------------------------------------
 
 DROP TABLE IF EXISTS `comments`;
 
 CREATE TABLE `comments` (
-  `id_comment` int(11) NOT NULL,
+  `id_comment` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_img` int(11) NOT NULL,
   `comment` text NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_comment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Dumping data for table `comments`
---
-
 INSERT INTO `comments` (`id_comment`, `id_user`, `id_img`, `comment`, `date`) VALUES
 (39, 14, 274, 'WOW my husband is so beautiful', '2019-04-02 17:01:06'),
 (40, 14, 278, 'always handsome darling', '2019-04-02 17:01:30'),
@@ -66,24 +54,20 @@ INSERT INTO `comments` (`id_comment`, `id_user`, `id_img`, `comment`, `date`) VA
 (57, 13, 288, 'rtret', '2019-04-03 17:26:53');
 
 -- --------------------------------------------------------
-
---
 -- Table structure for table `likes`
---
+-- --------------------------------------------------------
 
 DROP TABLE IF EXISTS `likes`;
 
 CREATE TABLE `likes` (
-  `id_like` int(11) NOT NULL,
+  `id_like` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_img` int(11) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_like`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Dumping data for table `likes`
---
-
 INSERT INTO `likes` (`id_like`, `id_user`, `id_img`, `date`) VALUES
 (91, 14, 274, '2019-04-02 17:01:08'),
 (92, 14, 278, '2019-04-02 17:01:23'),
@@ -99,25 +83,21 @@ INSERT INTO `likes` (`id_like`, `id_user`, `id_img`, `date`) VALUES
 (104, 13, 282, '2019-04-02 18:47:47');
 
 -- --------------------------------------------------------
-
---
 -- Table structure for table `picture`
---
+-- --------------------------------------------------------
 
 DROP TABLE IF EXISTS `picture`;
 
 CREATE TABLE `picture` (
-  `id_img` int(11) NOT NULL,
+  `id_img` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `img` varchar(255) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `likes` int(11) NOT NULL DEFAULT '0'
+  `likes` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_img`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Dumping data for table `picture`
---
-
 INSERT INTO `picture` (`id_img`, `id_user`, `img`, `date`, `likes`) VALUES
 (274, 13, 'public/upload/20190402165225.png', '2019-04-02 16:52:25', 2),
 (275, 13, 'public/upload/20190402165235.png', '2019-04-02 16:52:36', 0),
@@ -139,90 +119,65 @@ INSERT INTO `picture` (`id_img`, `id_user`, `img`, `date`, `likes`) VALUES
 (292, 15, 'public/upload/20190402172028.png', '2019-04-02 17:19:58', 0);
 
 -- --------------------------------------------------------
-
---
 -- Table structure for table `users`
---
+-- --------------------------------------------------------
 
 DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` text NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(500) NOT NULL,
   `activation_code` varchar(500) NOT NULL,
   `user_status` varchar(50) NOT NULL DEFAULT 'not verified',
   `token` varchar(255) NOT NULL,
-  `notif` int(11) NOT NULL
+  `notif` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- Dumping data for table `users`
---
-
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `activation_code`, `user_status`, `token`, `notif`) VALUES
 (13, 'noel', 'noel@camagru.fr', '$2y$10$IGfnk5bC5g9My5ToHgKikuwaiiIkUQnvVwBso0yo2ElZGkxz1LGXS', '1f4477bad7af3616c1f933a02bfabe4e', 'verified', '', 1),
 (14, 'suri', 'suri@camagru.fr', '$2y$10$p6oFhWwWChV0WKb2spB2BuYed5/UNMDVcf4ZvXaoVrI/cX/PBYeP2', '6aca97005c68f1206823815f66102863', 'verified', '', 1),
 (15, 'iz', 'iz@camagru.fr', '$2y$10$xGdQ4uIv2NwR8qSDAhAqc.C/jTGCNC/o3raOL3fHPF5qseiU2qBqK', 'f033ab37c30201f73f142449d037028d', 'verified', '', 1);
 
---
--- Indexes for dumped tables
---
+-- --------------------------------------------------------
+-- Table structure for table `stickers`
+-- --------------------------------------------------------
 
---
--- Indexes for table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id_comment`);
+DROP TABLE IF EXISTS `stickers`;
 
---
--- Indexes for table `likes`
---
-ALTER TABLE `likes`
-  ADD PRIMARY KEY (`id_like`);
+CREATE TABLE `stickers` (
+  `id_sticker` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_sticker`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Indexes for table `picture`
---
-ALTER TABLE `picture`
-  ADD PRIMARY KEY (`id_img`);
+-- Dumping data for table `stickers`
+INSERT INTO `stickers` (`id_sticker`, `name`, `path`) VALUES
+(1, 'Poop', 'public/stickers/poop.png'),
+(2, 'Peach', 'public/stickers/peach.png'),
+(3, 'Watermelon', 'public/stickers/watermelon.png'),
+(4, 'Pig', 'public/stickers/pig.png'),
+(5, 'Call Me', 'public/stickers/callme.png');
 
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `comments`
---
 ALTER TABLE `comments`
   MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
---
--- AUTO_INCREMENT for table `likes`
---
 ALTER TABLE `likes`
   MODIFY `id_like` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
---
--- AUTO_INCREMENT for table `picture`
---
 ALTER TABLE `picture`
   MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
 
---
--- AUTO_INCREMENT for table `users`
---
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ALTER TABLE `stickers`
+  MODIFY `id_sticker` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+COMMIT;
