@@ -17,10 +17,79 @@ CREATE DATABASE IF NOT EXISTS `db_camagru` DEFAULT CHARACTER SET utf8 COLLATE ut
 USE `db_camagru`;
 
 -- --------------------------------------------------------
--- Table structure for table `comments`
+-- Drop tables if they exist
+-- --------------------------------------------------------
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `login_attempts`;
+DROP TABLE IF EXISTS `comments`;
+DROP TABLE IF EXISTS `likes`;
+DROP TABLE IF EXISTS `pictures`;
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `stickers`;
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- --------------------------------------------------------
+-- Table structure for table `users`
 -- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(500) NOT NULL,
+  `activation_code` varchar(500) NOT NULL,
+  `user_status` varchar(50) NOT NULL DEFAULT 'not verified',
+  `token` varchar(255) NOT NULL,
+  `notif` int(11) NOT NULL,
+  `account_locked` TINYINT(1) NOT NULL DEFAULT 0,
+  `account_locked_until` DATETIME DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table `users`
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `activation_code`, `user_status`, `token`, `notif`, `account_locked`) VALUES
+(13, 'noel', 'noel@camagru.fr', '$2y$10$IGfnk5bC5g9My5ToHgKikuwaiiIkUQnvVwBso0yo2ElZGkxz1LGXS', '1f4477bad7af3616c1f933a02bfabe4e', 'verified', '', 1, 0),
+(14, 'suri', 'suri@camagru.fr', '$2y$10$p6oFhWwWChV0WKb2spB2BuYed5/UNMDVcf4ZvXaoVrI/cX/PBYeP2', '6aca97005c68f1206823815f66102863', 'verified', '', 1, 0),
+(15, 'iz', 'iz@camagru.fr', '$2y$10$xGdQ4uIv2NwR8qSDAhAqc.C/jTGCNC/o3raOL3fHPF5qseiU2qBqK', 'f033ab37c30201f73f142449d037028d', 'verified', '', 1, 0);
+
+-- --------------------------------------------------------
+-- Table structure for table `pictures`
+-- --------------------------------------------------------
+
+CREATE TABLE `pictures` (
+  `id_img` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `img` varchar(255) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `likes` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_img`),
+  FOREIGN KEY (`id_user`) REFERENCES `users`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table `pictures`
+INSERT INTO `pictures` (`id_img`, `id_user`, `img`, `date`, `likes`) VALUES
+(274, 13, 'public/upload/20190402165225.png', '2019-04-02 16:52:25', 2),
+(275, 13, 'public/upload/20190402165235.png', '2019-04-02 16:52:36', 0),
+(276, 13, 'public/upload/20190402165250.png', '2019-04-02 16:52:50', 0),
+(277, 13, 'public/upload/20190402165259.png', '2019-04-02 16:52:59', 2),
+(278, 13, 'public/upload/20190402165307.png', '2019-04-02 17:22:08', 2),
+(279, 13, 'public/upload/20190402165316.png', '2019-04-02 16:53:16', 0),
+(280, 14, 'public/upload/20190402170000.png', '2019-04-02 17:00:00', 0),
+(281, 14, 'public/upload/20190402170009.png', '2019-04-02 17:00:09', 1),
+(282, 14, 'public/upload/20190402170017.png', '2019-04-02 17:00:17', 1),
+(283, 14, 'public/upload/20190402170025.png', '2019-04-02 17:00:25', 1),
+(284, 14, 'public/upload/20190402170033.png', '2019-04-02 17:00:33', 1),
+(285, 14, 'public/upload/20190402170042.png', '2019-04-02 17:20:42', 2),
+(286, 15, 'public/upload/20190402171923.png', '2019-04-02 17:19:24', 0),
+(288, 15, 'public/upload/20190402171944.png', '2019-04-02 17:19:44', 0),
+(289, 15, 'public/upload/20190402171958.png', '2019-04-02 16:20:28', 0),
+(290, 15, 'public/upload/20190402172008.png', '2019-04-02 17:20:08', 0),
+(291, 15, 'public/upload/20190402172017.png', '2019-04-02 17:20:17', 0),
+(292, 15, 'public/upload/20190402172028.png', '2019-04-02 17:19:58', 0);
+
+-- --------------------------------------------------------
+-- Table structure for table `comments`
+-- --------------------------------------------------------
 
 CREATE TABLE `comments` (
   `id_comment` int(11) NOT NULL AUTO_INCREMENT,
@@ -28,7 +97,9 @@ CREATE TABLE `comments` (
   `id_img` int(11) NOT NULL,
   `comment` text NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_comment`)
+  PRIMARY KEY (`id_comment`),
+  FOREIGN KEY (`id_user`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`id_img`) REFERENCES `pictures`(`id_img`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `comments`
@@ -57,14 +128,14 @@ INSERT INTO `comments` (`id_comment`, `id_user`, `id_img`, `comment`, `date`) VA
 -- Table structure for table `likes`
 -- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `likes`;
-
 CREATE TABLE `likes` (
   `id_like` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_img` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_like`)
+  PRIMARY KEY (`id_like`),
+  FOREIGN KEY (`id_user`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`id_img`) REFERENCES `pictures`(`id_img`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `likes`
@@ -83,70 +154,8 @@ INSERT INTO `likes` (`id_like`, `id_user`, `id_img`, `date`) VALUES
 (104, 13, 282, '2019-04-02 18:47:47');
 
 -- --------------------------------------------------------
--- Table structure for table `picture`
--- --------------------------------------------------------
-
-DROP TABLE IF EXISTS `picture`;
-
-CREATE TABLE `picture` (
-  `id_img` int(11) NOT NULL AUTO_INCREMENT,
-  `id_user` int(11) NOT NULL,
-  `img` varchar(255) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `likes` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_img`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table `picture`
-INSERT INTO `picture` (`id_img`, `id_user`, `img`, `date`, `likes`) VALUES
-(274, 13, 'public/upload/20190402165225.png', '2019-04-02 16:52:25', 2),
-(275, 13, 'public/upload/20190402165235.png', '2019-04-02 16:52:36', 0),
-(276, 13, 'public/upload/20190402165250.png', '2019-04-02 16:52:50', 0),
-(277, 13, 'public/upload/20190402165259.png', '2019-04-02 16:52:59', 2),
-(278, 13, 'public/upload/20190402165307.png', '2019-04-02 17:22:08', 2),
-(279, 13, 'public/upload/20190402165316.png', '2019-04-02 16:53:16', 0),
-(280, 14, 'public/upload/20190402170000.png', '2019-04-02 17:00:00', 0),
-(281, 14, 'public/upload/20190402170009.png', '2019-04-02 17:00:09', 1),
-(282, 14, 'public/upload/20190402170017.png', '2019-04-02 17:00:17', 1),
-(283, 14, 'public/upload/20190402170025.png', '2019-04-02 17:00:25', 1),
-(284, 14, 'public/upload/20190402170033.png', '2019-04-02 17:00:33', 1),
-(285, 14, 'public/upload/20190402170042.png', '2019-04-02 17:20:42', 2),
-(286, 15, 'public/upload/20190402171923.png', '2019-04-02 17:19:24', 0),
-(288, 15, 'public/upload/20190402171944.png', '2019-04-02 17:19:44', 0),
-(289, 15, 'public/upload/20190402171958.png', '2019-04-02 16:20:28', 0),
-(290, 15, 'public/upload/20190402172008.png', '2019-04-02 17:20:08', 0),
-(291, 15, 'public/upload/20190402172017.png', '2019-04-02 17:20:17', 0),
-(292, 15, 'public/upload/20190402172028.png', '2019-04-02 17:19:58', 0);
-
--- --------------------------------------------------------
--- Table structure for table `users`
--- --------------------------------------------------------
-
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(500) NOT NULL,
-  `activation_code` varchar(500) NOT NULL,
-  `user_status` varchar(50) NOT NULL DEFAULT 'not verified',
-  `token` varchar(255) NOT NULL,
-  `notif` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table `users`
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `activation_code`, `user_status`, `token`, `notif`) VALUES
-(13, 'noel', 'noel@camagru.fr', '$2y$10$IGfnk5bC5g9My5ToHgKikuwaiiIkUQnvVwBso0yo2ElZGkxz1LGXS', '1f4477bad7af3616c1f933a02bfabe4e', 'verified', '', 1),
-(14, 'suri', 'suri@camagru.fr', '$2y$10$p6oFhWwWChV0WKb2spB2BuYed5/UNMDVcf4ZvXaoVrI/cX/PBYeP2', '6aca97005c68f1206823815f66102863', 'verified', '', 1),
-(15, 'iz', 'iz@camagru.fr', '$2y$10$xGdQ4uIv2NwR8qSDAhAqc.C/jTGCNC/o3raOL3fHPF5qseiU2qBqK', 'f033ab37c30201f73f142449d037028d', 'verified', '', 1);
-
--- --------------------------------------------------------
 -- Table structure for table `stickers`
 -- --------------------------------------------------------
-
-DROP TABLE IF EXISTS `stickers`;
 
 CREATE TABLE `stickers` (
   `id_sticker` int(11) NOT NULL AUTO_INCREMENT,
@@ -163,6 +172,19 @@ INSERT INTO `stickers` (`id_sticker`, `name`, `path`) VALUES
 (4, 'Pig', 'public/stickers/pig.png'),
 (5, 'Call Me', 'public/stickers/callme.png');
 
+-- --------------------------------------------------------
+-- Table structure for table `login_attempts`
+-- --------------------------------------------------------
+
+CREATE TABLE `login_attempts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `ip_address` varchar(255) NOT NULL,
+  `attempt_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- AUTO_INCREMENT for dumped tables
 
 ALTER TABLE `comments`
@@ -171,7 +193,7 @@ ALTER TABLE `comments`
 ALTER TABLE `likes`
   MODIFY `id_like` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
-ALTER TABLE `picture`
+ALTER TABLE `pictures`
   MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
 
 ALTER TABLE `users`

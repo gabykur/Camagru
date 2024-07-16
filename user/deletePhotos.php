@@ -16,7 +16,7 @@ if(isset($_POST['delete'])){
         $del_id = implode(",", array_map('intval', $checkbox));
 
         // Fetch the images to delete
-        $query = $pdo->prepare("SELECT img FROM picture WHERE id_img IN ($del_id)");
+        $query = $pdo->prepare("SELECT img FROM pictures WHERE id_img IN ($del_id)");
         $query->execute();
         $filesToDelete = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -26,7 +26,7 @@ if(isset($_POST['delete'])){
         }
 
         // Use prepared statements to delete from database
-        $tables = ['comments', 'likes', 'picture'];
+        $tables = ['comments', 'likes', 'pictures'];
         foreach ($tables as $table) {
             $stmt = $pdo->prepare("DELETE FROM $table WHERE id_img IN ($del_id)");
             $stmt->execute();
@@ -61,7 +61,7 @@ if(isset($_POST['delete'])){
                     <div id="deletePhotos">      
                         <form method="POST" action="">
                             <?php 
-                                $stmt = $pdo->prepare("SELECT img, id_img FROM picture WHERE id_user = :id_user ORDER BY date DESC");
+                                $stmt = $pdo->prepare("SELECT img, id_img FROM pictures WHERE id_user = :id_user ORDER BY date DESC");
                                 $stmt->bindParam(":id_user", $_SESSION['id']);
                                 $stmt->execute();
                                 $photos = $stmt->fetchAll(PDO::FETCH_ASSOC);

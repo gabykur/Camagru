@@ -14,7 +14,7 @@ function fetchStickers($pdo) {
 }
 
 function fetchUserPhotos($pdo, $user_id) {
-    $query = $pdo->prepare("SELECT img, id_img FROM picture WHERE id_user = :id_user ORDER BY date DESC");
+    $query = $pdo->prepare("SELECT img, id_img FROM pictures WHERE id_user = :id_user ORDER BY date DESC");
     $query->bindParam(":id_user", $user_id, PDO::PARAM_INT);
     $query->execute();
     return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -66,7 +66,7 @@ function fetchUser($pdo, $username) {
 }
 
 function savePhotoToDatabase($pdo, $user_id, $photo_path) {
-    $query = $pdo->prepare("INSERT INTO picture (id_user, img) VALUES (:id_user, :img)");
+    $query = $pdo->prepare("INSERT INTO pictures (id_user, img) VALUES (:id_user, :img)");
     $query->bindParam(":id_user", $user_id, PDO::PARAM_INT);
     $query->bindParam(":img", $photo_path, PDO::PARAM_STR);
     if ($query->execute()) {

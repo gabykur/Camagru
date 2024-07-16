@@ -4,17 +4,17 @@ require("config/database.php");
 session_start();
 
 function getPhotoCount($pdo) {
-    $query = $pdo->query('SELECT id_img FROM picture');
+    $query = $pdo->query('SELECT id_img FROM pictures');
     return $query->rowCount();
 }
 
 function getPhotos($pdo, $start, $photos_per_page) {
-    $stmt = $pdo->prepare("SELECT picture.id_img, picture.img, picture.date, picture.likes, users.username, COUNT(comments.id_img) AS nb_comment
-                           FROM picture
-                           LEFT JOIN comments ON (picture.id_img = comments.id_img) 
-                           INNER JOIN users ON picture.id_user = users.id 
-                           GROUP BY picture.id_img 
-                           ORDER BY picture.date DESC 
+    $stmt = $pdo->prepare("SELECT pictures.id_img, pictures.img, pictures.date, pictures.likes, users.username, COUNT(comments.id_img) AS nb_comment
+                           FROM pictures
+                           LEFT JOIN comments ON (pictures.id_img = comments.id_img) 
+                           INNER JOIN users ON pictures.id_user = users.id 
+                           GROUP BY pictures.id_img 
+                           ORDER BY pictures.date DESC 
                            LIMIT :start, :photos_per_page");
     $stmt->bindParam(':start', $start, PDO::PARAM_INT);
     $stmt->bindParam(':photos_per_page', $photos_per_page, PDO::PARAM_INT);

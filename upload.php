@@ -54,7 +54,7 @@ function fetchUser($pdo, $username) {
 }
 
 function savePhotoToDatabase($pdo, $user_id, $photo_path) {
-    $query = $pdo->prepare("INSERT INTO picture (id_user, img) VALUES (:id_user, :img)");
+    $query = $pdo->prepare("INSERT INTO pictures (id_user, img) VALUES (:id_user, :img)");
     $query->bindParam(":id_user", $user_id, PDO::PARAM_INT);
     $query->bindParam(":img", $photo_path, PDO::PARAM_STR);
     if ($query->execute()) {

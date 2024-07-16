@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_account'])) {
         $hashed_pwd = $stmt->fetch();
 
         if($hashed_pwd && password_verify($password, $hashed_pwd['password'])){ //Checks if the password is correct
-            $query = $pdo->prepare("SELECT * FROM picture WHERE id_user = :id_user");
+            $query = $pdo->prepare("SELECT * FROM pictures WHERE id_user = :id_user");
             if ($query->execute(array(':id_user' => $_SESSION['id']))){ // Deletes the photos from the file 'upload'
                 $filesToDelete = $query->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($filesToDelete as $fileToDelete) {
@@ -45,11 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_account'])) {
             $res = $query->fetchAll(PDO::FETCH_ASSOC);
             if ($res){
                 foreach ($res as $likedPhoto){
-                    $pdo->query("UPDATE picture SET likes = likes - 1 WHERE id_img = " . intval($likedPhoto['id_img']));
+                    $pdo->query("UPDATE pictures SET likes = likes - 1 WHERE id_img = " . intval($likedPhoto['id_img']));
                 }
             }
             $pdo->query("DELETE FROM likes WHERE likes.id_user = $username");
-            $pdo->query("DELETE FROM picture WHERE picture.id_user = $username");
+            $pdo->query("DELETE FROM pictures WHERE pictures.id_user = $username");
 
             $query = $pdo->prepare("DELETE FROM users WHERE id = :id"); 
             $query->bindParam(':id', $_SESSION['id']);

@@ -15,10 +15,10 @@ function testInput($data) {
 }
 
 function fetchPhoto($pdo, $id_photo) {
-    $query = $pdo->prepare("SELECT picture.id_img, picture.img, picture.date, users.username 
-                            FROM picture 
-                            INNER JOIN users ON picture.id_user = users.id 
-                            WHERE picture.id_img = ?");
+    $query = $pdo->prepare("SELECT pictures.id_img, pictures.img, pictures.date, users.username 
+                            FROM pictures 
+                            INNER JOIN users ON pictures.id_user = users.id 
+                            WHERE pictures.id_img = ?");
     $query->execute([$id_photo]);
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -28,7 +28,7 @@ function addLike($pdo, $id_user, $id_img) {
     $query->bindParam(':id_user', $id_user);
     $query->bindParam(':id_img', $id_img);
     if ($query->execute()) {
-        $update = $pdo->prepare("UPDATE picture SET likes = likes + 1 WHERE id_img = :id_img");
+        $update = $pdo->prepare("UPDATE pictures SET likes = likes + 1 WHERE id_img = :id_img");
         $update->bindParam('id_img', $id_img);
         $update->execute();
     }
@@ -39,7 +39,7 @@ function removeLike($pdo, $id_user, $id_img) {
     $query->bindParam(':id_user', $id_user);
     $query->bindParam(':id_img', $id_img);
     if ($query->execute()) {
-        $update = $pdo->prepare("UPDATE picture SET likes = likes - 1 WHERE id_img = :id_img");
+        $update = $pdo->prepare("UPDATE pictures SET likes = likes - 1 WHERE id_img = :id_img");
         $update->bindParam('id_img', $id_img);
         $update->execute();
     }
@@ -88,9 +88,9 @@ function deleteComment($pdo, $id_comment, $id_user) {
 
 function fetchPhotoUser($pdo, $id_img) {
     $query = $pdo->prepare("SELECT email, notif, username 
-                            FROM picture 
-                            JOIN users ON picture.id_user = users.id 
-                            WHERE picture.id_img = :id_img");
+                            FROM pictures 
+                            JOIN users ON pictures.id_user = users.id 
+                            WHERE pictures.id_img = :id_img");
     $query->bindParam(':id_img', $id_img);
     $query->execute();
     return $query->fetch(PDO::FETCH_ASSOC);
