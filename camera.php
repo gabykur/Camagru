@@ -83,22 +83,14 @@ if (isset($_POST['tookAphoto'])) {
     $photo_data = $_POST['photo'];
     $sticker_id = $_POST['sticker'];
 
-    echo "[DEBUG] Sticker ID: " . $sticker_id . "<br>";
-
     validatePhotoAndSticker($photo_data, $sticker_id);
-
     $photo_path = savePhotoToFile($photo_data);
-
     $sticker = fetchSticker($pdo, $sticker_id);
-    echo "[DEBUG] Sticker query result: " . print_r($sticker, true) . "<br>";
 
     if ($sticker && file_exists($sticker['path'])) {
         applyStickerToPhoto($photo_path, $sticker['path']);
-
         $username = $_SESSION['username'];
         $user = fetchUser($pdo, $username);
-        echo "[DEBUG] User query result: " . print_r($user, true) . "<br>";
-
         if ($user) {
             savePhotoToDatabase($pdo, $user['id'], $photo_path);
         } else {
@@ -122,19 +114,16 @@ $user_photos = fetchUserPhotos($pdo, $_SESSION['id']);
             </div>
             <video id="video"></video>
         </div>
-
         <div id="sticker_div">
             <?php foreach ($stickers as $sticker): ?>
                 <img src="<?= $sticker['path'] ?>" class="stickerImg" data-id="<?= $sticker['id_sticker'] ?>" onclick="selectSticker(this)">
             <?php endforeach; ?>
         </div>
-
         <form method="POST" action="" onsubmit="takePhoto();">
             <input id="photo" name="photo" type="hidden" value="">
             <input id="sticker" name="sticker" type="hidden" value="">
             <input id="snap" style="display:none;" type="submit" name="tookAphoto" value="">
         </form>
-
         <canvas style="display:none" id="canvas" width="640" height="480"></canvas>
         <div id='camera_gallery'>
             <?php foreach ($user_photos as $photo): ?>
@@ -145,7 +134,6 @@ $user_photos = fetchUserPhotos($pdo, $_SESSION['id']);
         <canvas style="display:none" id="canvasCopy" width="640" height="480"></canvas>
     </div>
 </div><br/><br/>
-
 <script src="/public/js/camera.js"></script>
 <?php $view = ob_get_clean(); ?>
 <?php require("template.php"); ?>
