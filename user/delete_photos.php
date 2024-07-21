@@ -33,7 +33,7 @@ if(isset($_POST['delete'])){
         }
         
         $message = "Selected photos have been deleted successfully.";
-        header("Refresh: 2; url=deletePhotos.php");
+        header("Refresh: 2; url=delete_photos.php");
         exit;
     }else{
         $message_err = "Please choose photos to delete";
@@ -48,9 +48,9 @@ if(isset($_POST['delete'])){
         <div id="account">
             <nav id="account_nav">
                 <a id="EdPro" href="account.php">Edit Profile</a>
-                <a id="EdPwd" href="modifyPassw.php">Edit Password</a>
-                <a id="DelPho" href="deletePhotos.php" >Delete Photos</a>
-                <a id="DelAcc" href="deleteAccount.php" >Delete Account</a>
+                <a id="EdPwd" href="modify_password.php">Edit Password</a>
+                <a id="DelPho" href="delete_photos.php" >Delete Photos</a>
+                <a id="DelAcc" href="delete_account.php" >Delete Account</a>
                 <a id="Notif" href="notifications.php" >Notifications</a>
             </nav>
             <article>

@@ -61,7 +61,7 @@ function sendResetEmail($email, $username, $token) {
             If this e-mail does not apply to you please ignore it.<br>
             It appears that you have requested a password reset.<br><br>
             To reset your password, please click the link below:<br>
-            <a href="http://'.$_SERVER['HTTP_HOST'].'/user/resetPassword.php?username='.$username.'&reset='.$token.'">Reset Password</a><br><br>
+            <a href="http://'.$_SERVER['HTTP_HOST'].'/user/reset_password.php?username='.$username.'&reset='.$token.'">Reset Password</a><br><br>
             If you cannot click it, please paste it into your web browser\'s address bar.<br><br>
             Thanks,<br>
             The Administration :)
@@ -75,7 +75,7 @@ function sendResetEmail($email, $username, $token) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['forgotPassword'])) {
+    if (isset($_POST['forgot_password'])) {
         if (empty(testInput($_POST['email'])) || empty(testInput($_POST['username']))) {
             $error = "Please enter your username and email.";
         } else {
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" placeholder="Enter your login" name="username">
         <input type="email" placeholder="Enter your email" name="email">
         <span><?php echo $error; ?></span><br />
-        <input type="submit" value="Send Link" name="forgotPassword">
+        <input type="submit" value="Send Link" name="forgot_password">
     </form>
 </div><br/>
 <div class="loginForm">

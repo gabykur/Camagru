@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = testInput($_POST["password"] ?? '');
     $confirm_password = testInput($_POST["confirm_password"] ?? '');
 
-    if (isset($_POST['resetPasswordForm'])) {
+    if (isset($_POST['reset_password'])) {
         if (empty($password)) {
             $password_err = "Please enter a password.";     
         } elseif (!isValidPassword($password)) {
@@ -94,7 +94,7 @@ if (isset($_GET['username'])) {
         <input type="password" name="confirm_password" placeholder="Confirm New Password" value="<?php echo htmlspecialchars($confirm_password); ?>">
         <span><?php echo $confirm_password_err; ?></span>
         <input type="hidden" name="reset" value="<?php if(isset($_GET['reset'])){ echo htmlspecialchars($_GET['reset']); } ?>">
-        <input type="submit" value="Reset Password" name="resetPasswordForm">
+        <input type="submit" value="Reset Password" name="reset_password">
     </form>
 </div><br/>    
 <?php $view = ob_get_clean(); ?>

@@ -114,13 +114,13 @@ if ($id_photo) {
 
 if (isset($_GET['like'])) {
     addLike($pdo, $_SESSION['id'], $_GET['like']);
-    header("Location: /user/addLikeCom.php?id=" . $id_photo);
+    header("Location: /user/add_like_comment.php?id=" . $id_photo);
     exit;
 }
 
 if (isset($_GET['dislike'])) {
     removeLike($pdo, $_SESSION['id'], $_GET['dislike']);
-    header("Location: /user/addLikeCom.php?id=" . $id_photo);
+    header("Location: /user/add_like_comment.php?id=" . $id_photo);
     exit;
 }
 
@@ -141,14 +141,14 @@ if (!empty($comment)) {
             mail($to, $subject, $message, $headers);
         }
     }
-    header("Location: /user/addLikeCom.php?id=" . $id_photo);
+    header("Location: /user/add_like_comment.php?id=" . $id_photo);
     exit;
 }
 
 if (isset($_POST['delete_comment']) && isset($_POST['comment_id'])) {
     $comment_id = $_POST['comment_id'];
     deleteComment($pdo, $comment_id, $_SESSION['id']);
-    header("Location: /user/addLikeCom.php?id=" . $id_photo);
+    header("Location: /user/add_like_comment.php?id=" . $id_photo);
     exit;
 }
 ?>
