@@ -70,6 +70,11 @@ function resetFailedAttempts($pdo, $user_id) {
     $stmt->execute();
 }
 
+// Capture the message from the URL
+if (isset($_GET['message'])) {
+    $activation_message = htmlspecialchars($_GET['message']);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = testInput($_POST["username"]);
     $password = testInput($_POST["password"]);
@@ -130,7 +135,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="loginForm" style="min-height:364px;">
         <form action="" method="post">
             <h2 id="title2">Login</h2>
-            <p id="actMsg"><?php echo $activation_message; ?></p><br>
+            <?php if (!empty($activation_message)): ?>
+                <div class="message" style="color: green;"><?php echo $activation_message; ?></div>
+            <?php endif; ?>
             <span><?php echo $username_err; ?></span>
             <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
             <span><?php echo $password_err; ?></span>
