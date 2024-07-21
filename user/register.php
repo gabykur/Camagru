@@ -96,7 +96,7 @@ function sendActivationEmail($email, $username, $activation_code, &$activation_m
             ------------------------<br><br>
 
             Please click this link to activate your account:<br>
-            http://'.$_SERVER['HTTP_HOST'].'/user/activation.php?username='.$username.'&activationCode='.$activation_code.'
+            http://'.$_SERVER['HTTP_HOST'].'/user/activation_account.php?username='.$username.'&activation_code='.$activation_code.'
         ';
 
         $mail->send();
@@ -165,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="loginForm" style="min-height:364px;">
     <h2 id="title2">Sign Up</h2>
-    <p id="actMsg"><?php echo $activation_mess; ?></p><br>
+    <p id="actMsg" style="color:green;"><?php echo $activation_mess; ?></p><br>
     <form action="" method="post">
         <span><?php echo $username_err; ?></span>
         <input type="text" name="username" placeholder="Username" value="<?php echo $username; ?>">
