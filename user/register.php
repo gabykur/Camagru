@@ -1,11 +1,19 @@
 <?php
 require_once("../config/database.php");
+require_once "../vendor/autoload.php";
 session_start();
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     header('Location: ../index.php');
     exit;
 }
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 $username = $email = $password = $confirm_password = "";
 $username_err = $email_err = $password_err = $confirm_password_err = $activation_mess = "";
@@ -39,8 +47,8 @@ function fetchUserByEmail($pdo, $email) {
 }
 
 function insertUser($pdo, $username, $email, $password, $activation_code) {
-    $sql = "INSERT INTO users (username, email, password, activation_code, user_status, token, notif)
-            VALUES (:username, :email, :password, :activation_code, :user_status, :token, :notif)";
+    $sql = "INSERT INTO users (username, email, password, activation_code, user_status, token, notif, account_locked, account_locked_until)
+            VALUES (:username, :email, :password, :activation_code, :user_status, :token, :notif, :account_locked, :account_locked_until)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(":username", $username, PDO::PARAM_STR);
     $stmt->bindParam(":email", $email, PDO::PARAM_STR);
@@ -49,30 +57,53 @@ function insertUser($pdo, $username, $email, $password, $activation_code) {
     $stmt->bindParam(":user_status", $user_status, PDO::PARAM_STR);
     $stmt->bindParam(":token", $token, PDO::PARAM_STR);
     $stmt->bindParam(":notif", $notif, PDO::PARAM_INT);
+    $stmt->bindParam(":account_locked", $account_locked, PDO::PARAM_INT);
+    $stmt->bindParam(":account_locked_until", $account_locked_until, PDO::PARAM_STR);
+    
     $user_status = 'not verified';
     $token = '';
     $notif = 1;
+    $account_locked = 0;
+    $account_locked_until = NULL;
+    
     return $stmt->execute();
 }
 
-function sendActivationEmail($email, $username, $activation_code) {
-    $to = $email;
-    $subject = 'Signup | Verification';
-    $message = '
-        Thanks for signing up!
-        Your account Catgram has been created! 
-        You can login with the following credentials after you have activated your account by pressing the url below.
+function sendActivationEmail($email, $username, $activation_code, &$activation_mess) {
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host = $_ENV['SMTP_HOST'];
+        $mail->SMTPAuth = true;
+        $mail->Username = $_ENV['SMTP_USERNAME'];
+        $mail->Password = $_ENV['SMTP_PASSWORD'];
+        $mail->SMTPSecure = $_ENV['SMTP_ENCRYPTION'];
+        $mail->Port = $_ENV['SMTP_PORT'];
 
-        ------------------------
-        Username: '.$username.'
-        Password: (the one you provided during signup)
-        ------------------------
+        $mail->setFrom($_ENV['SMTP_FROM_EMAIL'], $_ENV['SMTP_FROM_NAME']);
+        $mail->addAddress($email);
 
-        Please click this link to activate your account:
-        http://'.$_SERVER['HTTP_HOST'].'/user/activation.php?username='.$username.'&activationCode='.$activation_code.'
-    ';
-    $headers = 'From:noreply@gabriele.com' . "\r\n"; 
-    mail($to, $subject, $message, $headers); 
+        $mail->isHTML(true);
+        $mail->Subject = 'Signup | Verification';
+        $mail->Body = '
+            Thanks for signing up!<br>
+            Your account Catgram has been created!<br>
+            You can login with the following credentials after you have activated your account by pressing the url below.<br><br>
+
+            ------------------------<br>
+            Username: '.$username.'<br>
+            Password: (the one you provided during signup)<br>
+            ------------------------<br><br>
+
+            Please click this link to activate your account:<br>
+            http://'.$_SERVER['HTTP_HOST'].'/user/activation.php?username='.$username.'&activationCode='.$activation_code.'
+        ';
+
+        $mail->send();
+        $activation_mess = "Go check your email to activate your account";
+    } catch (Exception $e) {
+        $activation_mess = "Something went wrong while sending the activation email. Please try again later.";
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -123,8 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $activation_code = md5(rand(0, 1000));
 
         if (insertUser($pdo, $username, $email, $hashed_password, $activation_code)) {
-            sendActivationEmail($email, $username, $activation_code);
-            $activation_mess = "Go check your email to activate your account";
+            sendActivationEmail($email, $username, $activation_code, $activation_mess);
         } else {
             $activation_mess = "Something went wrong. Please try again later";
         }
