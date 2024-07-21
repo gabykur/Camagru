@@ -1,6 +1,5 @@
 <?php 
 require("config/database.php");
-
 session_start();
 
 function getPhotoCount($pdo) {
@@ -32,12 +31,17 @@ $all_pages = getAllPages($all_photos, $photos_per_page);
 $page = (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $all_pages) ? intval($_GET['page']) : 1;
 $start = ($page - 1) * $photos_per_page;
 $photos = getPhotos($pdo, $start, $photos_per_page);
+
+$message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 ?>
 
 <?php ob_start(); ?>
 <?php if (!empty($all_photos)): ?>
 <div class="background galleryB">
     <h2 id="title" style="letter-spacing:10px">Gallery</h2>
+    <?php if ($message): ?>
+        <div class="message" style="color:green; text-align:center;"><?php echo $message; ?></div>
+    <?php endif; ?>
     <div id="photoDisplay">
         <?php foreach ($photos as $photo): ?>
         <div id='img'>
