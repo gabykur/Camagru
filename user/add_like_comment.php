@@ -1,11 +1,19 @@
 <?php
 session_start();
 require("../config/database.php");
+require_once "../vendor/autoload.php";
 
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: ../index.php");
     exit;
 }
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 function testInput($data) {
     if (is_null($data)) {
@@ -96,6 +104,36 @@ function fetchPhotoUser($pdo, $id_img) {
     return $query->fetch(PDO::FETCH_ASSOC);
 }
 
+function sendNotificationEmail($email, $username, $commenter, $comment) {
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host = $_ENV['SMTP_HOST'];
+        $mail->SMTPAuth = true;
+        $mail->Username = $_ENV['SMTP_USERNAME'];
+        $mail->Password = $_ENV['SMTP_PASSWORD'];
+        $mail->SMTPSecure = $_ENV['SMTP_ENCRYPTION'];
+        $mail->Port = $_ENV['SMTP_PORT'];
+
+        $mail->setFrom($_ENV['SMTP_FROM_EMAIL'], $_ENV['SMTP_FROM_NAME']);
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);
+        $mail->Subject = 'New Comment';
+        $mail->Body = "
+            Hey $username,<br><br>
+            You have received a new comment on your photo from:<br><br>
+            <b>$commenter</b>: <i>\"$comment\"</i><br><br>
+            Best regards,<br>
+            The Catgram Team
+        ";
+
+        $mail->send();
+    } catch (Exception $e) {
+        // Log error or handle it
+    }
+}
+
 $id_photo = $_GET['id'] ?? null;
 $comment = $_POST['comment'] ?? '';
 $comment = testInput($comment);
@@ -128,17 +166,7 @@ if (!empty($comment)) {
     if (insertComment($pdo, $id_photo, $_SESSION['id'], $comment)) {
         $photo_user = fetchPhotoUser($pdo, $id_photo);
         if ($photo_user['notif'] == 1 && $_SESSION['username'] != $photo_user['username']) {
-            $to = $photo_user['email'];
-            $subject = 'New Comment';
-            $message = '
-                Hey ' . $photo_user['username'] . ',<br><br>
-        
-                You have received a new comment on your photo from :
-
-                <p><b>' . $_SESSION['username'] . '</b> : <i>"' . htmlspecialchars($comment, ENT_QUOTES, 'UTF-8') . '"</i></p>
-            ';
-            $headers = 'MIME-Version: 1.0' . "\n" . 'Content-type: text/html' . "\n" . "From:noreply@catgram.com" . "\n";
-            mail($to, $subject, $message, $headers);
+            sendNotificationEmail($photo_user['email'], $photo_user['username'], $_SESSION['username'], $comment);
         }
     }
     header("Location: /user/add_like_comment.php?id=" . $id_photo);

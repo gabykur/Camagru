@@ -48,15 +48,15 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             <?php if (empty($_SESSION['loggedin'])): ?>
                 <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/user/login.php"><img src="<?php echo $photo['img']; ?>" id="<?php echo $photo['id_img']; ?>"></a>
             <?php else: ?>
-                <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/user/addLikeCom.php?id=<?php echo $photo['id_img']; ?>"><img src="<?php echo $photo['img']; ?>" id="<?php echo $photo['id_img']; ?>"></a>
+                <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/user/add_like_comment.php?id=<?php echo $photo['id_img']; ?>"><img src="<?php echo $photo['img']; ?>" id="<?php echo $photo['id_img']; ?>"></a>
             <?php endif; ?>
             <div id='buttons'>
                 <?php if (empty($_SESSION['loggedin'])): ?>
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/user/login.php"><i class="fas fa-heart"></i> <?php echo $photo['likes']; ?></a>
                     <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/user/login.php"><i class="fas fa-comment"></i> <?php echo $photo['nb_comment']; ?></a>
                 <?php else: ?>
-                    <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/user/addLikeCom.php?id=<?php echo $photo['id_img']; ?>"><i class="fas fa-heart"></i> <?php echo $photo['likes']; ?></a>
-                    <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/user/addLikeCom.php?id=<?php echo $photo['id_img']; ?>"><i class="fas fa-comment"></i> <?php echo $photo['nb_comment']; ?></a>
+                    <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/user/add_like_comment.php?id=<?php echo $photo['id_img']; ?>"><i class="fas fa-heart"></i> <?php echo $photo['likes']; ?></a>
+                    <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/user/add_like_comment.php?id=<?php echo $photo['id_img']; ?>"><i class="fas fa-comment"></i> <?php echo $photo['nb_comment']; ?></a>
                 <?php endif; ?>
             </div>
         </div>
