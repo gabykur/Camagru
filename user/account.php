@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div id="account">
             <nav id="account_nav">
                 <a id="EdPro" href="account.php">Edit Profile</a>
-                <a id="EdPwd" href="modifyPassw.php">Edit Password</a>
+                <a id="EdPwd" href="modify_password.php">Edit Password</a>
                 <a id="DelPho" href="delete_photos.php">Delete Photos</a>
                 <a id="DelAcc" href="delete_account.php">Delete Account</a>
                 <a id="Notif" href="notifications.php">Notifications</a>
