@@ -1,5 +1,6 @@
 <?php 
 require("../config/database.php");
+require_once "../vendor/autoload.php";
 session_start();
 
 if (empty($_SESSION['loggedin'])) {
@@ -10,33 +11,44 @@ if (empty($_SESSION['loggedin'])) {
 $message = "";
 $message_err = "";
 
-if(isset($_POST['delete'])){
+function testInput($data) {
+    return htmlspecialchars(stripslashes(trim($data)), ENT_QUOTES, 'UTF-8');
+}
+
+function fetchUserPhotos($pdo, $userId) {
+    $stmt = $pdo->prepare("SELECT img, id_img FROM pictures WHERE id_user = :id_user ORDER BY date DESC");
+    $stmt->bindParam(":id_user", $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function deleteFilesFromFilesystem($files) {
+    foreach ($files as $file) {
+        unlink("../" . $file['img']);
+    }
+}
+
+function deletePhotosFromDatabase($pdo, $delId) {
+    $tables = ['comments', 'likes', 'pictures'];
+    foreach ($tables as $table) {
+        $stmt = $pdo->prepare("DELETE FROM $table WHERE id_img IN ($delId)");
+        $stmt->execute();
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])) {
     if (isset($_POST['check']) && !empty($_POST['check'])) {
-        $checkbox = $_POST['check'];
-        $del_id = implode(",", array_map('intval', $checkbox));
-
-        // Fetch the images to delete
-        $query = $pdo->prepare("SELECT img FROM pictures WHERE id_img IN ($del_id)");
-        $query->execute();
-        $filesToDelete = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        // Delete the images from the filesystem
-        foreach ($filesToDelete as $file) {
-            unlink("../" . $file['img']);    
-        }
-
-        // Use prepared statements to delete from database
-        $tables = ['comments', 'likes', 'pictures'];
-        foreach ($tables as $table) {
-            $stmt = $pdo->prepare("DELETE FROM $table WHERE id_img IN ($del_id)");
-            $stmt->execute();
-        }
-        
+        $checkbox = array_map('intval', $_POST['check']);
+        $delId = implode(",", $checkbox);
+        $filesToDelete = fetchUserPhotos($pdo, $_SESSION['id']);
+        $filesToDelete = array_filter($filesToDelete, function($photo) use ($checkbox) {
+            return in_array($photo['id_img'], $checkbox);
+        });
+        deleteFilesFromFilesystem($filesToDelete);
+        deletePhotosFromDatabase($pdo, $delId);
         $message = "Selected photos have been deleted successfully.";
-        header("Refresh: 2; url=delete_photos.php");
-        exit;
-    }else{
-        $message_err = "Please choose photos to delete";
+    } else {
+        $message_err = "Please choose photos to delete.";
     }
 }
 ?>
@@ -44,14 +56,14 @@ if(isset($_POST['delete'])){
 <?php ob_start(); ?>
 <div class="background galleryB">
     <div id="test">
-    <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">Hey Kitty </h2>
+        <h2 id="title" style="padding-top:0;text-shadow: 4px 2px 1px #67e8a6;">Hey Kitty</h2>
         <div id="account">
             <nav id="account_nav">
                 <a id="EdPro" href="account.php">Edit Profile</a>
                 <a id="EdPwd" href="modify_password.php">Edit Password</a>
-                <a id="DelPho" href="delete_photos.php" >Delete Photos</a>
-                <a id="DelAcc" href="delete_account.php" >Delete Account</a>
-                <a id="Notif" href="notifications.php" >Notifications</a>
+                <a id="DelPho" href="delete_photos.php">Delete Photos</a>
+                <a id="DelAcc" href="delete_account.php">Delete Account</a>
+                <a id="Notif" href="notifications.php">Notifications</a>
             </nav>
             <article>
                 <div class="loginForm accountForm DelPho">      
@@ -61,18 +73,13 @@ if(isset($_POST['delete'])){
                     <div id="deletePhotos">      
                         <form method="POST" action="">
                             <?php 
-                                $stmt = $pdo->prepare("SELECT img, id_img FROM pictures WHERE id_user = :id_user ORDER BY date DESC");
-                                $stmt->bindParam(":id_user", $_SESSION['id']);
-                                $stmt->execute();
-                                $photos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($photos as $photo) {
-                                    echo "
+                                $photos = fetchUserPhotos($pdo, $_SESSION['id']);
+                                foreach ($photos as $photo): ?>
                                     <div id='img'>
-                                        <img src='../" . htmlspecialchars($photo['img']) . "'>
-                                        <input type='checkbox' id='check_del' name='check[]' value='" . intval($photo['id_img']) . "'>
-                                    </div>";
-                                }
-                            ?>
+                                        <img src='../<?php echo htmlspecialchars($photo['img']); ?>'>
+                                        <input type='checkbox' id='check_del' name='check[]' value='<?php echo intval($photo['id_img']); ?>'>
+                                    </div>
+                                <?php endforeach; ?>
                             <div class="loginForm accountForm" style="background:none; box-shadow:none">
                                 <input type="submit" id="saveBtt" style="margin-top: 11px;font-size: 24px;margin-bottom:7px" name="delete" value="Delete">          
                             </div>

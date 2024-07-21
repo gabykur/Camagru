@@ -137,7 +137,7 @@ if (!empty($comment)) {
 
                 <p><b>' . $_SESSION['username'] . '</b> : <i>"' . htmlspecialchars($comment, ENT_QUOTES, 'UTF-8') . '"</i></p>
             ';
-            $headers = 'MIME-Version: 1.0' . "\n" . 'Content-type: text/html' . "\n" . "From:noreply@gabriele.com" . "\n";
+            $headers = 'MIME-Version: 1.0' . "\n" . 'Content-type: text/html' . "\n" . "From:noreply@catgram.com" . "\n";
             mail($to, $subject, $message, $headers);
         }
     }
