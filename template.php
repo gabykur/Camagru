@@ -9,7 +9,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta charset="UTF-8">
-    <title>Camagru</title>
+    <title>Catgram</title>
     <link rel="icon" href="/public/icons/noel.jpg">
     <link rel="stylesheet" href="/public/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -18,10 +18,10 @@ if (session_status() == PHP_SESSION_NONE) {
 <header>
     <div class="navbar">
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != ""): ?>
-            <a href="/camera.php" class="nav-icon"><i class="fas fa-camera"></i></a>
+            <a href="/camera.php" class="nav-icon camera-logo"><i class="fas fa-camera"></i></a>
         <?php endif; ?>
         <a href="/index.php" id="cam_logo" class="logo">
-            <h1>Camagru</h1>
+            <h1>Catgram</h1>
         </a>
         <a href="/index.php" id="c" class="logo">
             <h1>C</h1>

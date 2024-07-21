@@ -80,11 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (!isValidUsername($username)) {
         $username_err = "Invalid username. Only letters, numbers, and underscores are allowed. Length should be between 3 and 20 characters.";
     }
-
     if (empty($password)) {
         $password_err = "Please enter your password.";
     }
-
     if (empty($username_err) && empty($password_err)) {
         $user = fetchUserByUsername($pdo, $username);
 

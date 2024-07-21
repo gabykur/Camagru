@@ -6,7 +6,7 @@ try {
     $db = new PDO("mysql:host=localhost", $DB_USER, $DB_PASSWORD);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $sql = file_get_contents(__DIR__ . '/db_camagru.sql');
+    $sql = file_get_contents(__DIR__ . '/db_catgram.sql');
     $db->exec($sql);
     echo "Database setup successfully!";
     header("Location:../index.php");

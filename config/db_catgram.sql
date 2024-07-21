@@ -12,9 +12,9 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
--- Database: `db_camagru`
-CREATE DATABASE IF NOT EXISTS `db_camagru` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `db_camagru`;
+-- Database: `db_catgram`
+CREATE DATABASE IF NOT EXISTS `db_catgram` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `db_catgram`;
 
 -- --------------------------------------------------------
 -- Drop tables if they exist
@@ -48,9 +48,9 @@ CREATE TABLE `users` (
 
 -- Dumping data for table `users`
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `activation_code`, `user_status`, `token`, `notif`, `account_locked`) VALUES
-(13, 'noel', 'noel@camagru.fr', '$2y$10$IGfnk5bC5g9My5ToHgKikuwaiiIkUQnvVwBso0yo2ElZGkxz1LGXS', '1f4477bad7af3616c1f933a02bfabe4e', 'verified', '', 1, 0),
-(14, 'suri', 'suri@camagru.fr', '$2y$10$p6oFhWwWChV0WKb2spB2BuYed5/UNMDVcf4ZvXaoVrI/cX/PBYeP2', '6aca97005c68f1206823815f66102863', 'verified', '', 1, 0),
-(15, 'iz', 'iz@camagru.fr', '$2y$10$xGdQ4uIv2NwR8qSDAhAqc.C/jTGCNC/o3raOL3fHPF5qseiU2qBqK', 'f033ab37c30201f73f142449d037028d', 'verified', '', 1, 0);
+(13, 'noel', 'noel@catgram.fr', '$2y$10$IGfnk5bC5g9My5ToHgKikuwaiiIkUQnvVwBso0yo2ElZGkxz1LGXS', '1f4477bad7af3616c1f933a02bfabe4e', 'verified', '', 1, 0),
+(14, 'suri', 'suri@catgram.fr', '$2y$10$p6oFhWwWChV0WKb2spB2BuYed5/UNMDVcf4ZvXaoVrI/cX/PBYeP2', '6aca97005c68f1206823815f66102863', 'verified', '', 1, 0),
+(15, 'iz', 'iz@catgram.fr', '$2y$10$xGdQ4uIv2NwR8qSDAhAqc.C/jTGCNC/o3raOL3fHPF5qseiU2qBqK', 'f033ab37c30201f73f142449d037028d', 'verified', '', 1, 0);
 
 -- --------------------------------------------------------
 -- Table structure for table `pictures`

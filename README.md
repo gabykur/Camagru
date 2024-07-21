@@ -1,38 +1,39 @@
-# Camagru
+# Catgram
 
-Camagru is a web application allowing you to to take  photos via your webcam using some fun stickers. 
+Catgram is a web application allowing you to to take photos via your webcam using some fun stickers.
 It allows you to view all the users taken or uploaded photos via the gallery page.
 It's fun, simple and enjoyable for all.
-Long life to the cats.  
+Long life to the cats.
 
 ### Used technologies
 
-* PHP : Backend
-* MySQL : Database
-* Javascript | HTML/CSS : Frontend
+- PHP : Backend
+- MySQL : Database
+- Javascript | HTML/CSS : Frontend
 
 ### Modify the config file
 
-*config/database.php* contains all the information needed by MySQL to connect to the database. Modify it so it matches your config file.
+_config/database.php_ contains all the information needed by MySQL to connect to the database. Modify it so it matches your config file.
 
 ```
-$DB_DSN = 'mysql:host=localhost; dbname=db_camagru';
+$DB_DSN = 'mysql:host=localhost; dbname=db_catgram';
 $DB_USER = 'yourUsername';
 $DB_PASSWORD = "yourPassword";
 ```
 
 ### Create the database
-If no database is found, create the database by going to *config//setup.php*.
+
+If no database is found, create the database by going to _config//setup.php_.
 
 ### User Part
 
-You can now create a new profile 
-OR 
+You can now create a new profile
+OR
 Sign in with the following users:
 
-* noel : *noel*
-* suri : *suri*
-* iz : *iz*
+- noel : _noel_
+- suri : _suri_
+- iz : _iz_
 
 ### Desktop View
 
@@ -59,4 +60,5 @@ Sign in with the following users:
 ![alt text](screensnaps/cama12.png?raw=true "Title")
 
 ## Author
-* **Gabriele Kuraite** - *Front/Back* - [gkuraite](https://github.com/gkuraite)
+
+- **Gabriele Kuraite** - _Front/Back_ - [gkuraite](https://github.com/gkuraite)
